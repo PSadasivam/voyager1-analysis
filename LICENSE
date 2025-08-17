@@ -1,4 +1,4 @@
-MIT License
+MICopyright (c) 2025 Prabhu Sadasivam License
 
 Copyright (c) 2025 Voyager 1 Data Project
 
@@ -19,3 +19,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Data Attribution
+
+This software processes data from NASA's Voyager 1 spacecraft. The underlying 
+scientific data remains in the public domain and is provided by:
+
+- NASA Jet Propulsion Laboratory (JPL)
+- NASA Space Physics Data Facility (SPDF)  
+- NASA Planetary Data System (PDS)
+
+Users of this software should cite appropriate NASA data sources in any 
+publications or research derived from the analysis tools provided herein.
+
+## Acknowledgments
+
+This project acknowledges the remarkable achievements of the NASA Voyager mission
+team and the decades of engineering excellence that enable continued scientific
+discovery in interstellar space.
