@@ -32,19 +32,19 @@ Usage:
 Documentation: 
 Plasma Density Extraction Features
 
-📊 Ridge Detection Algorithm:
+Ridge Detection Algorithm:
 Preprocess Spectrogram: Median filtering, log transformation, normalization
 Peak Detection: Uses sophisticated algorithms to find plasma frequency peaks
 Ridge Tracking: Follows the plasma frequency over time with smoothing
 Outlier Removal: Applies median and Savitzky-Golay filters
 
-🔬 Scientific Method:
+Scientific Method:
 Plasma Frequency Formula: n_e = (ε₀ × m_e / e²) × (2π × f_pe)²
 Physical Constants: Uses exact CODATA values for precision
 Frequency Range: Focuses on 500-8000 Hz where plasma frequency typically appears
 Confidence Scoring: Evaluates detection quality
 
-📈 Visualization Outputs:
+Visualization Outputs:
 Process Plot: 3-panel showing:
 
 Original spectrogram with detected ridge overlay
@@ -57,12 +57,12 @@ Running averages
 Reference environment regions
 Professional formatting
 
-💾 Data Export:
+Data Export:
 CSV Output: Time, plasma frequency, electron density
 Statistics: Mean, std, range, trends
 Quality Metrics: Confidence scores, detection success rate
 
-🔬 Scientific Context:
+Scientific Context:
 Method: Same as NASA JPL scientists use for published density plots
 Accuracy: Typical uncertainty ~10-20% for well-defined plasma frequency
 Environment: Voyager 1 currently sees ~0.1-0.3 cm⁻³ in interstellar space

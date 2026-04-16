@@ -83,14 +83,14 @@ def check_current_position():
             print(f"Position error: {position_error:.2f} AU")
             
             if distance_error < 5.0:
-                print("✓ Distance accuracy: GOOD (within 5 AU)")
+                print("[PASS] Distance accuracy: GOOD (within 5 AU)")
             else:
-                print("⚠ Distance accuracy: POOR (>5 AU error)")
+                print("[WARN] Distance accuracy: POOR (>5 AU error)")
                 
             if position_error < 10.0:
-                print("✓ Position accuracy: GOOD (within 10 AU)")
+                print("[PASS] Position accuracy: GOOD (within 10 AU)")
             else:
-                print("⚠ Position accuracy: POOR (>10 AU error)")
+                print("[WARN] Position accuracy: POOR (>10 AU error)")
                 
             # Known facts about Voyager 1 (as of 2025)
             print()
