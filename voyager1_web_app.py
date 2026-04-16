@@ -460,6 +460,11 @@ def blackhole():
     """Universe inside a black hole — scientific paper page."""
     return render_template('blackhole.html')
 
+@app.route('/mars')
+def mars():
+    """Mission to Mars (1993) — early research paper page."""
+    return render_template('mars.html')
+
 @app.route('/api/plasma')
 def api_plasma():
     """API endpoint for plasma wave analysis data."""

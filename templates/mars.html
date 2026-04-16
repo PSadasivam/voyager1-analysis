@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Mission to Mars (1993) — Prabhu's Deep Space Labs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+
+        /* Nav bar — consistent with other pages */
+        .site-header {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 12px; }
+        .nav-bar a {
+            color: #aaa; text-decoration: none; padding: 6px 18px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15); font-size: 0.95em; transition: all 0.25s;
+        }
+        .nav-bar a:hover { color: #fff; border-color: #4ecdc4; }
+        .nav-bar a.active { color: #ffd700; border-color: #ffd700; background: rgba(255,215,0,0.1); }
+
+        /* Paper container */
+        .paper {
+            max-width: 820px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 60px 64px;
+        }
+
+        @media (max-width: 900px) {
+            .paper { padding: 36px 24px; }
+        }
+
+        /* Title block */
+        .paper-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            color: #111;
+            text-align: center;
+        }
+
+        .paper .paper-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: #555;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .author-block {
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.7;
+        }
+        .author-block a { color: #2563eb; text-decoration: none; }
+        .author-block a:hover { text-decoration: underline; }
+
+        /* Intro note box */
+        .intro-box {
+            background: #f7f7f7;
+            border-left: 4px solid #c0392b;
+            padding: 24px 28px;
+            margin-bottom: 36px;
+            border-radius: 0 8px 8px 0;
+        }
+        .intro-label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+        .intro-box p {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: #333;
+            text-align: justify;
+            margin-bottom: 12px;
+        }
+        .intro-box p:last-child { margin-bottom: 0; }
+
+        /* Section headings */
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 36px 0 16px;
+            color: #111;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin: 28px 0 12px;
+            color: #222;
+        }
+
+        /* Body text */
+        .paper p {
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 14px;
+            text-align: justify;
+            color: #222;
+        }
+
+        /* Bullet lists */
+        .paper ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+        .paper ul li {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #222;
+            margin-bottom: 6px;
+        }
+
+        /* Figure */
+        .figure-block {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .figure-block img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .figure-caption {
+            font-size: 0.88rem;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Reflection box */
+        .reflection-section {
+            background: #fafbfc;
+            border-left: 4px solid #2563eb;
+            padding: 24px 28px;
+            margin: 36px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .reflection-section h2 {
+            border-bottom: none;
+            margin-top: 0;
+            color: #2563eb;
+        }
+        .reflection-section h3 {
+            color: #1a1a1a;
+        }
+
+        /* Closing */
+        .closing-block {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e5e5;
+            text-align: center;
+        }
+        .closing-block p {
+            text-align: center;
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 12px;
+        }
+        .closing-block .closing-quote {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #555;
+            margin-top: 16px;
+        }
+
+        /* Footer */
+        .paper-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 0.82rem;
+            color: #888;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .site-footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 0;
+        }
+        .site-footer a { color: #ecf0f1; text-decoration: none; margin: 0 15px; transition: color 0.3s; }
+        .site-footer a:hover { color: #3498db; }
+
+        /* Responsive nav */
+        @media (max-width: 768px) {
+            .nav-bar { flex-wrap: wrap; gap: 8px; }
+            .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Site header with nav -->
+    <div class="site-header">
+        <div class="nav-bar">
+            <a href="/">Home</a>
+            <a href="/facts">Facts</a>
+            <a href="/trajectory">Trajectory</a>
+            <a href="/plasma">Plasma Waves</a>
+            <a href="/density">Density</a>
+            <a href="/dashboard">Magnetometer</a>
+            <a href="/atlas">3I/ATLAS</a>
+            <a href="/blackhole">Black Hole</a>
+            <a href="/mars" class="active">Mars (1993)</a>
+        </div>
+    </div>
+
+    <!-- Paper -->
+    <article class="paper">
+
+        <h1 class="paper-title">Mission to Mars (1993)</h1>
+        <p class="paper-subtitle">An early glimpse into the curiosity that shaped my thinking</p>
+
+        <div class="author-block">
+            <strong>Prabhu Sadasivam</strong><br>
+            Originally written in 1993 as a second-year undergraduate in Physics<br>
+            ORCID: <a href="https://orcid.org/0009-0008-0069-693X" target="_blank">0009-0008-0069-693X</a>
+        </div>
+
+        <!-- Intro Note -->
+        <div class="intro-box">
+            <div class="intro-label">A Note from Today</div>
+            <p>
+                In 1993, as a second-year undergraduate physics student, I wrote this paper on Mars exploration.
+            </p>
+            <p>
+                At the time, it was simply an assignment&mdash;driven by an interest in space and a curiosity about how we explore the unknown. I did not think much of it beyond that.
+            </p>
+            <p>
+                Looking back now, I see traces of ideas that stayed with me&mdash;an interest in complex systems, a fascination with long-duration missions, and an appreciation for how data and instrumentation shape understanding.
+            </p>
+            <p>
+                This page preserves the original work, lightly edited for readability, along with a few reflections on how those early interests quietly carried forward over time.
+            </p>
+        </div>
+
+        <!-- Original Scan -->
+        <div class="figure-block">
+            <img src="/images/prabhu_1993_mission_to_mars.jpeg" alt="Mission to Mars — original magazine article by S. Prabhu, II B.Sc. Physics, 1993">
+            <p class="figure-caption">Original article published in a local science magazine in India, 1993</p>
+        </div>
+
+        <!-- Edited Transcript -->
+        <h2 id="transcript">Mission to Mars &mdash; Edited Transcript</h2>
+        <p style="font-style: italic; color: #666; margin-bottom: 20px;">Originally written in 1993</p>
+
+        <h3>Mission to Mars</h3>
+        <p>
+            Previous missions to Mars&mdash;including the Mariner missions in 1965, 1969, and 1971, followed by the Viking orbiter and landers in 1975&mdash;observed only about 15% of the Martian surface at a resolution of approximately 250 meters. These spacecraft revealed key features such as polar ice caps that wax and wane, as well as dust storms that can envelop the entire planet.
+        </p>
+        <p>
+            On September 16, a Titan rocket was launched from the Kennedy Space Center in Florida. It was expected to begin orbiting Mars the following year after traveling approximately 720 million kilometers over 11 months. The spacecraft was scheduled to orbit Mars for 687 days (roughly one Martian year), using seven scientific instruments to conduct a detailed study of the planet's atmosphere, surface, and interior.
+        </p>
+        <p>
+            The mission aimed to provide insights into seasonal climate variations and geological structures. Earlier missions had already revealed deep channels on the Martian surface, which scientists believe were carved by flowing water approximately 1,000 to 2,000 million years ago.
+        </p>
+
+        <h3>Robots Prepare to Walk on Mars</h3>
+        <p>
+            Scientists in the United States and Russia began demonstrating a new generation of multi-legged and wheeled robotic systems designed to traverse the rugged terrain of Mars. These robots were intended to support and enable future human exploration.
+        </p>
+        <p>
+            The maneuverability of these mechanical systems&mdash;often referred to as &ldquo;walkers,&rdquo; &ldquo;crawlers,&rdquo; and wheeled vehicles&mdash;was tested in simulated environments that replicated the rocky and uneven Martian surface.
+        </p>
+        <p>
+            An international space exhibition titled <em>&ldquo;Robots for Exploring New Worlds&rdquo;</em> brought together contributions from NASA, Russian engineering teams, and European space organizations. These efforts reflected a growing global interest in robotic planetary exploration.
+        </p>
+        <p>
+            Robots offer practical advantages for long-duration missions. They can operate continuously, are not affected by fatigue, and reduce the risks associated with human space travel. For many tasks, it is more efficient to send robotic systems ahead of human missions.
+        </p>
+        <p>
+            Mobile planetary vehicles, commonly known as rovers, are designed to navigate unknown terrain. They vary in size and capability, carrying scientific payloads such as cameras, atmospheric sensors, spectrometers, and seismic instruments.
+        </p>
+        <p>
+            Experimental systems such as small-scale rovers (e.g., &ldquo;Rocky&rdquo; and &ldquo;Tooth&rdquo;) demonstrated capabilities for close-range imaging and environmental sensing. Other advanced systems, including legged robots like &ldquo;Dante,&rdquo; were designed to explore extreme environments such as volcanic craters by rappelling down steep surfaces while collecting data.
+        </p>
+        <p>
+            Through these robotic missions, scientists aim to improve our understanding of Mars and, more broadly, the evolution of planetary systems, including Earth.
+        </p>
+
+        <!-- Reflections -->
+        <div class="reflection-section">
+            <h2 id="reflections">Reflection: Looking Back</h2>
+            <p>
+                Reading this paper today, I am reminded less of what I knew at the time, and more of what I was curious about.
+            </p>
+            <p>
+                I was drawn to questions around:
+            </p>
+            <ul>
+                <li>how systems operate over long periods of time</li>
+                <li>how to explore environments that are not directly accessible</li>
+                <li>how instruments and data help us understand complex realities</li>
+            </ul>
+            <p>
+                Those interests have stayed with me, even as the context has changed.
+            </p>
+
+            <h3>From Exploration to Technology</h3>
+            <p>
+                Space missions are, in many ways, about building systems that can operate with limited intervention, adapt to uncertainty, and continue functioning over long durations.
+            </p>
+            <p>
+                In a different context, many of the same ideas apply to modern technology platforms:
+            </p>
+            <ul>
+                <li>systems need to be observable</li>
+                <li>reliability has to be designed from the beginning</li>
+                <li>decisions are increasingly data-driven</li>
+                <li>scale introduces both opportunity and complexity</li>
+            </ul>
+            <p>
+                The environments are different, but the underlying principles often feel familiar.
+            </p>
+
+            <h3>On Time Horizons</h3>
+            <p>
+                One thing that stands out about space exploration is its patience. Missions are planned over years, sometimes decades.
+            </p>
+            <p>
+                That perspective has influenced how I think about building and leading:
+            </p>
+            <ul>
+                <li>meaningful outcomes take time</li>
+                <li>strong foundations matter</li>
+                <li>consistency often matters more than speed</li>
+            </ul>
+
+            <h3>On Exploration and Leadership</h3>
+            <p>
+                Exploration does not come with complete information. It requires:
+            </p>
+            <ul>
+                <li>making decisions with partial data</li>
+                <li>adapting as new information emerges</li>
+                <li>staying steady through uncertainty</li>
+            </ul>
+            <p>
+                In many ways, leadership in complex environments is not very different.
+            </p>
+        </div>
+
+        <!-- Closing -->
+        <div class="closing-block">
+            <p>
+                This paper was simply a small assignment at the time.
+            </p>
+            <p>
+                Looking back, it feels like an early expression of curiosity&mdash;one that, in different forms, has stayed with me over the years.
+            </p>
+            <p class="closing-quote">
+                <em>The journey began long before the destination was visible.</em>
+            </p>
+        </div>
+
+        <div class="paper-footer">
+            &copy; 2026 Prabhu Sadasivam &middot; Prabhu's Deep Space Labs
+        </div>
+
+    </article>
+
+    <!-- Site footer -->
+    <footer class="site-footer">
+        <div>
+            <a href="https://github.com/PSadasivam/voyager1-analysis" target="_blank">Voyager 1 Repo</a>
+            <a href="https://github.com/PSadasivam/universe-inside-blackhole" target="_blank">Black Hole Repo</a>
+            <a href="https://orcid.org/0009-0008-0069-693X" target="_blank">ORCID</a>
+            <a href="/api/status">API Status</a>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.9em;">&copy; 2026 Prabhu Sadasivam | Deep Space Research</p>
+    </footer>
+
+</body>
+</html>

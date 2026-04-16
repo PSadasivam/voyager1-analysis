@@ -101,7 +101,7 @@
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 35px rgba(243,156,18,0.4);
         }
 
         .cta-buttons {
@@ -127,7 +127,7 @@
 
         .cta-button-secondary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 35px rgba(78,205,196,0.4);
         }
 
         .cta-button-tertiary {
@@ -145,7 +145,25 @@
 
         .cta-button-tertiary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 35px rgba(102,126,234,0.4);
+        }
+
+        .cta-button-mars {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #922b21, #c0392b, #e74c3c, #f39c12);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-button-mars:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(192,57,43,0.4);
         }
 
         /* Floating Elements Inspired by the Image */
@@ -503,6 +521,7 @@
             .cta-button { padding: 12px 30px; font-size: 1rem; }
             .cta-button-secondary { padding: 12px 30px; font-size: 1rem; }
             .cta-button-tertiary { padding: 12px 30px; font-size: 1rem; }
+            .cta-button-mars { padding: 12px 30px; font-size: 1rem; }
             .cta-buttons { gap: 12px; }
 
             .pdsl-section, .leadership-section { padding: 50px 0; }
@@ -530,6 +549,7 @@
             .cta-button { padding: 10px 24px; font-size: 0.95rem; }
             .cta-button-secondary { padding: 10px 24px; font-size: 0.95rem; }
             .cta-button-tertiary { padding: 10px 24px; font-size: 0.95rem; }
+            .cta-button-mars { padding: 10px 24px; font-size: 0.95rem; }
             .section-title { font-size: 1.6rem; margin-bottom: 30px; }
             .project-card { padding: 18px; }
             .project-icon { font-size: 2.2rem; }
@@ -579,6 +599,7 @@
                 <a href="#projects" class="cta-button">Explore Voyager 1 Analysis</a>
                 <a href="#atlas" class="cta-button-secondary">Explore 3I/ATLAS Research</a>
                 <a href="/blackhole" class="cta-button-tertiary">Black Hole Cosmology Paper</a>
+                <a href="/mars" class="cta-button-mars">Mission to Mars (1993)</a>
             </div>
 
             </div>
@@ -591,22 +612,28 @@
             <h2 class="pdsl-title">About <span>Prabhu's Deep Space Labs</span></h2>
             <div class="pdsl-text">
                 <p>
-                    Prabhu's Deep Space Labs (PDSL) is not a recent initiative &mdash; it is a lifelong pursuit that began during my undergraduate years in Physics in the early 1990s. That was when the first questions took hold: <em>How does the universe truly work? What lies beyond what we can observe?</em> Those questions never left.
+                    Prabhu's Deep Space Labs (PDSL) has been a lifelong pursuit that began during my undergraduate years in Physics in the early 1990s. That was when the first questions took hold: <em>How does the universe truly work? What lies beyond what we can observe?</em> Those questions never left. In fact, in 1993, I published a short paper on <a href="/mars">Mission to Mars</a>&mdash;an early expression of the curiosity that would quietly shape my thinking for decades.
                 </p>
                 <p>
-                    Over time, my professional path evolved into building large-scale technology platforms and data systems. But the curiosity for the cosmos remained constant. PDSL is where these two worlds come together &mdash; physics and data science, curiosity and computation.
+                    Over time, my professional journey evolved into engineering&mdash;building large-scale technology platforms, data and analytics systems, and aligning technology outcomes with business value across vertical markets such as Insurance and Healthcare. But the curiosity for how things work&mdash;and more importantly, <em>why</em>&mdash;remained constant.
                 </p>
                 <p>
-                    At its foundation, PDSL is a personal research platform focused on exploring deep space through real scientific data and disciplined analysis.
+                    PDSL is where these two worlds converge: physics and engineering, curiosity and computation&mdash;and ultimately, how I think as a leader.
                 </p>
                 <p>
-                    The journey began with NASA's <a href="https://voyager.jpl.nasa.gov/mission/status/" target="_blank" rel="noopener">Voyager&nbsp;1</a> &mdash; humanity's farthest-reaching spacecraft, now traveling through interstellar space. Using datasets from NASA's <a href="https://spdf.gsfc.nasa.gov/" target="_blank" rel="noopener">Space Physics Data Facility (SPDF)</a> and <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL HORIZONS</a>, I developed an end-to-end analysis pipeline to interpret magnetic field variations, plasma wave activity, and heliospheric transitions.
+                    At its core, PDSL is a personal research platform focused on exploring deep space through real scientific data and disciplined analysis.
                 </p>
                 <p>
-                    Building on this, the research expanded into interstellar object analysis. Current work includes the study of <a href="/atlas">3I/ATLAS</a> &mdash; focusing on its trajectory, observational data, and implications for interstellar material.
+                    The journey began with NASA's <a href="https://voyager.jpl.nasa.gov/mission/status/" target="_blank" rel="noopener">Voyager&nbsp;1</a>&mdash;humanity's farthest-reaching spacecraft, now traveling through interstellar space. Using datasets from NASA's <a href="https://spdf.gsfc.nasa.gov/" target="_blank" rel="noopener">Space Physics Data Facility (SPDF)</a> and <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL HORIZONS</a>, I developed an end-to-end analysis pipeline to interpret magnetic field variations, plasma wave activity, and heliospheric transitions&mdash;deriving temporal insights across years of data.
                 </p>
                 <p>
-                    In parallel, I am developing a scientific hypothesis exploring whether our universe itself could exist within a black hole. This builds on <a href="https://science.nasa.gov/universe/black-holes/" target="_blank" rel="noopener">General Relativity</a> and foundational black hole physics. The paper is available here: <a href="/blackhole">Universe Inside a Black Hole &mdash; Hypothesis Paper</a>.
+                    Building on this, the research expanded into interstellar object analysis, including the study of <a href="/atlas">3I/ATLAS</a>&mdash;focusing on its trajectory, observational signals, and implications for interstellar material entering our solar system.
+                </p>
+                <p>
+                    In parallel, I have been developing a scientific hypothesis exploring whether our universe itself could exist within a black hole&mdash;grounded in <a href="https://science.nasa.gov/universe/black-holes/" target="_blank" rel="noopener">General Relativity</a> and foundational black hole physics. This reflects a broader pursuit: not just analyzing data, but questioning the structure of reality itself. The paper is available here: <a href="/blackhole">Universe Inside a Black Hole &mdash; Hypothesis Paper</a>.
+                </p>
+                <p>
+                    <strong>That is who I am.</strong>
                 </p>
             </div>
         </div>
@@ -618,28 +645,42 @@
             <h2 class="leadership-title">From Deep Space to Enterprise Platforms</h2>
             <div class="leadership-text">
                 <p>
-                    My undergraduate degree was in Physics, and astronomy has always been a passion of mine.
-                </p>
-                <p>
-                    When Voyager&nbsp;1 launched, I was a child. Today, it has traveled more than 15&nbsp;billion kilometers from Earth and continues to transmit data &mdash; decades beyond its original mission life.
+                    I was a child when Voyager&nbsp;1 launched. Today, it has traveled over <span id="voyager-distance">24</span>&nbsp;billion kilometers from Earth and continues to transmit data&mdash;decades beyond its original mission life.
                 </p>
                 <p>
                     What fascinates me is not just the distance, but the design philosophy behind it.
                 </p>
                 <p>
-                    That spacecraft was engineered for a future no one could fully predict. It had to operate with extreme precision and reliability, without the assumption of constant human intervention. The engineers had to think decades ahead &mdash; designing for autonomy, resilience, and clarity of purpose.
+                    That spacecraft was engineered for a future no one could fully predict. It had to operate with extreme precision and reliability, without assuming human intervention. The engineers had to think decades ahead&mdash;designing for autonomy, resilience, and clarity of purpose.
                 </p>
                 <p>
-                    That mindset has deeply influenced how I approach technology leadership.
+                    That mindset has fundamentally shaped who I am as a technology leader.
                 </p>
                 <p>
-                    When I assumed leadership of Healthcare Technology, I stepped back to understand the landscape &mdash; the structural challenges, growth opportunities, and competitive dynamics. Because if we are not clear on the &ldquo;why&rdquo; and the &ldquo;what,&rdquo; the &ldquo;how&rdquo; becomes reactive.
+                    When I step into leadership roles, I start with understanding&mdash;not with immediate execution or reacting to the whirlwind.
                 </p>
                 <p>
-                    That reflection enabled us to define a one-platform vision &mdash; cohesive, scalable, and aligned to long-term direction.
+                    I take a step back to assess the landscape&mdash;its structural realities, growth opportunities, competitive dynamics, and the underlying rationale behind existing systems. Because if we are not clear on the why and the what, the how becomes reactive.
                 </p>
                 <p>
-                    Voyager reinforces a second principle: the systems we design today will outlive immediate roadmaps. Platforms, data models, and architecture decisions may operate for 10&ndash;15&nbsp;years. Architectural integrity and disciplined engineering are compounding investments.
+                    This approach has consistently enabled me to define broader, more cohesive strategies&mdash;moving organizations from fragmented execution to aligned, scalable platforms, resulting in hundreds of millions in incremental revenue over a five-year horizon.
+                </p>
+                <ul style="list-style: none; padding: 0; margin: 0 0 22px 0;">
+                    <li style="margin-bottom: 8px;">It is how one-platform visions are shaped.</li>
+                    <li style="margin-bottom: 8px;">It is how complex portfolios are simplified.</li>
+                    <li style="margin-bottom: 8px;">It is how technology is aligned to long-term market direction&mdash;not short-term noise.</li>
+                </ul>
+                <p>
+                    The engineer in me is relentless about finding a path forward&mdash;navigating ambiguity, solving complex problems, and driving outcomes. Over time, this has translated into a reputation for being both strategic and execution-oriented; a &ldquo;can-do&rdquo; leader grounded in first principles.
+                </p>
+                <p>
+                    Voyager reinforces a second principle: the systems we design today will outlive immediate roadmaps. Platforms, data models, and architectural decisions often operate for 10 to 15&nbsp;years.
+                </p>
+                <p>
+                    Architectural integrity and disciplined engineering are not optional; they are compounding investments.
+                </p>
+                <p>
+                    And finally, Voyager offers a simple but enduring leadership lesson:
                 </p>
             </div>
             <div class="leadership-emphasis">
@@ -647,7 +688,10 @@
                     Great engineering is not about building systems that run forever. It is about building systems that deliver value reliably for far longer than expected.
                 </p>
                 <p>
-                    Leadership is the same. It is about designing platforms, teams, and organizations that endure &mdash; not just for the next sprint, but for the long horizon.
+                    <strong>Leadership is the same.</strong> It is about designing platforms, teams, and organizations that endure&mdash;not just for the next sprint, but for the long horizon.
+                </p>
+                <p>
+                    <strong>That is who I am.</strong>
                 </p>
             </div>
         </div>
@@ -756,6 +800,16 @@
             <div class="project-grid">
                 <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <span class="project-icon"></span>
+                    <h3 class="project-title" style="color: #b388ff;">Theoretical Frameworks</h3>
+                    <p class="project-description" style="color: rgba(255,255,255,0.75);">
+                        From Pathria (1972) to Gazta&ntilde;aga (2025): spin&ndash;torsion cosmology, quantum degeneracy pressure,
+                        and the Black-Hole Universe model reviewed with 28 references.
+                    </p>
+                    <a href="/blackhole" class="project-link" style="color: #b388ff;">Read the Paper &rarr;</a>
+                </div>
+
+                <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="project-icon"></span>
                     <h3 class="project-title" style="color: #b388ff;">Schwarzschild Radius</h3>
                     <p class="project-description" style="color: rgba(255,255,255,0.75);">
                         The universe's total mass yields a gravitational radius ~10x larger than the observable radius.
@@ -771,17 +825,7 @@
                         Replacing the Big Bang singularity with a smooth bounce: a(t) = &radic;(a<sub>min</sub>&sup2; + (t/t&#8320;)&sup2;).
                         Simulation using Planck 2018 parameters and numerical visualization.
                     </p>
-                    <a href="/blackhole#bouncing" class="project-link" style="color: #b388ff;">Read the Paper &rarr;</a>
-                </div>
-
-                <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
-                    <span class="project-icon"></span>
-                    <h3 class="project-title" style="color: #b388ff;">Theoretical Frameworks</h3>
-                    <p class="project-description" style="color: rgba(255,255,255,0.75);">
-                        From Pathria (1972) to Gazta&ntilde;aga (2025): spin&ndash;torsion cosmology, quantum degeneracy pressure,
-                        and the Black-Hole Universe model reviewed with 28 references.
-                    </p>
-                    <a href="/blackhole#references" class="project-link" style="color: #b388ff;">View References &rarr;</a>
+                    <a href="/blackhole#bouncing" class="project-link" style="color: #b388ff;">View Bouncing Cosmology &rarr;</a>
                 </div>
             </div>
         </div>
@@ -790,7 +834,7 @@
     <!-- Closing Statement -->
     <section class="closing-section">
         <div class="container">
-            <p class="closing-text">&ldquo;This is not a project. It is a lifelong exploration.&rdquo;</p>
+            <p class="closing-text">“Thinking in decades. Building for the long horizon.”</p>
         </div>
     </section>
 
@@ -843,6 +887,31 @@
         for (let i = 0; i < 10; i++) {
             setTimeout(() => createParticle(), i * 500);
         }
+
+        // Compute live Voyager 1 distance from Earth
+        // Voyager 1: ~163 AU from Sun on 2025-01-01, receding at ~3.6 AU/year
+        (function() {
+            const AU_KM = 149597870.7;
+            const refAU = 163.0;
+            const auPerYear = 3.6;
+            const refDate = new Date('2025-01-01T00:00:00Z');
+            const years = (Date.now() - refDate.getTime()) / (365.25 * 86400000);
+            const distAU = refAU + auPerYear * years;
+
+            // Try the live API first; accept only if the value is realistic (>100 AU)
+            fetch('/api/position')
+                .then(r => r.json())
+                .then(data => {
+                    const apiAU = parseFloat(data.distance);
+                    const au = (apiAU > 100) ? apiAU : distAU;
+                    document.getElementById('voyager-distance').textContent =
+                        ((au * AU_KM) / 1e9).toFixed(1);
+                })
+                .catch(() => {
+                    document.getElementById('voyager-distance').textContent =
+                        ((distAU * AU_KM) / 1e9).toFixed(1);
+                });
+        })();
     </script>
 </body>
 </html>
