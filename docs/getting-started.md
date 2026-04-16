@@ -132,8 +132,38 @@ python verify_voyager_position.py
 
 ## 7. Run Unit Tests
 
+Tests live in the `tests/` directory and use Python's built-in `unittest` framework.
+
+**Run all tests:**
+
 ```bash
-python -m unittest test_voyager1_magneticfield_nTS_analysis.py
+python -m unittest discover -s tests -v
+```
+
+**Run a specific test module:**
+
+```bash
+python -m unittest tests.test_voyager1_magneticfield_nTS_analysis -v
+```
+
+**Run a single test:**
+
+```bash
+python -m unittest tests.test_voyager1_magneticfield_nTS_analysis.TestVoyager1MagneticFieldAnalysis.test_csv_data_shape -v
+```
+
+A successful run looks like:
+
+```
+test_csv_data_shape ... ok
+test_csv_data_values_are_positive ... ok
+test_csv_timestamps_are_sorted ... ok
+test_fetch_ephemeris_returns_arrays ... ok
+test_main_with_csv ... ok
+test_plot_csv_runs_without_error ... ok
+----------------------------------------------------------------------
+Ran 6 tests in 0.3s
+OK
 ```
 
 ## Troubleshooting
