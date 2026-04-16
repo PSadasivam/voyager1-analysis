@@ -455,6 +455,11 @@ def atlas():
     """3I/ATLAS interstellar comet research page."""
     return render_template('atlas.html')
 
+@app.route('/blackhole')
+def blackhole():
+    """Universe inside a black hole — scientific paper page."""
+    return render_template('blackhole.html')
+
 @app.route('/api/plasma')
 def api_plasma():
     """API endpoint for plasma wave analysis data."""

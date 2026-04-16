@@ -131,6 +131,24 @@
             box-shadow: 0 12px 35px rgba(0,0,0,0.3);
         }
 
+        .cta-button-tertiary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-button-tertiary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
         /* Floating Elements Inspired by the Image */
         .floating-element {
             position: absolute;
@@ -452,6 +470,7 @@
             .hero-content { margin-top: -5vh; }
             .cta-button { padding: 12px 30px; font-size: 1rem; }
             .cta-button-secondary { padding: 12px 30px; font-size: 1rem; }
+            .cta-button-tertiary { padding: 12px 30px; font-size: 1rem; }
             .cta-buttons { gap: 12px; }
 
             .about-content {
@@ -481,6 +500,7 @@
             .hero-content { padding: 0 12px; }
             .cta-button { padding: 10px 24px; font-size: 0.95rem; }
             .cta-button-secondary { padding: 10px 24px; font-size: 0.95rem; }
+            .cta-button-tertiary { padding: 10px 24px; font-size: 0.95rem; }
             .section-title { font-size: 1.6rem; margin-bottom: 30px; }
             .project-card { padding: 18px; }
             .project-icon { font-size: 2.2rem; }
@@ -528,6 +548,7 @@
             <div class="cta-buttons">
                 <a href="#projects" class="cta-button">Explore Voyager 1 Analysis</a>
                 <a href="#atlas" class="cta-button-secondary">Explore 3I/ATLAS Research</a>
+                <a href="/blackhole" class="cta-button-tertiary">Black Hole Cosmology Paper</a>
             </div>
 
             <!-- About This Research -->
@@ -649,6 +670,44 @@
                         4,267 observations over a 180-day arc from ground and space-based telescopes.
                     </p>
                     <a href="/atlas#visualizations" class="project-link" style="color: #4ecdc4;">View Visualizations →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Black Hole Section -->
+    <section class="content-section" id="blackhole" style="background: linear-gradient(135deg, #1a0a2e 0%, #0d0d0d 50%, #1a0a2e 100%);">
+        <div class="container">
+            <h2 class="section-title" style="color: #fff;">Black Hole Cosmology: Scientific Paper</h2>
+            <div class="project-grid">
+                <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="project-icon"></span>
+                    <h3 class="project-title" style="color: #b388ff;">Schwarzschild Radius</h3>
+                    <p class="project-description" style="color: rgba(255,255,255,0.75);">
+                        The universe's total mass yields a gravitational radius ~10x larger than the observable radius.
+                        R/r<sub>s</sub> &asymp; 0.098 &mdash; we fit well inside our own Schwarzschild radius.
+                    </p>
+                    <a href="/blackhole#ref1" class="project-link" style="color: #b388ff;">View Calculations &rarr;</a>
+                </div>
+
+                <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="project-icon"></span>
+                    <h3 class="project-title" style="color: #b388ff;">Bouncing Cosmology</h3>
+                    <p class="project-description" style="color: rgba(255,255,255,0.75);">
+                        Replacing the Big Bang singularity with a smooth bounce: a(t) = &radic;(a<sub>min</sub>&sup2; + (t/t&#8320;)&sup2;).
+                        Simulation using Planck 2018 parameters and numerical visualization.
+                    </p>
+                    <a href="/blackhole" class="project-link" style="color: #b388ff;">Read the Paper &rarr;</a>
+                </div>
+
+                <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                    <span class="project-icon"></span>
+                    <h3 class="project-title" style="color: #b388ff;">Theoretical Frameworks</h3>
+                    <p class="project-description" style="color: rgba(255,255,255,0.75);">
+                        From Pathria (1972) to Gazta&ntilde;aga (2025): spin&ndash;torsion cosmology, quantum degeneracy pressure,
+                        and the Black-Hole Universe model reviewed with 28 references.
+                    </p>
+                    <a href="/blackhole#references" class="project-link" style="color: #b388ff;">View References &rarr;</a>
                 </div>
             </div>
         </div>
