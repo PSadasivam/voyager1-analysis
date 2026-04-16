@@ -143,6 +143,46 @@
             .info-panels { grid-template-columns: 1fr; }
             .info-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.8em; }
+            .header p { font-size: 1em; }
+
+            .nav-bar { flex-wrap: wrap; gap: 8px; }
+            .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
+
+            .status-bar { flex-wrap: wrap; gap: 8px; }
+            .status-item { font-size: 0.8em; padding: 4px 10px; }
+
+            .container { padding: 12px; }
+            .panel { padding: 18px; }
+            .panel h2 { font-size: 1.15em; }
+            .plot-section { padding: 16px; }
+            .plot-section h2 { font-size: 1.15em; }
+
+            .controls {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            .controls label { font-size: 0.9em; margin-right: 4px; }
+            .controls select, .controls button { padding: 6px 10px; font-size: 0.9em; margin: 0; }
+
+            .ref-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+            .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .footer-links a { margin: 0; font-size: 0.9em; }
+            .footer { padding: 25px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.4em; }
+            .header p { font-size: 0.9em; }
+            .container { padding: 8px; }
+            .panel { padding: 14px; }
+            .plot-section { padding: 12px; }
+            .info-item { padding: 8px; }
+            .info-value { font-size: 1em; }
+            .method-block { padding: 12px 14px; font-size: 0.9em; }
+            .footer-links a { font-size: 0.85em; }
         }
     </style>
 </head>

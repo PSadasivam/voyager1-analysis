@@ -242,12 +242,55 @@
             }
             
             .header h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             
             .info-grid {
                 grid-template-columns: 1fr;
             }
+
+            .nav-bar {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .nav-bar a {
+                padding: 5px 12px;
+                font-size: 0.85em;
+            }
+
+            .status-bar {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .status-item { font-size: 0.8em; padding: 4px 10px; }
+
+            .header p { font-size: 1em; }
+            .panel { padding: 18px; }
+            .panel h2 { font-size: 1.2em; }
+            .container { padding: 12px; }
+
+            .controls select, .controls button {
+                padding: 6px 10px;
+                font-size: 0.9em;
+                margin: 4px 3px;
+            }
+            .controls label { font-size: 0.9em; }
+
+            .mission-stats { grid-template-columns: 1fr; }
+
+            .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .footer-links a { margin: 0; font-size: 0.9em; }
+            .footer { padding: 25px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.4em; }
+            .header p { font-size: 0.9em; }
+            .panel { padding: 14px; }
+            .container { padding: 8px; }
+            .info-item { padding: 8px; }
+            .info-value { font-size: 1em; }
+            .footer-links a { font-size: 0.85em; }
         }
     </style>
 </head>
