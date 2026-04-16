@@ -450,6 +450,11 @@ def plasma():
     """Plasma wave analysis page."""
     return render_template('plasma.html')
 
+@app.route('/atlas')
+def atlas():
+    """3I/ATLAS interstellar comet research page."""
+    return render_template('atlas.html')
+
 @app.route('/api/plasma')
 def api_plasma():
     """API endpoint for plasma wave analysis data."""
