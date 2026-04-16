@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Prabhu's Deep Space Research</title>
+    <title>Prabhu's Deep Space Labs</title>
     <style>
         * {
             margin: 0;
@@ -359,31 +359,107 @@
             transform: none;
         }
 
-        .about-section {
-            padding: 40px 0 0 0;
+        /* PDSL Narrative Section */
+        .pdsl-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #0d1b2a 0%, #0a0e27 100%);
         }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 50px;
-            align-items: center;
-            padding-left: 20%;
+        .pdsl-content {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .about-text {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.85);
-            text-align: left;
+        .pdsl-title {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 40px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        .about-text .section-title {
-            color: white;
+        .pdsl-title span {
+            color: #f39c12;
         }
 
-        .about-text strong {
-            color: #f1c40f;
+        .pdsl-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.82);
+        }
+
+        .pdsl-text p {
+            margin-bottom: 22px;
+        }
+
+        .pdsl-text a {
+            color: #4ecdc4;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(78,205,196,0.3);
+            transition: border-color 0.3s;
+        }
+
+        .pdsl-text a:hover {
+            border-color: #4ecdc4;
+        }
+
+        /* Leadership Philosophy Section */
+        .leadership-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0a0a1a 0%, #141428 50%, #0a0a1a 100%);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .leadership-content {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .leadership-title {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .leadership-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.82);
+        }
+
+        .leadership-text p {
+            margin-bottom: 22px;
+        }
+
+        .leadership-emphasis {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.95);
+            border-left: 3px solid #667eea;
+            padding-left: 24px;
+            margin: 40px 0 0 0;
+        }
+
+        .leadership-emphasis p {
+            margin-bottom: 16px;
+        }
+
+        /* Closing Statement */
+        .closing-section {
+            padding: 60px 0;
+            background: linear-gradient(180deg, #1a0a2e 0%, #2c3e50 100%);
+            text-align: center;
+        }
+
+        .closing-text {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+            letter-spacing: 0.5px;
         }
 
         .footer {
@@ -436,12 +512,10 @@
             .cta-button-tertiary { padding: 12px 30px; font-size: 1rem; }
             .cta-buttons { gap: 12px; }
 
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 25px;
-            }
-            .about-text .section-title { text-align: center !important; }
+            .pdsl-section, .leadership-section { padding: 50px 0; }
+            .pdsl-title, .leadership-title { font-size: 1.8rem; }
+            .leadership-emphasis { font-size: 1.1rem; }
+            .closing-text { font-size: 1.2rem; }
 
             .section-title { font-size: 2rem; }
             .project-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -471,6 +545,11 @@
             .container { padding: 0 12px; }
             .footer { padding: 25px 0; }
             .footer-links a { font-size: 0.85em; }
+            .pdsl-section, .leadership-section { padding: 40px 0; }
+            .pdsl-title, .leadership-title { font-size: 1.5rem; }
+            .pdsl-text, .leadership-text { font-size: 1rem; }
+            .leadership-emphasis { font-size: 1rem; }
+            .closing-text { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -500,8 +579,8 @@
             <div class="hero-header">
                 <img src="/images/al-0135.JPG" alt="Prabhu" class="profile-photo">
                 <div class="hero-text">
-                    <h1 class="blog-title">PRABHU'S DEEP SPACE RESEARCH</h1>
-                    <p class="blog-subtitle">It's my space to explore the cosmos and spark scientific discovery</p>
+                    <h1 class="blog-title">PRABHU'S DEEP SPACE LABS</h1>
+                    <p class="blog-subtitle">Exploring the cosmos through real data, disciplined analysis, and lifelong curiosity</p>
                 </div>
             </div>
             <div class="cta-buttons">
@@ -510,27 +589,74 @@
                 <a href="/blackhole" class="cta-button-tertiary">Black Hole Cosmology Paper</a>
             </div>
 
-            <!-- About This Research -->
-            <div class="about-section">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">About This Research</h2>
-                        <p>
-                            Welcome to my deep space research laboratory, where cutting-edge data science meets the infinite cosmos. 
-                            This project represents a comprehensive analysis suite for NASA's Voyager 1 spacecraft - humanity's most 
-                            distant ambassador, now traveling through the uncharted territories of interstellar space.
-                        </p>
-                        <p style="margin-top: 20px;">
-                            Using real NASA data from the Space Physics Data Facility (SPDF) and JPL HORIZONS service, I've created 
-                            interactive tools that bring the universe closer to home. From magnetic field fluctuations to plasma wave 
-                            signatures, every graph tells a story of discovery beyond our solar system.
-                        </p>
-                        <p style="margin-top: 20px;">
-                            <strong>Mission:</strong> To democratize space data analysis and inspire the next generation of space explorers 
-                            through beautiful, accessible visualizations of humanity's greatest journey.
-                        </p>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDSL Narrative -->
+    <section class="pdsl-section" id="pdsl">
+        <div class="pdsl-content">
+            <h2 class="pdsl-title">About <span>Prabhu's Deep Space Labs</span></h2>
+            <div class="pdsl-text">
+                <p>
+                    Prabhu's Deep Space Labs (PDSL) is not a recent initiative &mdash; it is a lifelong pursuit that began during my undergraduate years in Physics in the early 1990s. That was when the first questions took hold: <em>How does the universe truly work? What lies beyond what we can observe?</em> Those questions never left.
+                </p>
+                <p>
+                    Over time, my professional path evolved into building large-scale technology platforms and data systems. But the curiosity for the cosmos remained constant. PDSL is where these two worlds come together &mdash; physics and data science, curiosity and computation.
+                </p>
+                <p>
+                    At its foundation, PDSL is a personal research platform focused on exploring deep space through real scientific data and disciplined analysis.
+                </p>
+                <p>
+                    The journey began with NASA's <a href="https://voyager.jpl.nasa.gov/mission/status/" target="_blank" rel="noopener">Voyager&nbsp;1</a> &mdash; humanity's farthest-reaching spacecraft, now traveling through interstellar space. Using datasets from NASA's <a href="https://spdf.gsfc.nasa.gov/" target="_blank" rel="noopener">Space Physics Data Facility (SPDF)</a> and <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL HORIZONS</a>, I developed an end-to-end analysis pipeline to interpret magnetic field variations, plasma wave activity, and heliospheric transitions.
+                </p>
+                <p>
+                    Building on this, the research expanded into interstellar object analysis. Current work includes the study of <a href="/atlas">3I/ATLAS</a> &mdash; focusing on its trajectory, observational data, and implications for interstellar material.
+                </p>
+                <p>
+                    In parallel, I am developing a scientific hypothesis exploring whether our universe itself could exist within a black hole. This builds on <a href="https://science.nasa.gov/universe/black-holes/" target="_blank" rel="noopener">General Relativity</a> and foundational black hole physics. The paper is available here: <a href="/blackhole">Universe Inside a Black Hole &mdash; Hypothesis Paper</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Philosophy -->
+    <section class="leadership-section" id="leadership">
+        <div class="leadership-content">
+            <h2 class="leadership-title">From Deep Space to Enterprise Platforms</h2>
+            <div class="leadership-text">
+                <p>
+                    My undergraduate degree was in Physics, and astronomy has always been a passion of mine.
+                </p>
+                <p>
+                    When Voyager&nbsp;1 launched, I was a child. Today, it has traveled more than 15&nbsp;billion kilometers from Earth and continues to transmit data &mdash; decades beyond its original mission life.
+                </p>
+                <p>
+                    What fascinates me is not just the distance, but the design philosophy behind it.
+                </p>
+                <p>
+                    That spacecraft was engineered for a future no one could fully predict. It had to operate with extreme precision and reliability, without the assumption of constant human intervention. The engineers had to think decades ahead &mdash; designing for autonomy, resilience, and clarity of purpose.
+                </p>
+                <p>
+                    That mindset has deeply influenced how I approach technology leadership.
+                </p>
+                <p>
+                    When I assumed leadership of Healthcare Technology, I stepped back to understand the landscape &mdash; the structural challenges, growth opportunities, and competitive dynamics. Because if we are not clear on the &ldquo;why&rdquo; and the &ldquo;what,&rdquo; the &ldquo;how&rdquo; becomes reactive.
+                </p>
+                <p>
+                    That reflection enabled us to define a one-platform vision &mdash; cohesive, scalable, and aligned to long-term direction.
+                </p>
+                <p>
+                    Voyager reinforces a second principle: the systems we design today will outlive immediate roadmaps. Platforms, data models, and architecture decisions may operate for 10&ndash;15&nbsp;years. Architectural integrity and disciplined engineering are compounding investments.
+                </p>
+            </div>
+            <div class="leadership-emphasis">
+                <p>
+                    Great engineering is not about building systems that run forever. It is about building systems that deliver value reliably for far longer than expected.
+                </p>
+                <p>
+                    Leadership is the same. It is about designing platforms, teams, and organizations that endure &mdash; not just for the next sprint, but for the long horizon.
+                </p>
             </div>
         </div>
     </section>
@@ -669,17 +795,24 @@
         </div>
     </section>
 
+    <!-- Closing Statement -->
+    <section class="closing-section">
+        <div class="container">
+            <p class="closing-text">&ldquo;This is not a project. It is a lifelong exploration.&rdquo;</p>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <a href="https://github.com/PSadasivam/voyager1-analysis" target="_blank">GitHub Repository</a>
-                <a href="https://orcid.org/0009-0008-0069-693X" target="_blank">ORCID</a>
-                <a href="https://voyager.jpl.nasa.gov/" target="_blank">NASA Voyager Mission</a>
-                <a href="https://spdf.gsfc.nasa.gov/" target="_blank">NASA SPDF Data</a>
+                <a href="https://github.com/PSadasivam/voyager1-analysis" target="_blank" rel="noopener">GitHub Repository</a>
+                <a href="https://orcid.org/0009-0008-0069-693X" target="_blank" rel="noopener">ORCID</a>
+                <a href="https://voyager.jpl.nasa.gov/" target="_blank" rel="noopener">NASA Voyager Mission</a>
+                <a href="https://spdf.gsfc.nasa.gov/" target="_blank" rel="noopener">NASA SPDF Data</a>
                 <a href="/api/status">API Status</a>
             </div>
-            <p>&copy; 2025 Prabhu Sadasivam | Deep Space Research | Data courtesy of NASA JPL & SPDF</p>
+            <p>&copy; 2026 Prabhu Sadasivam | Prabhu's Deep Space Labs | Data courtesy of NASA JPL &amp; SPDF</p>
         </div>
     </footer>
 
