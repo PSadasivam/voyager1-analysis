@@ -199,11 +199,25 @@
         }
 
         .footer {
+            background: #2c3e50;
+            color: white;
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            opacity: 0.7;
+            padding: 40px 0;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
         }
 
         @media (max-width: 768px) {
@@ -251,10 +265,18 @@
             </div>
         </div>
 
-        <div class="footer">
-            <p>Data provided by NASA Jet Propulsion Laboratory and Space Physics Data Facility</p>
-            <p>Voyager 1 Deep Space Analysis Suite &copy; 2025 Prabhu Sadasivam</p>
-        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="https://github.com/PSadasivam/voyager1-analysis" target="_blank">GitHub Repository</a>
+                    <a href="https://orcid.org/0009-0008-0069-693X" target="_blank">ORCID</a>
+                    <a href="https://voyager.jpl.nasa.gov/" target="_blank">NASA Voyager Mission</a>
+                    <a href="https://spdf.gsfc.nasa.gov/" target="_blank">NASA SPDF Data</a>
+                    <a href="/api/status">API Status</a>
+                </div>
+                <p>&copy; 2025 Prabhu Sadasivam | Deep Space Research | Data courtesy of NASA JPL & SPDF</p>
+            </div>
+        </footer>
     </div>
 
     <script>
