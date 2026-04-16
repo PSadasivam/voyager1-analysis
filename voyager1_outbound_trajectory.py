@@ -66,6 +66,10 @@ MISSION_EVENTS = [
                  "#ff7f0e", marker='o', size=100),
     MissionEvent("Saturn Flyby", datetime.datetime(1980, 11, 12, tzinfo=datetime.timezone.utc), 
                  "#2ca02c", marker='s', size=100),
+    MissionEvent("Pale Blue Dot", datetime.datetime(1990, 2, 14, tzinfo=datetime.timezone.utc), 
+                 "#17becf", marker='p', size=90),
+    MissionEvent("Termination Shock", datetime.datetime(2004, 12, 16, tzinfo=datetime.timezone.utc), 
+                 "#e377c2", marker='^', size=90),
     MissionEvent("Heliopause", datetime.datetime(2012, 8, 25, tzinfo=datetime.timezone.utc), 
                  "#d62728", marker='D', size=90),
 ]
@@ -145,6 +149,8 @@ def fetch_trajectory_synthetic(start_date: datetime.datetime, end_date: datetime
         datetime.datetime(1977, 9, 5, tzinfo=datetime.timezone.utc): 1.0,      # Launch
         datetime.datetime(1979, 3, 5, tzinfo=datetime.timezone.utc): 5.2,     # Jupiter  
         datetime.datetime(1980, 11, 12, tzinfo=datetime.timezone.utc): 9.5,   # Saturn
+        datetime.datetime(1990, 2, 14, tzinfo=datetime.timezone.utc): 40.0,   # Pale Blue Dot
+        datetime.datetime(2004, 12, 16, tzinfo=datetime.timezone.utc): 94.0,  # Termination Shock
         datetime.datetime(2012, 8, 25, tzinfo=datetime.timezone.utc): 121.0,  # Heliopause
         # Updated calculation for current position (more accurate)
         # Voyager 1 moves ~3.6 AU/year since heliopause crossing

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Voyager 1 — Amazing Facts</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        .header {
+            text-align: center; margin-bottom: 40px; padding: 24px;
+            background: rgba(255,255,255,0.08); border-radius: 15px; backdrop-filter: blur(10px);
+        }
+        .header h1 {
+            font-size: 2.6em; margin-bottom: 8px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .header p { font-size: 1.15em; opacity: 0.85; }
+
+        .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 12px; }
+        .nav-bar a {
+            color: #aaa; text-decoration: none; padding: 6px 18px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15); font-size: 0.95em; transition: all 0.25s;
+        }
+        .nav-bar a:hover { color: #fff; border-color: #4ecdc4; }
+        .nav-bar a.active { color: #ffd700; border-color: #ffd700; background: rgba(255,215,0,0.1); }
+
+        /* Hero stat */
+        .hero-stat {
+            text-align: center; margin-bottom: 40px; padding: 40px 20px;
+            background: radial-gradient(ellipse at center, rgba(78,205,196,0.12) 0%, transparent 70%);
+            border-radius: 20px; border: 1px solid rgba(78,205,196,0.2);
+        }
+        .hero-number {
+            font-size: 5em; font-weight: 800; letter-spacing: -2px;
+            background: linear-gradient(45deg, #4ecdc4, #ffd700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            line-height: 1.1;
+        }
+        .hero-label { font-size: 1.4em; opacity: 0.8; margin-top: 6px; }
+        .hero-sub { font-size: 1em; opacity: 0.55; margin-top: 8px; }
+
+        /* Category */
+        .category {
+            margin-bottom: 36px;
+        }
+        .category-title {
+            font-size: 1.5em; font-weight: 700; margin-bottom: 18px; padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px;
+        }
+        .category-icon { font-size: 1.4em; }
+
+        /* Fact cards */
+        .facts-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+        }
+        .fact-card {
+            background: rgba(255,255,255,0.06); border-radius: 14px; padding: 22px 24px;
+            border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .fact-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        }
+        .fact-card:hover {
+            transform: translateY(-4px); border-color: rgba(78,205,196,0.3);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .cat-distance .fact-card::before { background: linear-gradient(90deg, #4ecdc4, #45b7aa); }
+        .cat-engineering .fact-card::before { background: linear-gradient(90deg, #ffd700, #f0c030); }
+        .cat-science .fact-card::before { background: linear-gradient(90deg, #ff6b6b, #e05555); }
+        .cat-golden .fact-card::before { background: linear-gradient(90deg, #daa520, #b8860b); }
+        .cat-fun .fact-card::before { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
+
+        .fact-highlight {
+            font-size: 1.7em; font-weight: 800; color: #4ecdc4; margin-bottom: 6px; line-height: 1.15;
+        }
+        .cat-engineering .fact-highlight { color: #ffd700; }
+        .cat-science .fact-highlight { color: #ff6b6b; }
+        .cat-golden .fact-highlight { color: #daa520; }
+        .cat-fun .fact-highlight { color: #9b59b6; }
+
+        .fact-text { font-size: 0.98em; line-height: 1.6; opacity: 0.85; }
+        .fact-text strong { color: #fff; opacity: 1; }
+
+        /* Quote */
+        .quote-block {
+            text-align: center; margin: 40px 0; padding: 32px 40px;
+            background: rgba(218,165,32,0.08); border-radius: 16px;
+            border: 1px solid rgba(218,165,32,0.2);
+            font-style: italic; font-size: 1.2em; line-height: 1.6;
+        }
+        .quote-block .author {
+            display: block; margin-top: 12px; font-style: normal;
+            font-weight: 600; color: #daa520; font-size: 0.85em;
+        }
+
+        .footer {
+            text-align: center; margin-top: 50px; padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6; font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .facts-grid { grid-template-columns: 1fr; }
+            .hero-number { font-size: 3.5em; }
+            .header h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-bar">
+                <a href="/">Home</a>
+                <a href="/facts" class="active">Facts</a>
+                <a href="/trajectory">Trajectory</a>
+                <a href="/plasma">Plasma Waves</a>
+                <a href="/density">Density</a>
+                <a href="/dashboard">Magnetometer</a>
+            </div>
+            <h1>🌟 Voyager 1 — Amazing Facts</h1>
+            <p>Humanity's most distant ambassador, now in interstellar space</p>
+        </div>
+
+        <!-- Hero stat -->
+        <div class="hero-stat">
+            <div class="hero-number">~1 Light-Day</div>
+            <div class="hero-label">from Earth — a signal takes nearly 24 hours to reach Voyager 1</div>
+            <div class="hero-sub">~170 AU &nbsp;·&nbsp; ~25.4 billion km &nbsp;·&nbsp; ~15.8 billion miles</div>
+        </div>
+
+        <!-- Distance & Speed -->
+        <div class="category cat-distance">
+            <div class="category-title"><span class="category-icon">📏</span> Distance &amp; Speed</div>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <div class="fact-highlight">17 km/s</div>
+                    <div class="fact-text">That's <strong>38,000 mph</strong> — fast enough to cross the entire United States coast-to-coast in about <strong>4 minutes</strong>.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">~22.5 hours</div>
+                    <div class="fact-text">The time it takes a radio signal, traveling at the speed of light, to travel from <strong>Earth to Voyager 1</strong> and back: nearly 2 full days.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">73,000 years</div>
+                    <div class="fact-text">At its current speed, it would take this long to reach the <strong>nearest star</strong> (Proxima Centauri) — if it were heading that way.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">170 AU</div>
+                    <div class="fact-text">If the Sun were a basketball, Voyager 1 would be <strong>~2.5 miles away</strong>. The nearest star? About <strong>4,300 miles</strong>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="category cat-engineering">
+            <div class="category-title"><span class="category-icon">⚙️</span> Engineering Marvels</div>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <div class="fact-highlight">49 years</div>
+                    <div class="fact-text">Launched <strong>September 5, 1977</strong> — still transmitting data. Most software gets deprecated in 5 years; Voyager keeps going.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">23 watts</div>
+                    <div class="fact-text">Voyager's radio transmitter is about the power of a <strong>refrigerator light bulb</strong> — yet NASA can still hear it from 25 billion km away.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">~70 KB memory</div>
+                    <div class="fact-text">The onboard computer has less memory than a <strong>single low-resolution JPEG image</strong>. Your phone has roughly 2 million times more.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">160 bits/sec</div>
+                    <div class="fact-text">Current data rate from Voyager 1. It would take about <strong>2 hours</strong> to download a single smartphone photo at this speed.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scientific Firsts -->
+        <div class="category cat-science">
+            <div class="category-title"><span class="category-icon">🔬</span> Scientific Firsts</div>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <div class="fact-highlight">Interstellar Space</div>
+                    <div class="fact-text"><strong>First human-made object</strong> to leave the heliosphere and enter the space between stars, on <strong>August 25, 2012</strong>.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">Volcanoes on Io</div>
+                    <div class="fact-text">Voyager 1 discovered <strong>active volcanoes on Jupiter's moon Io</strong> — the first extraterrestrial volcanic activity ever observed.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">Saturn's Rings</div>
+                    <div class="fact-text">Revealed incredible detail in <strong>Saturn's ring structure</strong>, discovering intricate patterns, gaps, and previously unknown moons.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">~0.01 cm⁻³</div>
+                    <div class="fact-text">The electron density Voyager measures in <strong>interstellar space</strong> — the thin plasma filling the vast emptiness between stars.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Golden Record -->
+        <div class="category cat-golden">
+            <div class="category-title"><span class="category-icon">💿</span> The Golden Record</div>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <div class="fact-highlight">55 Languages</div>
+                    <div class="fact-text">Carries a <strong>gold-plated copper phonograph record</strong> with greetings in 55 human languages, from Akkadian to Wu Chinese.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">90 min of Music</div>
+                    <div class="fact-text">From <strong>Bach to Chuck Berry</strong>, Beethoven to Blind Willie Johnson — a playlist chosen to represent all of humanity's music.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">115 Images</div>
+                    <div class="fact-text">Encoded analog images of <strong>humans, DNA, our solar system, mathematical definitions</strong>, and scenes of life on Earth.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">1 Billion Years</div>
+                    <div class="fact-text">The estimated <strong>lifespan of the Golden Record</strong> in the vacuum of space — long after Earth's continents have rearranged.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="quote-block">
+            "The spacecraft will be encountered and the record played only if there are advanced space-faring civilizations in interstellar space, 
+            but the launching of this bottle into the cosmic ocean says something very hopeful about life on this planet."
+            <span class="author">— Carl Sagan</span>
+        </div>
+
+        <!-- Fun Comparisons -->
+        <div class="category cat-fun">
+            <div class="category-title"><span class="category-icon">🎯</span> Fun Comparisons</div>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <div class="fact-highlight">Older than most colleagues</div>
+                    <div class="fact-text">Voyager 1 has been traveling <strong>longer than most people in the room have been alive</strong>. It launched when Star Wars first hit theaters.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">Pale Blue Dot</div>
+                    <div class="fact-text">In 1990, Voyager 1 turned its camera back toward Earth from 6 billion km away and took the famous <strong>"Pale Blue Dot"</strong> photo — Earth as a tiny speck in a sunbeam.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">Your phone vs. Voyager</div>
+                    <div class="fact-text">A modern smartphone has <strong>~100,000×</strong> the computing power of Voyager's onboard computer, yet Voyager is exploring interstellar space.</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-highlight">Still phoning home</div>
+                    <div class="fact-text">Voyager 1's RTG power source loses ~4 watts per year. NASA expects to keep <strong>at least one instrument running until ~2030</strong>.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Data courtesy of NASA JPL &amp; Space Physics Data Facility &nbsp;·&nbsp; Voyager 1 Deep Space Analysis Suite &copy; 2025 Prabhu Sadasivam</p>
+        </div>
+    </div>
+</body>
+</html>

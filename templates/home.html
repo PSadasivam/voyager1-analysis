@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Prabhu's Deep Space Research</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0e27 0%, #0d1b2a 40%, #1b2838 100%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 1600px;
+            padding: 0 20px;
+            margin-top: -10vh;
+        }
+
+        .hero-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 60% top;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(102,126,234,0.3), inset 0 0 10px rgba(0,0,0,0.2);
+            transform: perspective(500px) rotateY(-5deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .profile-photo:hover {
+            transform: perspective(500px) rotateY(0deg) scale(1.05);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 30px rgba(102,126,234,0.5), inset 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .blog-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
+
+        .blog-subtitle {
+            font-size: 2.5rem;
+            color: #ecf0f1;
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        /* Floating Elements Inspired by the Image */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .floating-books {
+            top: 10%;
+            left: 10%;
+            font-size: 4rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-bulb {
+            top: 20%;
+            right: 15%;
+            font-size: 5rem;
+            animation: float 8s ease-in-out infinite reverse;
+            color: #f1c40f;
+        }
+
+        .floating-satellite {
+            bottom: 20%;
+            left: 8%;
+            font-size: 6rem;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .floating-rocket {
+            top: 60%;
+            right: 10%;
+            font-size: 4rem;
+            animation: float 7s ease-in-out infinite reverse;
+        }
+
+        .floating-telescope {
+            top: 40%;
+            left: 5%;
+            font-size: 3rem;
+            animation: float 9s ease-in-out infinite;
+        }
+
+        .floating-star {
+            top: 6%;
+            left: 45%;
+            font-size: 3.5rem;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .floating-comet {
+            top: 12%;
+            right: 35%;
+            font-size: 3rem;
+            animation: float 11s ease-in-out infinite reverse;
+        }
+
+        .floating-planet {
+            bottom: 15%;
+            right: 8%;
+            font-size: 4rem;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-galaxy {
+            bottom: 25%;
+            right: 20%;
+            font-size: 3.5rem;
+            animation: float 12s ease-in-out infinite reverse;
+        }
+
+        /* Curved Lines */
+        .curved-line {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: 30%;
+            left: 20%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .curved-line-2 {
+            position: absolute;
+            width: 300px;
+            height: 150px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: 50%;
+            right: 25%;
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        .curved-line-3 {
+            position: absolute;
+            width: 400px;
+            height: 100px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            bottom: 20%;
+            left: 30%;
+            animation: rotate 25s linear infinite;
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 80%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 50%; left: 85%; animation-delay: 1s; }
+        .particle:nth-child(3) { top: 80%; left: 75%; animation-delay: 2s; }
+        .particle:nth-child(4) { top: 30%; left: 70%; animation-delay: 0.5s; }
+        .particle:nth-child(5) { top: 70%; left: 90%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #0d1b2a, #1b2838);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #764ba2;
+        }
+
+        .project-link.disabled {
+            color: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        .project-link.disabled:hover {
+            color: #95a5a6;
+            transform: none;
+        }
+
+        .about-section {
+            padding: 40px 0 0 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 10rem;
+            opacity: 0.8;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            text-align: left;
+        }
+
+        .about-text .section-title {
+            color: white;
+        }
+
+        .about-text strong {
+            color: #f1c40f;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 2.5rem;
+            }
+            
+            .blog-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-image {
+                font-size: 6rem;
+            }
+            
+            .floating-element {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- Floating Elements -->
+        <div class="floating-element floating-books">📚</div>
+        <div class="floating-element floating-bulb">💡</div>
+        <div class="floating-element floating-satellite">🛰️</div>
+        <div class="floating-element floating-telescope">🔭</div>
+        <div class="floating-element floating-star">⭐</div>
+        <div class="floating-element floating-comet">☄️</div>
+        <div class="floating-element floating-planet">🪐</div>
+        <div class="floating-element floating-galaxy">🌌</div>
+        
+        <!-- Curved Lines -->
+        <div class="curved-line"></div>
+        <div class="curved-line-2"></div>
+        <div class="curved-line-3"></div>
+        
+        <!-- Particles -->
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        
+        <div class="hero-content">
+            <div class="hero-header">
+                <img src="/images/al-0135.JPG" alt="Prabhu" class="profile-photo">
+                <div class="hero-text">
+                    <h1 class="blog-title">PRABHU'S DEEP SPACE RESEARCH</h1>
+                    <p class="blog-subtitle">It's my space to explore the cosmos and spark scientific discovery</p>
+                </div>
+            </div>
+            <a href="#projects" class="cta-button">Explore Voyager 1 Analysis</a>
+
+            <!-- About This Research -->
+            <div class="about-section">
+                <div class="about-content">
+                    <div class="about-image">
+                        🌌
+                    </div>
+                    <div class="about-text">
+                        <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">About This Research</h2>
+                        <p>
+                            Welcome to my deep space research laboratory, where cutting-edge data science meets the infinite cosmos. 
+                            This project represents a comprehensive analysis suite for NASA's Voyager 1 spacecraft - humanity's most 
+                            distant ambassador, now traveling through the uncharted territories of interstellar space.
+                        </p>
+                        <p style="margin-top: 20px;">
+                            Using real NASA data from the Space Physics Data Facility (SPDF) and JPL HORIZONS service, I've created 
+                            interactive tools that bring the universe closer to home. From magnetic field fluctuations to plasma wave 
+                            signatures, every graph tells a story of discovery beyond our solar system.
+                        </p>
+                        <p style="margin-top: 20px;">
+                            <strong>Mission:</strong> To democratize space data analysis and inspire the next generation of space explorers 
+                            through beautiful, accessible visualizations of humanity's greatest journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="content-section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Voyager 1: Deep Space Analysis</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <span class="project-icon">🌟</span>
+                    <h3 class="project-title">Amazing Facts</h3>
+                    <p class="project-description">
+                        Fascinating facts about Voyager 1 — from the 1 light-day milestone to the Golden Record, 
+                        engineering marvels, and scientific firsts. Perfect for presentations and sharing.
+                    </p>
+                    <a href="/facts" class="project-link">Explore Facts →</a>
+                </div>
+                
+                <div class="project-card">
+                    <span class="project-icon">🌌</span>
+                    <h3 class="project-title">Trajectory Visualization</h3>
+                    <p class="project-description">
+                        3D visualization of Voyager 1's complete outbound trajectory from 1977 launch to current interstellar position. 
+                        Includes mission milestones, planetary encounters, and real-time position tracking.
+                    </p>
+                    <a href="/trajectory" class="project-link">Launch Trajectory →</a>
+                </div>
+                
+                <div class="project-card">
+                    <span class="project-icon">📡</span>
+                    <h3 class="project-title">Plasma Wave Analysis</h3>
+                    <p class="project-description">
+                        Advanced spectrograms of Voyager 1's plasma wave subsystem data, revealing the secrets of interstellar 
+                        medium through frequency analysis and wave classification algorithms.
+                    </p>
+                    <a href="/plasma" class="project-link">Launch Plasma Waves →</a>
+                </div>
+                
+                <div class="project-card">
+                    <span class="project-icon">⚡</span>
+                    <h3 class="project-title">Density Extraction</h3>
+                    <p class="project-description">
+                        NASA-style electron density extraction from plasma frequency ridges, providing insights into the 
+                        structure and composition of the interstellar environment surrounding Voyager 1.
+                    </p>
+                    <a href="/density" class="project-link">Launch Density Analysis →</a>
+                </div>
+                
+                <div class="project-card">
+                    <span class="project-icon">🧲</span>
+                    <h3 class="project-title">Magnetometer Analysis</h3>
+                    <p class="project-description">
+                        Interactive web dashboard showcasing real-time Voyager 1 magnetic field data from NASA's archives. 
+                        Features dynamic plotting, statistical analysis, and beautiful visualizations of humanity's most distant spacecraft.
+                    </p>
+                    <a href="/dashboard" class="project-link">Launch Dashboard →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/PSadasivam/voyager1-analysis" target="_blank">GitHub Repository</a>
+                <a href="https://orcid.org/0009-0008-0069-693X" target="_blank">ORCID</a>
+                <a href="https://voyager.jpl.nasa.gov/" target="_blank">NASA Voyager Mission</a>
+                <a href="https://spdf.gsfc.nasa.gov/" target="_blank">NASA SPDF Data</a>
+                <a href="/api/status">API Status</a>
+            </div>
+            <p>&copy; 2025 Prabhu Sadasivam | Deep Space Research | Data courtesy of NASA JPL & SPDF</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelectorAll('.floating-element').forEach(element => {
+                element.style.transform = `translateY(${rate}px)`;
+            });
+        });
+
+        // Dynamic particle generation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            document.querySelector('.hero-section').appendChild(particle);
+        }
+
+        // Add more particles for enhanced effect
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => createParticle(), i * 500);
+        }
+    </script>
+</body>
+</html>

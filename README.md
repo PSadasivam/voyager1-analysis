@@ -89,7 +89,7 @@ voyager1_project/
 
 ```bash
 # Clone the repository
-git clone https://github.com/PrabhuSadasivam/voyager1-analysis.git
+git clone https://github.com/PSadasivam/voyager1-analysis.git
 cd voyager1_project
 
 # Create virtual environment
@@ -211,12 +211,13 @@ python verify_voyager_position.py
 **License**: MIT License - see `LICENSE` file for details
 
 **Developer**: Prabhu Sadasivam  
-**Contact**: https://www.linkedin.com/in/prabhusadasivam/
+**Contact**: https://www.linkedin.com/in/prabhusadasivam/  
+**ORCID**: https://orcid.org/0009-0008-0069-693X
 
 **Citation**: If using this toolkit for research, please cite:
 ```
 Sadasivam, P. (2025). Voyager 1 Deep Space Analysis Suite. 
-GitHub Repository: https://github.com/PrabhuSadasivam/voyager1-analysis
+GitHub Repository: https://github.com/PSadasivam/voyager1-analysis
 ```
 
 ## Acknowledgments

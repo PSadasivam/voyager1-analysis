@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Voyager 1 Deep Space Analysis Suite"
+authors:
+  - family-names: Sadasivam
+    given-names: Prabhu
+    orcid: "https://orcid.org/0009-0008-0069-693X"
+repository-code: "https://github.com/PSadasivam/voyager1-analysis"
+license: MIT
+date-released: "2025-01-01"
+keywords:
+  - voyager-1
+  - deep-space
+  - magnetometer
+  - plasma-waves
+  - heliosphere
+  - nasa
+  - space-physics
+abstract: >-
+  A comprehensive Python toolkit for analyzing Voyager 1 deep space data,
+  including magnetic field measurements, plasma wave observations, electron
+  density extraction, and trajectory visualization. Features a Flask-based
+  web dashboard for interactive exploration of interstellar medium data.
