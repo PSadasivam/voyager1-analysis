@@ -43,6 +43,7 @@
             justify-content: center;
             gap: 40px;
             margin-bottom: 20px;
+            padding-left: 12%;
         }
 
         .profile-photo {
@@ -89,6 +90,8 @@
         .cta-button {
             display: inline-block;
             padding: 15px 40px;
+            min-width: 280px;
+            text-align: center;
             background: linear-gradient(45deg, #f39c12, #e67e22);
             color: white;
             text-decoration: none;
@@ -110,11 +113,14 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 40px;
+            padding-left: 12%;
         }
 
         .cta-button-secondary {
             display: inline-block;
             padding: 15px 40px;
+            min-width: 280px;
+            text-align: center;
             background: linear-gradient(45deg, #4ecdc4, #2c9f97);
             color: white;
             text-decoration: none;
@@ -133,6 +139,8 @@
         .cta-button-tertiary {
             display: inline-block;
             padding: 15px 40px;
+            min-width: 280px;
+            text-align: center;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             text-decoration: none;
@@ -151,6 +159,8 @@
         .cta-button-mars {
             display: inline-block;
             padding: 15px 40px;
+            min-width: 280px;
+            text-align: center;
             background: linear-gradient(45deg, #922b21, #c0392b, #e74c3c, #f39c12);
             color: white;
             text-decoration: none;
@@ -496,7 +506,7 @@
 
         /* Responsive — Tablet (iPad) */
         @media (max-width: 1024px) {
-            .hero-header { gap: 25px; }
+            .hero-header { gap: 25px; padding-left: 5%; }
             .blog-title { font-size: 3rem; }
             .blog-subtitle { font-size: 2rem; }
             .profile-photo { width: 140px; height: 140px; }
@@ -507,6 +517,7 @@
             .hero-header {
                 flex-direction: column;
                 gap: 20px;
+                padding-left: 0;
             }
             .hero-text { text-align: center; }
             .blog-title {
@@ -518,11 +529,11 @@
             .profile-photo { width: 120px; height: 120px; }
             .hero-section { min-height: 100vh; }
             .hero-content { padding: 60px 20px; }
-            .cta-button { padding: 12px 30px; font-size: 1rem; }
-            .cta-button-secondary { padding: 12px 30px; font-size: 1rem; }
-            .cta-button-tertiary { padding: 12px 30px; font-size: 1rem; }
-            .cta-button-mars { padding: 12px 30px; font-size: 1rem; }
-            .cta-buttons { gap: 12px; }
+            .cta-button { padding: 12px 30px; font-size: 1rem; min-width: 240px; }
+            .cta-button-secondary { padding: 12px 30px; font-size: 1rem; min-width: 240px; }
+            .cta-button-tertiary { padding: 12px 30px; font-size: 1rem; min-width: 240px; }
+            .cta-button-mars { padding: 12px 30px; font-size: 1rem; min-width: 240px; }
+            .cta-buttons { gap: 12px; padding-left: 0; }
 
             .pdsl-section, .leadership-section { padding: 50px 0; }
             .pdsl-title, .leadership-title { font-size: 1.8rem; }
@@ -546,10 +557,10 @@
             .blog-subtitle { font-size: 1.1rem; }
             .profile-photo { width: 100px; height: 100px; }
             .hero-content { padding: 0 12px; }
-            .cta-button { padding: 10px 24px; font-size: 0.95rem; }
-            .cta-button-secondary { padding: 10px 24px; font-size: 0.95rem; }
-            .cta-button-tertiary { padding: 10px 24px; font-size: 0.95rem; }
-            .cta-button-mars { padding: 10px 24px; font-size: 0.95rem; }
+            .cta-button { padding: 10px 24px; font-size: 0.95rem; min-width: auto; }
+            .cta-button-secondary { padding: 10px 24px; font-size: 0.95rem; min-width: auto; }
+            .cta-button-tertiary { padding: 10px 24px; font-size: 0.95rem; min-width: auto; }
+            .cta-button-mars { padding: 10px 24px; font-size: 0.95rem; min-width: auto; }
             .section-title { font-size: 1.6rem; margin-bottom: 30px; }
             .project-card { padding: 18px; }
             .project-icon { font-size: 2.2rem; }
