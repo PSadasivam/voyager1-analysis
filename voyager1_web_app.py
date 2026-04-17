@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, Response
 import matplotlib.dates as mdates
 
 # Import our analysis functions
@@ -464,6 +464,42 @@ def blackhole():
 def mars():
     """Mission to Mars (1993) — early research paper page."""
     return render_template('mars.html')
+
+@app.route('/ai-index')
+def ai_index():
+    """AI-friendly structured knowledge index for LLM and search crawlers."""
+    return render_template('ai-index.html')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    """XML sitemap for search engine crawlers."""
+    pages = [
+        {'loc': 'https://prabhusadasivam.com/', 'priority': '1.0'},
+        {'loc': 'https://prabhusadasivam.com/facts', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/trajectory', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/plasma', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/density', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/dashboard', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/atlas', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/blackhole', 'priority': '0.9'},
+        {'loc': 'https://prabhusadasivam.com/mars', 'priority': '0.7'},
+        {'loc': 'https://prabhusadasivam.com/ai-index', 'priority': '0.6'},
+    ]
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for page in pages:
+        xml += f'  <url><loc>{page["loc"]}</loc><priority>{page["priority"]}</priority></url>\n'
+    xml += '</urlset>'
+    return Response(xml, mimetype='application/xml')
+
+@app.route('/robots.txt')
+def robots():
+    """Robots.txt for search engine crawlers."""
+    txt = """User-agent: *
+Allow: /
+Sitemap: https://prabhusadasivam.com/sitemap.xml
+"""
+    return Response(txt, mimetype='text/plain')
 
 @app.route('/api/plasma')
 def api_plasma():
