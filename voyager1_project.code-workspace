@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../3I-Atlas-Research"
+		},
+		{
+			"path": "../universe-inside-blackhole"
 		}
 	],
 	"settings": {}
