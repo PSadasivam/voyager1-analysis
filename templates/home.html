@@ -6,6 +6,9 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Prabhu's Deep Space Labs</title>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -174,6 +177,30 @@
         .cta-button-mars:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(192,57,43,0.4);
+        }
+
+        .scroll-top-rocket {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            text-decoration: none;
+            font-size: 0.7em;
+            background: linear-gradient(135deg, #f39c12, #e74c3c, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.5;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .scroll-top-rocket:hover {
+            opacity: 1;
+            transform: translateY(-60%);
+        }
+
+        .leadership-title .scroll-top-rocket {
+            right: -210px;
         }
 
         /* Floating Elements Inspired by the Image */
@@ -443,6 +470,7 @@
             color: #fff;
             margin-bottom: 40px;
             font-weight: 700;
+            position: relative;
         }
 
         .leadership-text {
@@ -510,6 +538,7 @@
             .blog-title { font-size: 3rem; }
             .blog-subtitle { font-size: 2rem; }
             .profile-photo { width: 140px; height: 140px; }
+            .leadership-title .scroll-top-rocket { right: 0; }
         }
 
         /* Responsive — Phone landscape / small tablet */
@@ -579,7 +608,7 @@
 </head>
 <body>
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" id="top">
         <!-- Floating Elements -->
         <div class="floating-element floating-books">📚</div>
         <div class="floating-element floating-bulb">💡</div>
@@ -609,7 +638,7 @@
             <div class="cta-buttons">
                 <a href="#projects" class="cta-button">Explore Voyager 1 Analysis</a>
                 <a href="#atlas" class="cta-button-secondary">Explore 3I/ATLAS Research</a>
-                <a href="/blackhole" class="cta-button-tertiary">Black Hole Cosmology Paper</a>
+                <a href="#blackhole" class="cta-button-tertiary">Black Hole Cosmology Paper</a>
                 <a href="/mars" class="cta-button-mars">Mission to Mars (1993)</a>
             </div>
 
@@ -650,7 +679,7 @@
     <!-- Leadership Philosophy -->
     <section class="leadership-section" id="leadership">
         <div class="leadership-content">
-            <h2 class="leadership-title">From Deep Space to Enterprise Platforms</h2>
+            <h2 class="leadership-title">From Deep Space to Enterprise Platforms <a href="#top" class="scroll-top-rocket" title="Back to top">&#x25B3;</a></h2>
             <div class="leadership-text">
                 <p>
                     I was a child when Voyager&nbsp;1 launched. Today, it has traveled over <span id="voyager-distance">24</span>&nbsp;billion kilometers from Earth and continues to transmit data&mdash;decades beyond its original mission life.
@@ -708,7 +737,7 @@
     <!-- Projects Section -->
     <section class="content-section" id="projects">
         <div class="container">
-            <h2 class="section-title">Voyager 1: Deep Space Analysis</h2>
+            <h2 class="section-title">Voyager 1: Deep Space Analysis <a href="#top" class="scroll-top-rocket" title="Back to top">&#x25B3;</a></h2>
             <div class="project-grid">
                 <div class="project-card">
                     <span class="project-icon"></span>
@@ -766,7 +795,7 @@
     <!-- 3I/ATLAS Section -->
     <section class="content-section" id="atlas" style="background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);">
         <div class="container">
-            <h2 class="section-title" style="color: #fff;">3I/ATLAS: Interstellar Comet Research</h2>
+            <h2 class="section-title" style="color: #fff;">3I/ATLAS: Interstellar Comet Research <a href="#top" class="scroll-top-rocket" title="Back to top">&#x25B3;</a></h2>
             <div class="project-grid">
                 <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <span class="project-icon"></span>
@@ -804,7 +833,7 @@
     <!-- Black Hole Section -->
     <section class="content-section" id="blackhole" style="background: linear-gradient(135deg, #1a0a2e 0%, #0d0d0d 50%, #1a0a2e 100%);">
         <div class="container">
-            <h2 class="section-title" style="color: #fff;">Black Hole Cosmology: Scientific Paper</h2>
+            <h2 class="section-title" style="color: #fff;">Black Hole Cosmology: Scientific Paper <a href="#top" class="scroll-top-rocket" title="Back to top">&#x25B3;</a></h2>
             <div class="project-grid">
                 <div class="project-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <span class="project-icon"></span>
