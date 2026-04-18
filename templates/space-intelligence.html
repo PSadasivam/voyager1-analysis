@@ -169,6 +169,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             margin-bottom: 30px;
+            align-items: start;
         }
 
         /* ---------- Panel / Card ---------- */
@@ -432,6 +433,9 @@
                 This page is my attempt to bridge that gap — from raw data to insight,
                 from events to meaning, from observation to understanding.
             </p>
+            <p>
+                Most dashboards stop at visualization. They show you what happened. The question I always ask in engineering reviews is: <em>"So what? What does this mean for us?"</em> That's what the highlights at the top of this page try to answer — not just the data, but the implication.
+            </p>
         </div>
 
         <!-- ===== LOADING STATE ===== -->
@@ -449,56 +453,50 @@
         <!-- ===== TWO-COLUMN: NEO + WEATHER ===== -->
         <div class="two-col">
             <!-- NEO Watch -->
-            <div class="panel">
-                <h2>Near-Earth Object Watch</h2>
-                <p style="opacity:0.7; margin-bottom:16px; font-size:0.92em;">Close approaches in the next 7 days, sorted by miss distance.</p>
-                <div id="neoContent"></div>
+            <div>
+                <div class="panel">
+                    <h2>Near-Earth Object Watch</h2>
+                    <p style="opacity:0.7; margin-bottom:16px; font-size:0.92em;">Close approaches in the next 7 days, sorted by miss distance.</p>
+                    <div id="neoContent"></div>
+                </div>
+                <div class="perspective" style="margin-top:20px;">
+                    <h2>Perspectives from Near-Earth Object Watch - Watching the Neighborhood</h2>
+                    <p>
+                        We track thousands of near-Earth objects. Most will never make headlines. But the discipline of watching — of maintaining situational awareness at planetary scale — is the same discipline that keeps production systems alive. You don't monitor because you expect failure. You monitor because you respect the system.
+                    </p>
+                    <p>
+                        When I see a potentially hazardous asteroid flagged at 0.03 AU, I think of it in engineering terms: that's a known risk within tolerance. The real danger isn't the objects we track — it's the ones we haven't cataloged yet. In platform engineering, we call those <em>unknown unknowns</em>.
+                    </p>
+                </div>
             </div>
 
             <!-- Space Weather -->
-            <div class="panel">
-                <h2>Space Weather Monitor</h2>
-                <div id="kpGauge"></div>
-                <div id="kpForecast"></div>
-                <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Solar Flares</h3>
-                <div id="flaresContent"></div>
-                <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Coronal Mass Ejections</h3>
-                <div id="cmesContent"></div>
-                <div id="stormsContent"></div>
+            <div>
+                <div class="panel">
+                    <h2>Space Weather Monitor</h2>
+                    <div id="kpGauge"></div>
+                    <div id="kpForecast"></div>
+                    <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Solar Flares</h3>
+                    <div id="flaresContent"></div>
+                    <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Coronal Mass Ejections</h3>
+                    <div id="cmesContent"></div>
+                    <div id="stormsContent"></div>
+                </div>
+                <div class="perspective" style="margin-top:20px;">
+                    <h2>Perspectives from Space Weather as System Load</h2>
+                    <p>
+                        Solar activity reminds me of system load spikes. Most systems fail not under average conditions, but under stress. An X-class flare is the cosmic equivalent of a traffic surge that tests every layer of your architecture — from satellites to power grids to GPS timing.
+                    </p>
+                    <p>
+                        We've built remarkable infrastructure on Earth: financial systems, communications networks, navigation grids. All of it assumes a benign electromagnetic environment. Space weather is the reminder that our infrastructure has external dependencies we rarely test against.
+                    </p>
+                </div>
             </div>
         </div>
 
         </div><!-- /dataContent -->
 
-        <!-- ===== NEO PERSPECTIVE ===== -->
-        <div class="perspective">
-            <h2>My Perspective — Watching the Neighborhood</h2>
-            <p>
-                We track thousands of near-Earth objects. Most will never make headlines. But the discipline of watching — of maintaining situational awareness at planetary scale — is the same discipline that keeps production systems alive. You don't monitor because you expect failure. You monitor because you respect the system.
-            </p>
-            <p>
-                When I see a potentially hazardous asteroid flagged at 0.03 AU, I think of it in engineering terms: that's a known risk within tolerance. The real danger isn't the objects we track — it's the ones we haven't cataloged yet. In platform engineering, we call those <em>unknown unknowns</em>.
-            </p>
-        </div>
 
-        <!-- ===== WEATHER PERSPECTIVE ===== -->
-        <div class="perspective">
-            <h2>My Perspective — Space Weather as System Load</h2>
-            <p>
-                Solar activity reminds me of system load spikes. Most systems fail not under average conditions, but under stress. An X-class flare is the cosmic equivalent of a traffic surge that tests every layer of your architecture — from satellites to power grids to GPS timing.
-            </p>
-            <p>
-                We've built remarkable infrastructure on Earth: financial systems, communications networks, navigation grids. All of it assumes a benign electromagnetic environment. Space weather is the reminder that our infrastructure has external dependencies we rarely test against.
-            </p>
-        </div>
-
-        <!-- ===== EVENT INTELLIGENCE PERSPECTIVE ===== -->
-        <div class="perspective">
-            <h2>My Perspective — From Data to "So What?"</h2>
-            <p>
-                Most dashboards stop at visualization. They show you what happened. The question I always ask in engineering reviews is: <em>"So what? What does this mean for us?"</em> That's what the highlights at the top of this page try to answer — not just the data, but the implication.
-            </p>
-        </div>
 
         <!-- ===== CREDITS ===== -->
         <div class="credits">
