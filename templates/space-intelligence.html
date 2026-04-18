@@ -450,14 +450,14 @@
         <div class="two-col">
             <!-- NEO Watch -->
             <div class="panel">
-                <h2>☄️ Near-Earth Object Watch</h2>
+                <h2>Near-Earth Object Watch</h2>
                 <p style="opacity:0.7; margin-bottom:16px; font-size:0.92em;">Close approaches in the next 7 days, sorted by miss distance.</p>
                 <div id="neoContent"></div>
             </div>
 
             <!-- Space Weather -->
             <div class="panel">
-                <h2>🌞 Space Weather Monitor</h2>
+                <h2>Space Weather Monitor</h2>
                 <div id="kpGauge"></div>
                 <div id="kpForecast"></div>
                 <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Solar Flares</h3>
@@ -597,7 +597,7 @@
                 // Highlights
                 var hEl = document.getElementById('highlightsSection');
                 if (d.highlights && d.highlights.length) {
-                    var hh = '<h2 style="color:#ffd700;margin-bottom:16px;font-size:1.3em;">🛰️ What to Watch Right Now</h2><div class="highlights">';
+                    var hh = '<h2 style="color:#ffd700;margin-bottom:16px;font-size:1.3em;">What to Watch Right Now</h2><div class="highlights">';
                     d.highlights.forEach(function(h) {
                         hh += '<div class="highlight-card"><span class="badge badge-' + esc(h.severity) + '">' + esc(h.severity) + '</span><h3>' + esc(h.title) + '</h3><div class="detail">' + esc(h.detail) + '</div></div>';
                     });
