@@ -209,6 +209,42 @@
             color: #3498db;
         }
 
+        .v1-subnav {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin: 24px 0 18px;
+        }
+        .v1-subnav a {
+            display: inline-block;
+            padding: 10px 22px;
+            min-width: 140px;
+            text-align: center;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.08) inset;
+            transform: perspective(600px) rotateX(2deg);
+            transition: all 0.25s ease;
+        }
+        .v1-subnav a:hover {
+            color: #fff;
+            transform: perspective(600px) rotateX(0deg) translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 18px rgba(78,205,196,0.35), 0 1px 0 rgba(255,255,255,0.10) inset;
+            border-color: rgba(78,205,196,0.4);
+        }
+        .v1-subnav a.active {
+            color: #ffd700;
+            border-color: rgba(255,215,0,0.4);
+            background: linear-gradient(180deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.04) 100%);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.4), 0 0 14px rgba(255,215,0,0.25), 0 1px 0 rgba(255,255,255,0.08) inset;
+        }
+
         @media (max-width: 768px) {
             .info-panels { grid-template-columns: 1fr; }
             .info-grid { grid-template-columns: 1fr; }
@@ -219,6 +255,9 @@
             .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
 
             .status-bar { flex-wrap: wrap; gap: 8px; }
+
+            .v1-subnav { gap: 10px; }
+            .v1-subnav a { min-width: 120px; padding: 8px 16px; font-size: 0.85rem; }
 
             .container { padding: 12px; }
             .panel { padding: 18px; }
@@ -324,6 +363,14 @@
                 <div class="status-item" id="data-source">Source: Loading...</div>
                 <div class="status-item" id="update-time">Last refreshed: Loading...</div>
             </div>
+        </div>
+
+        <div class="v1-subnav">
+            <a href="/facts">Facts</a>
+            <a href="/trajectory">Trajectory</a>
+            <a href="/plasma" class="active">Plasma Waves</a>
+            <a href="/density">Density</a>
+            <a href="/dashboard">Magnetometer</a>
         </div>
 
         <div class="controls">
