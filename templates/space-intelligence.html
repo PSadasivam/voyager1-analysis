@@ -584,9 +584,19 @@
             return '#4caf50';
         }
 
+        var retried = false;
+
+        function loadData() {
         fetch('/api/space-intelligence')
             .then(function(r) { return r.json(); })
             .then(function(d) {
+                // If NEOs are empty and we haven't retried, try once more after 5s
+                if ((!d.neos || !d.neos.length) && !retried) {
+                    retried = true;
+                    msgEl.textContent = 'Retrying NASA data source...';
+                    setTimeout(loadData, 5000);
+                    return;
+                }
                 clearInterval(msgTimer);
 
                 // Refreshed timestamps
@@ -717,9 +727,18 @@
             })
             .catch(function() {
                 clearInterval(msgTimer);
+                if (!retried) {
+                    retried = true;
+                    msgEl.textContent = 'Retrying...';
+                    setTimeout(loadData, 5000);
+                    return;
+                }
                 document.getElementById('loadingText').textContent = 'Data temporarily unavailable. Please refresh.';
                 document.querySelector('.spinner').style.display = 'none';
             });
+        }
+
+        loadData();
     })();
     </script>
 </body>
