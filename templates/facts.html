@@ -37,6 +37,16 @@
         .nav-bar a:hover { color: #fff; border-color: #4ecdc4; }
         .nav-bar a.active { color: #ffd700; border-color: #ffd700; background: rgba(255,215,0,0.1); }
 
+        .status-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+
         /* Hero stat */
         .hero-stat {
             text-align: center; margin-bottom: 40px; padding: 40px 20px;
@@ -138,6 +148,7 @@
 
             .nav-bar { flex-wrap: wrap; gap: 8px; }
             .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
+            .status-bar { flex-wrap: wrap; gap: 8px; }
 
             .container { padding: 12px; }
             .hero-stat { padding: 28px 16px; }
@@ -236,6 +247,10 @@
             </nav>
             <h1>Voyager 1 — Amazing Facts</h1>
             <p>Humanity's most distant ambassador, now in interstellar space</p>
+            <div class="status-bar">
+                <div class="status-item">Source: NASA JPL & SPDF</div>
+                <div class="status-item">Last refreshed: April 2026</div>
+            </div>
         </div>
 
         <!-- Hero stat -->

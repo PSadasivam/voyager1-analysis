@@ -59,16 +59,14 @@
 
         .status-bar {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             gap: 20px;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            font-style: italic;
+            color: #888;
         }
 
         .status-item {
-            padding: 5px 15px;
-            background: rgba(76, 175, 80, 0.2);
-            border-radius: 20px;
-            border: 1px solid #4caf50;
         }
 
         .dashboard {
@@ -332,7 +330,6 @@
                 flex-wrap: wrap;
                 gap: 8px;
             }
-            .status-item { font-size: 0.8em; padding: 4px 10px; }
 
             .header p { font-size: 1em; }
             .panel { padding: 18px; }
@@ -431,8 +428,8 @@
             <p>Real-time analysis of humanity's most distant spacecraft</p>
             <div class="status-bar">
                 <div class="status-item" id="system-status">System: Loading...</div>
-                <div class="status-item" id="data-status">Data: Connecting...</div>
-                <div class="status-item" id="update-time">Last Update: --:--</div>
+                <div class="status-item" id="data-status">Source: NASA JPL & SPDF</div>
+                <div class="status-item" id="update-time">Last refreshed: Loading...</div>
             </div>
         </div>
 
@@ -564,7 +561,7 @@
                     document.getElementById('system-status').textContent = 
                         `System: ${data.status.toUpperCase()}`;
                     document.getElementById('data-status').textContent = 
-                        `CDF Support: ${data.cdflib_available ? 'Available' : 'Limited'}`;
+                        `Source: NASA JPL & SPDF`;
                     updateTimestamp();
                 })
                 .catch(error => {
@@ -576,7 +573,7 @@
         function updateTimestamp() {
             const now = new Date();
             document.getElementById('update-time').textContent = 
-                `Updated: ${now.toLocaleTimeString()}`;
+                `Last refreshed: ${now.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'})} ${now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',hour12:false})} UTC`;
         }
 
         function loadPositionData() {

@@ -59,17 +59,15 @@
 
         .status-bar {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             gap: 20px;
-            font-size: 0.9em;
+            font-size: 0.85em;
             margin-top: 10px;
+            font-style: italic;
+            color: #888;
         }
 
         .status-item {
-            padding: 5px 15px;
-            background: rgba(76,175,80,0.2);
-            border-radius: 20px;
-            border: 1px solid #4caf50;
         }
 
         /* Main layout */
@@ -303,7 +301,6 @@
             .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
 
             .status-bar { flex-wrap: wrap; gap: 8px; }
-            .status-item { font-size: 0.8em; padding: 4px 10px; }
 
             .container { padding: 12px; }
             .panel { padding: 18px; }
@@ -398,7 +395,7 @@
             <p>Complete outbound journey from 1977 launch to interstellar space</p>
             <div class="status-bar">
                 <div class="status-item" id="data-source">Source: Loading...</div>
-                <div class="status-item" id="update-time">Updated: --:--</div>
+                <div class="status-item" id="update-time">Last refreshed: Loading...</div>
             </div>
         </div>
 
@@ -488,8 +485,8 @@
 
                     // Status bar
                     document.getElementById('data-source').textContent = 'Source: ' + data.data_source;
-                    document.getElementById('update-time').textContent = 'Updated: ' +
-                        new Date().toLocaleTimeString();
+                    document.getElementById('update-time').textContent = 'Last refreshed: ' +
+                        new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) + ' ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',hour12:false}) + ' UTC';
 
                     // Info grid
                     document.getElementById('status-info').innerHTML = `
