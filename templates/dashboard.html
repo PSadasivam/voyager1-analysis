@@ -379,6 +379,7 @@
         .nav-group:hover .caret { transform:rotate(180deg); }
         .nav-dropdown { display:none; position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); background:rgba(22,33,62,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:8px 0; min-width:190px; z-index:1000; box-shadow:0 8px 32px rgba(0,0,0,0.6); }
         .nav-group:hover .nav-dropdown { display:block; }
+        .nav-dropdown::before { content:''; position:absolute; top:-12px; left:0; right:0; height:12px; }
         .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; }
         .nav-dropdown a:hover { color:#fff; background:rgba(78,205,196,0.15); }
         .nav-dropdown a.active { color:#ffd700; background:rgba(255,215,0,0.08); }
