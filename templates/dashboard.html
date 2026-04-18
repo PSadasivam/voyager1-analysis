@@ -362,23 +362,70 @@
             .info-value { font-size: 1em; }
             .footer-links a { font-size: 0.85em; }
         }
+
+        /* Grouped nav */
+        .main-nav { display:flex; justify-content:center; align-items:center; margin-bottom:8px; position:relative; flex-wrap:wrap; }
+        .nav-toggle { display:none; background:none; border:1px solid rgba(255,255,255,0.25); color:#ccc; font-size:1.5em; padding:6px 14px; border-radius:10px; cursor:pointer; transition:all 0.25s; }
+        .nav-toggle:hover { color:#fff; border-color:#4ecdc4; }
+        .nav-links { display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; }
+        .nav-links > a { color:#aaa; text-decoration:none; padding:6px 18px; border-radius:20px; border:1px solid rgba(255,255,255,0.15); font-size:0.95em; transition:all 0.25s; }
+        .nav-links > a:hover { color:#fff; border-color:#4ecdc4; }
+        .nav-links > a.active { color:#ffd700; border-color:#ffd700; background:rgba(255,215,0,0.1); }
+        .nav-group { position:relative; }
+        .nav-group-label { color:#aaa; background:none; border:1px solid rgba(255,255,255,0.15); padding:6px 18px; border-radius:20px; font-size:0.95em; cursor:pointer; transition:all 0.25s; font-family:inherit; display:flex; align-items:center; gap:4px; white-space:nowrap; }
+        .nav-group-label:hover { color:#fff; border-color:#4ecdc4; }
+        .nav-group-label.active { color:#ffd700; border-color:#ffd700; background:rgba(255,215,0,0.1); }
+        .caret { font-size:0.7em; transition:transform 0.3s; }
+        .nav-group:hover .caret { transform:rotate(180deg); }
+        .nav-dropdown { display:none; position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); background:rgba(22,33,62,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:8px 0; min-width:190px; z-index:1000; box-shadow:0 8px 32px rgba(0,0,0,0.6); }
+        .nav-group:hover .nav-dropdown { display:block; }
+        .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; }
+        .nav-dropdown a:hover { color:#fff; background:rgba(78,205,196,0.15); }
+        .nav-dropdown a.active { color:#ffd700; background:rgba(255,215,0,0.08); }
+        @media (max-width:768px) {
+            .nav-toggle { display:block; margin:0 auto 8px; }
+            .nav-links { display:none; flex-direction:column; width:100%; gap:4px; }
+            .main-nav.open .nav-links { display:flex; }
+            .nav-links > a { text-align:center; }
+            .nav-group { width:100%; }
+            .nav-group-label { width:100%; justify-content:center; }
+            .nav-dropdown { position:static; transform:none; background:rgba(255,255,255,0.04); border:none; box-shadow:none; border-radius:8px; margin-top:4px; min-width:auto; }
+            .nav-group:hover .nav-dropdown { display:none; }
+            .nav-group.open .nav-dropdown { display:block; }
+            .nav-group:hover .caret { transform:none; }
+            .nav-group.open .caret { transform:rotate(180deg); }
+            .nav-dropdown a { text-align:center; padding:8px 20px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="nav-bar">
-                <a href="/">Home</a>
-                <a href="/facts">Facts</a>
-                <a href="/trajectory">Trajectory</a>
-                <a href="/plasma">Plasma Waves</a>
-                <a href="/density">Density</a>
-                <a href="/dashboard" class="active">Magnetometer</a>
-                <a href="/space-intelligence">Space Intel</a>
-                <a href="/atlas">3I/ATLAS</a>
-                <a href="/blackhole">Black Hole</a>
-                <a href="/mars">Mars (1993)</a>
-            </div>
+            <nav class="main-nav" id="mainNav">
+                <button class="nav-toggle" onclick="document.getElementById('mainNav').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <div class="nav-group" onclick="this.classList.toggle('open')">
+                        <button class="nav-group-label active">Voyager 1 <span class="caret">&#9660;</span></button>
+                        <div class="nav-dropdown">
+                            <a href="/facts">Facts</a>
+                            <a href="/trajectory">Trajectory</a>
+                            <a href="/plasma">Plasma Waves</a>
+                            <a href="/density">Density</a>
+                            <a href="/dashboard" class="active">Magnetometer</a>
+                        </div>
+                    </div>
+                    <a href="/space-intelligence">Space Intel</a>
+                    <div class="nav-group" onclick="this.classList.toggle('open')">
+                        <button class="nav-group-label">Deep Research <span class="caret">&#9660;</span></button>
+                        <div class="nav-dropdown">
+                            <a href="/atlas">3I/ATLAS</a>
+                            <a href="/blackhole">Black Hole</a>
+                            <a href="/mars">Mars (1993)</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
             <h1>Voyager 1 Deep Space Analysis Dashboard</h1>
             <p>Real-time analysis of humanity's most distant spacecraft</p>
             <div class="status-bar">
