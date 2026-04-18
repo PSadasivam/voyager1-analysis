@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Real-Time Space Intelligence — Near-Earth Objects & Space Weather | Prabhu's Deep Space Labs</title>
+    <meta name="description" content="Live near-Earth asteroid tracking and space weather monitoring. Today's close approaches, solar flares, geomagnetic storms — with expert perspective from Prabhu Sadasivam.">
+    <meta name="keywords" content="near earth objects today, asteroid close approach, space weather, solar flare today, geomagnetic storm, NEO tracking, potentially hazardous asteroid, Kp index, CME, Prabhu Sadasivam">
+    <meta name="author" content="Prabhu Sadasivam">
+    <link rel="canonical" href="https://prabhusadasivam.com/space-intelligence">
+    <meta property="og:title" content="Real-Time Space Intelligence — Prabhu's Deep Space Labs">
+    <meta property="og:description" content="Live asteroid tracking, solar flare monitoring, and geomagnetic storm alerts — with perspective from a VP of Technology who treats the universe like a distributed system.">
+    <meta property="og:url" content="https://prabhusadasivam.com/space-intelligence">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Real-Time Space Intelligence",
+        "description": "Live near-Earth asteroid tracking and space weather monitoring with expert interpretation.",
+        "url": "https://prabhusadasivam.com/space-intelligence",
+        "author": {
+            "@type": "Person",
+            "name": "Prabhu Sadasivam",
+            "jobTitle": "Vice President, Technology",
+            "worksFor": {
+                "@type": "Organization",
+                "name": "LexisNexis Risk Solutions"
+            }
+        },
+        "about": [
+            { "@type": "Thing", "name": "Near-Earth Objects" },
+            { "@type": "Thing", "name": "Space Weather" },
+            { "@type": "Thing", "name": "Asteroid Tracking" },
+            { "@type": "Thing", "name": "Solar Flares" }
+        ],
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Prabhu's Deep Space Labs",
+            "url": "https://prabhusadasivam.com"
+        }
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+        /* ---------- Header ---------- */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p { font-size: 1.15em; opacity: 0.9; margin-bottom: 10px; }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+        .nav-bar a {
+            color: #aaa;
+            text-decoration: none;
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            font-size: 0.95em;
+            transition: all 0.25s;
+        }
+        .nav-bar a:hover { color: #fff; border-color: #4ecdc4; }
+        .nav-bar a.active { color: #ffd700; border-color: #ffd700; background: rgba(255,215,0,0.1); }
+
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .status-item {
+            padding: 5px 15px;
+            background: rgba(76,175,80,0.2);
+            border-radius: 20px;
+            border: 1px solid #4caf50;
+        }
+
+        /* ---------- Perspective ---------- */
+        .perspective {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.85;
+        }
+        .perspective h2 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .perspective p {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-bottom: 12px;
+        }
+        .perspective p:last-child { margin-bottom: 0; }
+
+        /* ---------- Highlights ---------- */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .highlight-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 22px 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            cursor: default;
+            transition: border-color 0.3s;
+        }
+        .highlight-card:hover { border-color: rgba(255,255,255,0.35); }
+        .highlight-card .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.78em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .badge-red   { background: rgba(255,107,107,0.25); color: #ff6b6b; border: 1px solid #ff6b6b; }
+        .badge-orange{ background: rgba(255,165,0,0.2);   color: #ffa500; border: 1px solid #ffa500; }
+        .badge-yellow{ background: rgba(255,215,0,0.2);   color: #ffd700; border: 1px solid #ffd700; }
+        .badge-teal  { background: rgba(78,205,196,0.2);  color: #4ecdc4; border: 1px solid #4ecdc4; }
+        .badge-green { background: rgba(76,175,80,0.2);   color: #4caf50; border: 1px solid #4caf50; }
+        .highlight-card h3 { font-size: 1.1em; margin-bottom: 6px; }
+        .highlight-card .detail { font-size: 0.92em; opacity: 0.8; }
+
+        /* ---------- Two-column layout ---------- */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* ---------- Panel / Card ---------- */
+        .panel {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .panel h2 {
+            color: #ffd700;
+            margin-bottom: 18px;
+            font-size: 1.35em;
+        }
+
+        /* ---------- Tables ---------- */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 10px 8px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            color: #4ecdc4;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .data-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .data-table tr:hover { background: rgba(255,255,255,0.04); }
+        .hazardous { color: #ff6b6b; font-weight: 700; }
+        .safe { color: #4caf50; }
+
+        /* Severity dots */
+        .severity-dot {
+            display: inline-block;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .dot-red    { background: #ff6b6b; box-shadow: 0 0 6px #ff6b6b; }
+        .dot-orange { background: #ffa500; box-shadow: 0 0 6px #ffa500; }
+        .dot-yellow { background: #ffd700; box-shadow: 0 0 6px #ffd700; }
+        .dot-green  { background: #4caf50; box-shadow: 0 0 6px #4caf50; }
+        .dot-teal   { background: #4ecdc4; box-shadow: 0 0 6px #4ecdc4; }
+
+        /* ---------- Kp Gauge ---------- */
+        .kp-gauge {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+        .kp-value {
+            font-size: 3em;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .kp-label { font-size: 0.95em; opacity: 0.8; }
+        .kp-green  { color: #4caf50; }
+        .kp-yellow { color: #ffd700; }
+        .kp-orange { color: #ffa500; }
+        .kp-red    { color: #ff6b6b; }
+
+        /* ---------- Forecast mini-bar ---------- */
+        .forecast-bar {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+        .forecast-chip {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.78em;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        /* ---------- Empty state ---------- */
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        /* ---------- Credits ---------- */
+        .credits {
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            font-size: 0.88em;
+            line-height: 1.75;
+            opacity: 0.8;
+        }
+        .credits strong { color: #4ecdc4; }
+
+        /* ---------- Journey nav ---------- */
+        .journey-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .journey-nav a { color: #4ecdc4; text-decoration: none; font-size: 1.05em; transition: color 0.25s; }
+        .journey-nav a:hover { color: #ffd700; }
+        .journey-label { font-size: 0.85em; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .journey-teaser { font-size: 0.9em; opacity: 0.7; margin-top: 4px; }
+        .journey-prev, .journey-next { max-width: 45%; }
+        .journey-next { text-align: right; }
+
+        /* ---------- Footer ---------- */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: #3498db; }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 768px) {
+            .two-col { grid-template-columns: 1fr; }
+            .highlights { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+            .nav-bar { flex-wrap: wrap; gap: 8px; }
+            .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
+            .status-bar { flex-wrap: wrap; gap: 8px; }
+            .container { padding: 12px; }
+            .panel { padding: 18px; }
+            .data-table { font-size: 0.82em; }
+            .data-table th, .data-table td { padding: 8px 5px; }
+            .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .footer-links a { margin: 0; font-size: 0.9em; }
+            .footer { padding: 25px 0; }
+        }
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.4em; }
+            .container { padding: 8px; }
+            .panel { padding: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="nav-bar">
+                <a href="/">Home</a>
+                <a href="/facts">Facts</a>
+                <a href="/trajectory">Trajectory</a>
+                <a href="/plasma">Plasma Waves</a>
+                <a href="/density">Density</a>
+                <a href="/dashboard">Magnetometer</a>
+                <a href="/space-intelligence" class="active">Space Intel</a>
+                <a href="/atlas">3I/ATLAS</a>
+                <a href="/blackhole">Black Hole</a>
+                <a href="/mars">Mars (1993)</a>
+            </div>
+            <h1>Real-Time Space Intelligence</h1>
+            <p>Turning the Universe into a Living, Observable System</p>
+            <div class="status-bar">
+                <div class="status-item">Last refreshed: {{ refreshed }}</div>
+                <div class="status-item">Data: NASA · NOAA</div>
+            </div>
+        </div>
+
+        <!-- ===== INTRO PERSPECTIVE ===== -->
+        <div class="perspective">
+            <h2>My Perspective</h2>
+            <p>
+                In my professional world, we build platforms that process billions of transactions.
+                We obsess over observability, real-time signals, anomaly detection, and resilience.
+                Space operates no differently — just at a vastly larger scale.
+            </p>
+            <p>
+                The universe is the ultimate distributed system. We just don't monitor it that way.
+                This page is my attempt to bridge that gap — from raw data to insight,
+                from events to meaning, from observation to understanding.
+            </p>
+        </div>
+
+        <!-- ===== WHAT TO WATCH ===== -->
+        {% if highlights %}
+        <h2 style="color:#ffd700; margin-bottom:16px; font-size:1.3em;">🛰️ What to Watch Right Now</h2>
+        <div class="highlights">
+            {% for h in highlights %}
+            <div class="highlight-card">
+                <span class="badge badge-{{ h.severity }}">{{ h.severity }}</span>
+                <h3>{{ h.title }}</h3>
+                <div class="detail">{{ h.detail }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- ===== TWO-COLUMN: NEO + WEATHER ===== -->
+        <div class="two-col">
+            <!-- NEO Watch -->
+            <div class="panel">
+                <h2>☄️ Near-Earth Object Watch</h2>
+                <p style="opacity:0.7; margin-bottom:16px; font-size:0.92em;">Close approaches in the next 7 days, sorted by miss distance.</p>
+                {% if neos %}
+                <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Object</th>
+                            <th>Date</th>
+                            <th>Miss (LD)</th>
+                            <th>Miss (AU)</th>
+                            <th>Diameter (m)</th>
+                            <th>Speed (km/h)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for neo in neos[:15] %}
+                        <tr>
+                            <td>
+                                {% if neo.is_hazardous %}
+                                <span class="severity-dot dot-red"></span>
+                                <span class="hazardous">{{ neo.name }}</span>
+                                {% else %}
+                                <span class="severity-dot dot-green"></span>
+                                <span class="safe">{{ neo.name }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ neo.close_approach_date }}</td>
+                            <td>{{ neo.miss_lunar }}</td>
+                            <td>{{ neo.miss_au }}</td>
+                            <td>{{ neo.diameter_min }}–{{ neo.diameter_max }}</td>
+                            <td>{{ neo.velocity_kph }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% else %}
+                <div class="empty-state">NEO data temporarily unavailable. Cached data will appear on next refresh.</div>
+                {% endif %}
+            </div>
+
+            <!-- Space Weather -->
+            <div class="panel">
+                <h2>🌞 Space Weather Monitor</h2>
+
+                <!-- Kp Gauge -->
+                {% if kp_info %}
+                <div class="kp-gauge">
+                    {% if kp_info.kp >= 7 %}
+                    <div class="kp-value kp-red">{{ "%.0f"|format(kp_info.kp) }}</div>
+                    {% elif kp_info.kp >= 5 %}
+                    <div class="kp-value kp-orange">{{ "%.0f"|format(kp_info.kp) }}</div>
+                    {% elif kp_info.kp >= 4 %}
+                    <div class="kp-value kp-yellow">{{ "%.0f"|format(kp_info.kp) }}</div>
+                    {% else %}
+                    <div class="kp-value kp-green">{{ "%.0f"|format(kp_info.kp) }}</div>
+                    {% endif %}
+                    <div class="kp-label">Current Kp Index — {{ kp_info.gScale }}</div>
+                </div>
+                {% endif %}
+
+                <!-- Kp Forecast -->
+                {% if kp_forecast %}
+                <h3 style="color:#4ecdc4; font-size:0.95em; margin-bottom:8px;">Kp Forecast</h3>
+                <div class="forecast-bar">
+                    {% for f in kp_forecast %}
+                    <div class="forecast-chip" style="border-color:{% if f.kp >= 5 %}#ff6b6b{% elif f.kp >= 4 %}#ffa500{% else %}#4caf50{% endif %};">
+                        {{ f.time[-5:] if f.time|length > 5 else f.time }}: <strong>{{ "%.0f"|format(f.kp) }}</strong>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Solar Flares -->
+                <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Solar Flares</h3>
+                {% if flares %}
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Class</th><th>Peak Time</th><th>Location</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for f in flares[:6] %}
+                        <tr>
+                            <td>
+                                <span class="severity-dot dot-{{ flare_severity(f.classType) }}"></span>
+                                {{ f.classType }}
+                            </td>
+                            <td>{{ f.peakTime }}</td>
+                            <td>{{ f.sourceLocation or '—' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">No solar flares reported in the last 7 days.</div>
+                {% endif %}
+
+                <!-- CMEs -->
+                <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Coronal Mass Ejections</h3>
+                {% if cmes %}
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Time</th><th>Speed (km/s)</th><th>Half-Angle</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for c in cmes[:5] %}
+                        <tr>
+                            <td>{{ c.startTime }}</td>
+                            <td>{{ c.speed or '—' }}</td>
+                            <td>{{ c.halfAngle or '—' }}°</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">No CMEs reported in the last 7 days.</div>
+                {% endif %}
+
+                <!-- Geomagnetic Storms -->
+                {% if storms %}
+                <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Geomagnetic Storms</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Start</th><th>Peak Kp</th><th>Scale</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for s in storms[:5] %}
+                        <tr>
+                            <td>{{ s.startTime }}</td>
+                            <td>
+                                <span class="severity-dot dot-{{ severity_color(s.kpMax) }}"></span>
+                                {{ s.kpMax }}
+                            </td>
+                            <td>{{ s.gScale }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ===== NEO PERSPECTIVE ===== -->
+        <div class="perspective">
+            <h2>My Perspective — Watching the Neighborhood</h2>
+            <p>
+                We track thousands of near-Earth objects. Most will never make headlines. But the discipline of watching — of maintaining situational awareness at planetary scale — is the same discipline that keeps production systems alive. You don't monitor because you expect failure. You monitor because you respect the system.
+            </p>
+            <p>
+                When I see a potentially hazardous asteroid flagged at 0.03 AU, I think of it in engineering terms: that's a known risk within tolerance. The real danger isn't the objects we track — it's the ones we haven't cataloged yet. In platform engineering, we call those <em>unknown unknowns</em>.
+            </p>
+        </div>
+
+        <!-- ===== WEATHER PERSPECTIVE ===== -->
+        <div class="perspective">
+            <h2>My Perspective — Space Weather as System Load</h2>
+            <p>
+                Solar activity reminds me of system load spikes. Most systems fail not under average conditions, but under stress. An X-class flare is the cosmic equivalent of a traffic surge that tests every layer of your architecture — from satellites to power grids to GPS timing.
+            </p>
+            <p>
+                We've built remarkable infrastructure on Earth: financial systems, communications networks, navigation grids. All of it assumes a benign electromagnetic environment. Space weather is the reminder that our infrastructure has external dependencies we rarely test against.
+            </p>
+        </div>
+
+        <!-- ===== EVENT INTELLIGENCE PERSPECTIVE ===== -->
+        <div class="perspective">
+            <h2>My Perspective — From Data to "So What?"</h2>
+            <p>
+                Most dashboards stop at visualization. They show you what happened. The question I always ask in engineering reviews is: <em>"So what? What does this mean for us?"</em> That's what the highlights at the top of this page try to answer — not just the data, but the implication.
+            </p>
+        </div>
+
+        <!-- ===== CREDITS ===== -->
+        <div class="credits">
+            <strong>Data Sources:</strong><br>
+            • Near-Earth Objects: NASA Center for Near Earth Object Studies (CNEOS), Jet Propulsion Laboratory<br>
+            • Solar &amp; CME Events: NASA DONKI, Goddard Space Flight Center<br>
+            • Geomagnetic Indices: NOAA Space Weather Prediction Center (SWPC)<br><br>
+            All data retrieved via public APIs. Timestamps reflect UTC.<br>
+            Last refreshed: {{ refreshed }}
+        </div>
+
+        <!-- ===== JOURNEY NAV ===== -->
+        <div class="journey-nav">
+            <div class="journey-prev">
+                <div class="journey-label">← Previous</div>
+                <a href="/dashboard">Magnetometer</a>
+                <div class="journey-teaser">Voyager 1 magnetic field data from interstellar space</div>
+            </div>
+            <div class="journey-next">
+                <div class="journey-label">Continue the Journey →</div>
+                <a href="/atlas">3I/ATLAS</a>
+                <div class="journey-teaser">Tracking the third confirmed interstellar visitor</div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="https://github.com/PSadasivam/voyager1-analysis" target="_blank">GitHub Repository</a>
+                    <a href="https://orcid.org/0009-0008-0069-693X" target="_blank">ORCID</a>
+                    <a href="https://voyager.jpl.nasa.gov/" target="_blank">NASA Voyager Mission</a>
+                    <a href="https://api.nasa.gov/" target="_blank">NASA Open APIs</a>
+                    <a href="https://www.swpc.noaa.gov/" target="_blank">NOAA SWPC</a>
+                    <a href="/api/status">API Status</a>
+                </div>
+                <p>&copy; 2025 Prabhu Sadasivam | Deep Space Research | Data courtesy of NASA JPL, CNEOS, DONKI &amp; NOAA SWPC</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

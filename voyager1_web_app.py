@@ -24,13 +24,16 @@ Then open: http://localhost:5000
 import io
 import base64
 import datetime
+import os
 import tempfile
+import time
 from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')  # Use non-interactive backend for web
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import requests as http_requests
 
 from flask import Flask, render_template, jsonify, request, Response
 import matplotlib.dates as mdates
@@ -480,6 +483,7 @@ def sitemap():
         {'loc': 'https://prabhusadasivam.com/plasma', 'priority': '0.8'},
         {'loc': 'https://prabhusadasivam.com/density', 'priority': '0.8'},
         {'loc': 'https://prabhusadasivam.com/dashboard', 'priority': '0.8'},
+        {'loc': 'https://prabhusadasivam.com/space-intelligence', 'priority': '0.9', 'changefreq': 'hourly'},
         {'loc': 'https://prabhusadasivam.com/atlas', 'priority': '0.8'},
         {'loc': 'https://prabhusadasivam.com/blackhole', 'priority': '0.9'},
         {'loc': 'https://prabhusadasivam.com/mars', 'priority': '0.7'},
@@ -488,7 +492,9 @@ def sitemap():
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for page in pages:
-        xml += f'  <url><loc>{page["loc"]}</loc><priority>{page["priority"]}</priority></url>\n'
+        freq = page.get('changefreq', '')
+        freq_tag = f'<changefreq>{freq}</changefreq>' if freq else ''
+        xml += f'  <url><loc>{page["loc"]}</loc><priority>{page["priority"]}</priority>{freq_tag}</url>\n'
     xml += '</urlset>'
     return Response(xml, mimetype='application/xml')
 
@@ -799,6 +805,325 @@ def api_magnetometer():
     days_back = request.args.get('days', default=7, type=int)
     days_back = max(1, min(days_back, 30))  # Limit between 1-30 days
     return jsonify(create_magnetometer_plot(days_back))
+
+# ---------------------------------------------------------------------------
+# Space Intelligence: caching + data helpers
+# ---------------------------------------------------------------------------
+_SI_CACHE = {}
+_SI_CACHE_TTL = 900  # 15 minutes
+
+NASA_API_KEY = os.environ.get('NASA_API_KEY', 'DEMO_KEY')
+
+
+def _si_cached_get(url, key, params=None):
+    """GET *url* with 15-min in-memory cache. Returns parsed JSON or None."""
+    now = time.time()
+    if key in _SI_CACHE and now - _SI_CACHE[key]['ts'] < _SI_CACHE_TTL:
+        return _SI_CACHE[key]['data']
+    try:
+        r = http_requests.get(url, params=params, timeout=15)
+        r.raise_for_status()
+        data = r.json()
+        _SI_CACHE[key] = {'data': data, 'ts': now}
+        return data
+    except Exception as exc:
+        print(f"[space-intelligence] fetch {key} failed: {exc}")
+        # Return stale cache if available
+        if key in _SI_CACHE:
+            return _SI_CACHE[key]['data']
+        return None
+
+
+def _fetch_neo_data():
+    """Return list of close-approach objects for the next 7 days."""
+    today = datetime.date.today()
+    end = today + datetime.timedelta(days=7)
+    params = {
+        'start_date': today.isoformat(),
+        'end_date': end.isoformat(),
+        'api_key': NASA_API_KEY,
+    }
+    raw = _si_cached_get(
+        'https://api.nasa.gov/neo/rest/v1/feed', 'neo_feed', params)
+    if not raw:
+        return []
+    neos = []
+    for day_list in raw.get('near_earth_objects', {}).values():
+        for obj in day_list:
+            ca = obj.get('close_approach_data', [{}])[0]
+            miss_km = float(ca.get('miss_distance', {}).get('kilometers', 0))
+            miss_au = float(ca.get('miss_distance', {}).get('astronomical', 0))
+            miss_lunar = float(ca.get('miss_distance', {}).get('lunar', 0))
+            diam = obj.get('estimated_diameter', {}).get('meters', {})
+            neos.append({
+                'name': obj.get('name', 'Unknown'),
+                'id': obj.get('id', ''),
+                'is_hazardous': obj.get('is_potentially_hazardous_asteroid', False),
+                'close_approach_date': ca.get('close_approach_date_full', ca.get('close_approach_date', '')),
+                'velocity_kph': f"{float(ca.get('relative_velocity', {}).get('kilometers_per_hour', 0)):,.0f}",
+                'miss_km': f"{miss_km:,.0f}",
+                'miss_au': f"{miss_au:.4f}",
+                'miss_lunar': f"{miss_lunar:.2f}",
+                'diameter_min': f"{diam.get('estimated_diameter_min', 0):.1f}",
+                'diameter_max': f"{diam.get('estimated_diameter_max', 0):.1f}",
+                'miss_au_raw': miss_au,
+            })
+    neos.sort(key=lambda x: x['miss_au_raw'])
+    return neos
+
+
+def _fetch_solar_flares():
+    """Recent solar flares from DONKI (last 7 days)."""
+    today = datetime.date.today()
+    start = today - datetime.timedelta(days=7)
+    params = {
+        'startDate': start.isoformat(),
+        'endDate': today.isoformat(),
+        'api_key': NASA_API_KEY,
+    }
+    raw = _si_cached_get(
+        'https://api.nasa.gov/DONKI/FLR', 'donki_flr', params)
+    if not raw:
+        return []
+    flares = []
+    for f in raw:
+        flares.append({
+            'flrID': f.get('flrID', ''),
+            'beginTime': f.get('beginTime', ''),
+            'peakTime': f.get('peakTime', ''),
+            'endTime': f.get('endTime', ''),
+            'classType': f.get('classType', 'Unknown'),
+            'sourceLocation': f.get('sourceLocation', ''),
+        })
+    # Most recent first
+    flares.sort(key=lambda x: x['peakTime'], reverse=True)
+    return flares
+
+
+def _fetch_cme():
+    """Recent CMEs from DONKI (last 7 days)."""
+    today = datetime.date.today()
+    start = today - datetime.timedelta(days=7)
+    params = {
+        'startDate': start.isoformat(),
+        'endDate': today.isoformat(),
+        'api_key': NASA_API_KEY,
+    }
+    raw = _si_cached_get(
+        'https://api.nasa.gov/DONKI/CME', 'donki_cme', params)
+    if not raw:
+        return []
+    cmes = []
+    for c in raw:
+        analysis = c.get('cmeAnalyses') or []
+        speed = ''
+        half_angle = ''
+        if analysis:
+            a = analysis[0]
+            speed = f"{a.get('speed', '')}"
+            half_angle = f"{a.get('halfAngle', '')}"
+        cmes.append({
+            'activityID': c.get('activityID', ''),
+            'startTime': c.get('startTime', ''),
+            'sourceLocation': c.get('sourceLocation', ''),
+            'speed': speed,
+            'halfAngle': half_angle,
+            'note': (c.get('note') or '')[:120],
+        })
+    cmes.sort(key=lambda x: x['startTime'], reverse=True)
+    return cmes
+
+
+def _fetch_geomagnetic():
+    """Recent geomagnetic storms from DONKI (last 30 days)."""
+    today = datetime.date.today()
+    start = today - datetime.timedelta(days=30)
+    params = {
+        'startDate': start.isoformat(),
+        'endDate': today.isoformat(),
+        'api_key': NASA_API_KEY,
+    }
+    raw = _si_cached_get(
+        'https://api.nasa.gov/DONKI/GST', 'donki_gst', params)
+    if not raw:
+        return []
+    storms = []
+    for g in raw:
+        kp_vals = g.get('allKpIndex') or []
+        max_kp = max((k.get('kpIndex', 0) for k in kp_vals), default=0)
+        storms.append({
+            'gstID': g.get('gstID', ''),
+            'startTime': g.get('startTime', ''),
+            'kpMax': max_kp,
+            'gScale': _kp_to_g(max_kp),
+        })
+    storms.sort(key=lambda x: x['startTime'], reverse=True)
+    return storms
+
+
+def _fetch_kp_index():
+    """Current Kp index from NOAA SWPC."""
+    raw = _si_cached_get(
+        'https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json',
+        'swpc_kp')
+    if not raw or len(raw) < 2:
+        return None
+    # First row is header; last row is latest
+    # Rows may be lists or dicts depending on API version
+    latest = raw[-1]
+    try:
+        if isinstance(latest, dict):
+            kp = float(latest.get('Kp', latest.get('kp', latest.get('kp_index', 0))))
+            ts = latest.get('time_tag', latest.get('model_prediction_time', ''))
+        else:
+            kp = float(latest[1])
+            ts = latest[0] if latest else ''
+    except (IndexError, ValueError, KeyError, TypeError):
+        kp = 0
+        ts = ''
+    return {
+        'timestamp': ts,
+        'kp': kp,
+        'gScale': _kp_to_g(kp),
+    }
+
+
+def _fetch_kp_forecast():
+    """Kp forecast from NOAA SWPC."""
+    raw = _si_cached_get(
+        'https://services.swpc.noaa.gov/products/noaa-planetary-k-index-forecast.json',
+        'swpc_kp_forecast')
+    if not raw or len(raw) < 1:
+        return []
+    # Filter to predicted/future rows if possible; use last 8 entries
+    rows = raw
+    if isinstance(rows[0], dict) and 'observed' in rows[0]:
+        predicted = [r for r in rows if r.get('observed') == 'predicted']
+        rows = predicted if predicted else rows
+    forecast = []
+    for row in rows[-8:]:  # last 8 forecast periods
+        try:
+            if isinstance(row, dict):
+                t = row.get('time_tag', row.get('model_prediction_time', ''))
+                kp_val = float(row.get('Kp', row.get('kp', row.get('kp_index', 0))))
+            else:
+                t = row[0]
+                kp_val = float(row[1])
+            forecast.append({
+                'time': t,
+                'kp': kp_val,
+                'gScale': _kp_to_g(kp_val),
+            })
+        except (IndexError, ValueError):
+            continue
+    return forecast
+
+
+def _kp_to_g(kp):
+    """Convert Kp index to NOAA G-scale label."""
+    if kp >= 9:
+        return 'G5 — Extreme'
+    if kp >= 8:
+        return 'G4 — Severe'
+    if kp >= 7:
+        return 'G3 — Strong'
+    if kp >= 6:
+        return 'G2 — Moderate'
+    if kp >= 5:
+        return 'G1 — Minor'
+    return 'Quiet'
+
+
+def _severity_color(kp):
+    """Return severity label for template color-coding."""
+    if kp >= 7:
+        return 'red'
+    if kp >= 5:
+        return 'orange'
+    if kp >= 4:
+        return 'yellow'
+    return 'green'
+
+
+def _flare_severity(class_type):
+    """Severity color from flare class."""
+    if not class_type:
+        return 'green'
+    c = class_type[0].upper()
+    if c == 'X':
+        return 'red'
+    if c == 'M':
+        return 'orange'
+    if c == 'C':
+        return 'yellow'
+    return 'green'
+
+
+def _build_highlights(neos, flares, kp_info, storms):
+    """Pick top 2-3 events for the "What to Watch" panel."""
+    highlights = []
+    # Closest NEO
+    if neos:
+        closest = neos[0]
+        severity = 'red' if closest['is_hazardous'] else ('orange' if closest['miss_au_raw'] < 0.05 else 'teal')
+        highlights.append({
+            'title': f"Close Approach: {closest['name']}",
+            'detail': f"{closest['miss_lunar']} lunar distances — {closest['close_approach_date']}",
+            'severity': severity,
+            'section': 'neo',
+        })
+    # Strongest recent flare
+    if flares:
+        top = flares[0]
+        highlights.append({
+            'title': f"Solar Flare: {top['classType']}",
+            'detail': f"Peak {top['peakTime']} — {top['sourceLocation'] or 'location N/A'}",
+            'severity': _flare_severity(top['classType']),
+            'section': 'weather',
+        })
+    # Kp / storm
+    if kp_info and kp_info['kp'] >= 4:
+        highlights.append({
+            'title': f"Kp Index: {kp_info['kp']:.0f} ({kp_info['gScale']})",
+            'detail': f"Measured {kp_info['timestamp']}",
+            'severity': _severity_color(kp_info['kp']),
+            'section': 'weather',
+        })
+    elif storms:
+        s = storms[0]
+        highlights.append({
+            'title': f"Recent Storm: {s['gScale']}",
+            'detail': f"Started {s['startTime']} — peak Kp {s['kpMax']}",
+            'severity': _severity_color(s['kpMax']),
+            'section': 'weather',
+        })
+    return highlights[:3]
+
+
+@app.route('/space-intelligence')
+def space_intelligence():
+    """Real-Time Space Intelligence page."""
+    neos = _fetch_neo_data()
+    flares = _fetch_solar_flares()
+    cmes = _fetch_cme()
+    storms = _fetch_geomagnetic()
+    kp_info = _fetch_kp_index()
+    kp_forecast = _fetch_kp_forecast()
+    highlights = _build_highlights(neos, flares, kp_info, storms)
+    refreshed = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+
+    return render_template('space-intelligence.html',
+                           neos=neos,
+                           flares=flares,
+                           cmes=cmes,
+                           storms=storms,
+                           kp_info=kp_info,
+                           kp_forecast=kp_forecast,
+                           highlights=highlights,
+                           refreshed=refreshed,
+                           flare_severity=_flare_severity,
+                           severity_color=_severity_color)
+
 
 @app.route('/api/status')
 def api_status():

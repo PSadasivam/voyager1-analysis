@@ -5,3 +5,7 @@ numpy
 matplotlib
 cdflib
 scipy
+flask
+gunicorn
+Pillow
+requests
