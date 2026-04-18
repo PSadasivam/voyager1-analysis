@@ -29,6 +29,16 @@
         }
         .header p { font-size: 1.15em; opacity: 0.85; }
 
+        .status-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+
         .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 12px; }
         .nav-bar a {
             color: #aaa; text-decoration: none; padding: 6px 18px; border-radius: 20px;
@@ -243,6 +253,7 @@
 
             .nav-bar { flex-wrap: wrap; gap: 8px; }
             .nav-bar a { padding: 5px 12px; font-size: 0.85em; }
+            .status-bar { flex-wrap: wrap; gap: 8px; }
 
             .container { padding: 12px; }
             .hero-stat { padding: 28px 16px; }
@@ -341,6 +352,10 @@
             </nav>
             <h1>3I/ATLAS (C/2025 N1)</h1>
             <p>The third known interstellar object — a comet from beyond our Solar System</p>
+            <div class="status-bar">
+                <div class="status-item">Research date: November 2025</div>
+                <div class="status-item">Last updated: April 2026</div>
+            </div>
         </div>
 
         <!-- Hero stat -->
