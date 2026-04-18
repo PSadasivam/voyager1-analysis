@@ -1102,7 +1102,13 @@ def _build_highlights(neos, flares, kp_info, storms):
 
 @app.route('/space-intelligence')
 def space_intelligence():
-    """Real-Time Space Intelligence page."""
+    """Real-Time Space Intelligence page — shell loads instantly, data via API."""
+    return render_template('space-intelligence.html')
+
+
+@app.route('/api/space-intelligence')
+def api_space_intelligence():
+    """JSON API: fetch all space-intelligence data for client-side rendering."""
     neos = _fetch_neo_data()
     flares = _fetch_solar_flares()
     cmes = _fetch_cme()
@@ -1112,17 +1118,16 @@ def space_intelligence():
     highlights = _build_highlights(neos, flares, kp_info, storms)
     refreshed = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
 
-    return render_template('space-intelligence.html',
-                           neos=neos,
-                           flares=flares,
-                           cmes=cmes,
-                           storms=storms,
-                           kp_info=kp_info,
-                           kp_forecast=kp_forecast,
-                           highlights=highlights,
-                           refreshed=refreshed,
-                           flare_severity=_flare_severity,
-                           severity_color=_severity_color)
+    return jsonify(
+        neos=neos,
+        flares=[{'classType': f.get('classType', ''), 'peakTime': f.get('peakTime', ''), 'sourceLocation': f.get('sourceLocation', '')} for f in (flares or [])],
+        cmes=[{'startTime': c.get('startTime', ''), 'speed': c.get('cmeAnalyses', [{}])[0].get('speed') if c.get('cmeAnalyses') else c.get('speed'), 'halfAngle': c.get('cmeAnalyses', [{}])[0].get('halfAngle') if c.get('cmeAnalyses') else c.get('halfAngle')} for c in (cmes or [])],
+        storms=[{'startTime': s.get('startTime', ''), 'kpMax': s.get('allKpIndex', [{}])[-1].get('kpIndex') if s.get('allKpIndex') else s.get('kpMax', ''), 'gScale': _kp_to_g(s.get('allKpIndex', [{}])[-1].get('kpIndex', 0) if s.get('allKpIndex') else s.get('kpMax', 0))} for s in (storms or [])],
+        kp_info=kp_info,
+        kp_forecast=kp_forecast,
+        highlights=highlights,
+        refreshed=refreshed,
+    )
 
 
 @app.route('/api/status')

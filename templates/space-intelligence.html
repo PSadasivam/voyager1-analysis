@@ -294,6 +294,20 @@
         .journey-prev, .journey-next { max-width: 45%; }
         .journey-next { text-align: right; }
 
+        /* ---------- Loading ---------- */
+        .loading-overlay {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 60px 20px; text-align: center;
+        }
+        .spinner {
+            width: 48px; height: 48px; border: 4px solid rgba(255,255,255,0.15);
+            border-top-color: #4ecdc4; border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin-bottom: 18px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: #aaa; font-size: 1.05em; animation: pulse 1.5s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity:0.6; } 50% { opacity:1; } }
+
         /* ---------- Footer ---------- */
         .footer {
             background: #2c3e50;
@@ -400,7 +414,7 @@
             <h1>Real-Time Space Intelligence</h1>
             <p>Turning the Universe into a Living, Observable System</p>
             <div class="status-bar">
-                <div class="status-item">Last refreshed: {{ refreshed }}</div>
+                <div class="status-item" id="statusRefreshed">Loading...</div>
                 <div class="status-item">Data: NASA · NOAA</div>
             </div>
         </div>
@@ -420,19 +434,17 @@
             </p>
         </div>
 
-        <!-- ===== WHAT TO WATCH ===== -->
-        {% if highlights %}
-        <h2 style="color:#ffd700; margin-bottom:16px; font-size:1.3em;">🛰️ What to Watch Right Now</h2>
-        <div class="highlights">
-            {% for h in highlights %}
-            <div class="highlight-card">
-                <span class="badge badge-{{ h.severity }}">{{ h.severity }}</span>
-                <h3>{{ h.title }}</h3>
-                <div class="detail">{{ h.detail }}</div>
-            </div>
-            {% endfor %}
+        <!-- ===== LOADING STATE ===== -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <div class="loading-text" id="loadingText">Searching Near-Earth Objects...</div>
         </div>
-        {% endif %}
+
+        <!-- ===== DATA CONTENT (hidden until loaded) ===== -->
+        <div id="dataContent" style="display:none;">
+
+        <!-- ===== WHAT TO WATCH ===== -->
+        <div id="highlightsSection"></div>
 
         <!-- ===== TWO-COLUMN: NEO + WEATHER ===== -->
         <div class="two-col">
@@ -440,146 +452,23 @@
             <div class="panel">
                 <h2>☄️ Near-Earth Object Watch</h2>
                 <p style="opacity:0.7; margin-bottom:16px; font-size:0.92em;">Close approaches in the next 7 days, sorted by miss distance.</p>
-                {% if neos %}
-                <div style="overflow-x:auto;">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Object</th>
-                            <th>Date</th>
-                            <th>Miss (LD)</th>
-                            <th>Miss (AU)</th>
-                            <th>Diameter (m)</th>
-                            <th>Speed (km/h)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for neo in neos[:15] %}
-                        <tr>
-                            <td>
-                                {% if neo.is_hazardous %}
-                                <span class="severity-dot dot-red"></span>
-                                <span class="hazardous">{{ neo.name }}</span>
-                                {% else %}
-                                <span class="severity-dot dot-green"></span>
-                                <span class="safe">{{ neo.name }}</span>
-                                {% endif %}
-                            </td>
-                            <td>{{ neo.close_approach_date }}</td>
-                            <td>{{ neo.miss_lunar }}</td>
-                            <td>{{ neo.miss_au }}</td>
-                            <td>{{ neo.diameter_min }}–{{ neo.diameter_max }}</td>
-                            <td>{{ neo.velocity_kph }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                </div>
-                {% else %}
-                <div class="empty-state">NEO data temporarily unavailable. Cached data will appear on next refresh.</div>
-                {% endif %}
+                <div id="neoContent"></div>
             </div>
 
             <!-- Space Weather -->
             <div class="panel">
                 <h2>🌞 Space Weather Monitor</h2>
-
-                <!-- Kp Gauge -->
-                {% if kp_info %}
-                <div class="kp-gauge">
-                    {% if kp_info.kp >= 7 %}
-                    <div class="kp-value kp-red">{{ "%.0f"|format(kp_info.kp) }}</div>
-                    {% elif kp_info.kp >= 5 %}
-                    <div class="kp-value kp-orange">{{ "%.0f"|format(kp_info.kp) }}</div>
-                    {% elif kp_info.kp >= 4 %}
-                    <div class="kp-value kp-yellow">{{ "%.0f"|format(kp_info.kp) }}</div>
-                    {% else %}
-                    <div class="kp-value kp-green">{{ "%.0f"|format(kp_info.kp) }}</div>
-                    {% endif %}
-                    <div class="kp-label">Current Kp Index — {{ kp_info.gScale }}</div>
-                </div>
-                {% endif %}
-
-                <!-- Kp Forecast -->
-                {% if kp_forecast %}
-                <h3 style="color:#4ecdc4; font-size:0.95em; margin-bottom:8px;">Kp Forecast</h3>
-                <div class="forecast-bar">
-                    {% for f in kp_forecast %}
-                    <div class="forecast-chip" style="border-color:{% if f.kp >= 5 %}#ff6b6b{% elif f.kp >= 4 %}#ffa500{% else %}#4caf50{% endif %};">
-                        {{ f.time[-5:] if f.time|length > 5 else f.time }}: <strong>{{ "%.0f"|format(f.kp) }}</strong>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-
-                <!-- Solar Flares -->
+                <div id="kpGauge"></div>
+                <div id="kpForecast"></div>
                 <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Solar Flares</h3>
-                {% if flares %}
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Class</th><th>Peak Time</th><th>Location</th></tr>
-                    </thead>
-                    <tbody>
-                        {% for f in flares[:6] %}
-                        <tr>
-                            <td>
-                                <span class="severity-dot dot-{{ flare_severity(f.classType) }}"></span>
-                                {{ f.classType }}
-                            </td>
-                            <td>{{ f.peakTime }}</td>
-                            <td>{{ f.sourceLocation or '—' }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <div class="empty-state">No solar flares reported in the last 7 days.</div>
-                {% endif %}
-
-                <!-- CMEs -->
+                <div id="flaresContent"></div>
                 <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Coronal Mass Ejections</h3>
-                {% if cmes %}
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Time</th><th>Speed (km/s)</th><th>Half-Angle</th></tr>
-                    </thead>
-                    <tbody>
-                        {% for c in cmes[:5] %}
-                        <tr>
-                            <td>{{ c.startTime }}</td>
-                            <td>{{ c.speed or '—' }}</td>
-                            <td>{{ c.halfAngle or '—' }}°</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <div class="empty-state">No CMEs reported in the last 7 days.</div>
-                {% endif %}
-
-                <!-- Geomagnetic Storms -->
-                {% if storms %}
-                <h3 style="color:#ffd700; font-size:1em; margin:20px 0 10px;">Recent Geomagnetic Storms</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Start</th><th>Peak Kp</th><th>Scale</th></tr>
-                    </thead>
-                    <tbody>
-                        {% for s in storms[:5] %}
-                        <tr>
-                            <td>{{ s.startTime }}</td>
-                            <td>
-                                <span class="severity-dot dot-{{ severity_color(s.kpMax) }}"></span>
-                                {{ s.kpMax }}
-                            </td>
-                            <td>{{ s.gScale }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
+                <div id="cmesContent"></div>
+                <div id="stormsContent"></div>
             </div>
         </div>
+
+        </div><!-- /dataContent -->
 
         <!-- ===== NEO PERSPECTIVE ===== -->
         <div class="perspective">
@@ -618,7 +507,7 @@
             • Solar &amp; CME Events: NASA DONKI, Goddard Space Flight Center<br>
             • Geomagnetic Indices: NOAA Space Weather Prediction Center (SWPC)<br><br>
             All data retrieved via public APIs. Timestamps reflect UTC.<br>
-            Last refreshed: {{ refreshed }}
+            <span id="creditsRefreshed"></span>
         </div>
 
         <!-- ===== JOURNEY NAV ===== -->
@@ -649,5 +538,157 @@
             </div>
         </footer>
     </div>
+
+    <script>
+    (function() {
+        var loadingMsgs = [
+            'Searching Near-Earth Objects...',
+            'Scanning space weather data...',
+            'Checking solar flare activity...',
+            'Querying geomagnetic indices...',
+            'Building intelligence report...'
+        ];
+        var msgIdx = 0;
+        var msgEl = document.getElementById('loadingText');
+        var msgTimer = setInterval(function() {
+            msgIdx = (msgIdx + 1) % loadingMsgs.length;
+            msgEl.textContent = loadingMsgs[msgIdx];
+        }, 2200);
+
+        function esc(s) { var d = document.createElement('div'); d.textContent = s || '—'; return d.innerHTML; }
+
+        function flareSev(cls) {
+            if (!cls) return 'green';
+            var c = cls.charAt(0).toUpperCase();
+            if (c === 'X') return 'red';
+            if (c === 'M') return 'orange';
+            return 'green';
+        }
+        function sevColor(kp) {
+            kp = parseFloat(kp) || 0;
+            if (kp >= 7) return 'red';
+            if (kp >= 5) return 'orange';
+            if (kp >= 4) return 'yellow';
+            return 'green';
+        }
+        function kpColor(kp) {
+            kp = parseFloat(kp) || 0;
+            if (kp >= 7) return 'kp-red';
+            if (kp >= 5) return 'kp-orange';
+            if (kp >= 4) return 'kp-yellow';
+            return 'kp-green';
+        }
+        function chipColor(kp) {
+            kp = parseFloat(kp) || 0;
+            if (kp >= 5) return '#ff6b6b';
+            if (kp >= 4) return '#ffa500';
+            return '#4caf50';
+        }
+
+        fetch('/api/space-intelligence')
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                clearInterval(msgTimer);
+
+                // Refreshed timestamps
+                document.getElementById('statusRefreshed').textContent = 'Last refreshed: ' + d.refreshed;
+                document.getElementById('creditsRefreshed').textContent = 'Last refreshed: ' + d.refreshed;
+
+                // Highlights
+                var hEl = document.getElementById('highlightsSection');
+                if (d.highlights && d.highlights.length) {
+                    var hh = '<h2 style="color:#ffd700;margin-bottom:16px;font-size:1.3em;">🛰️ What to Watch Right Now</h2><div class="highlights">';
+                    d.highlights.forEach(function(h) {
+                        hh += '<div class="highlight-card"><span class="badge badge-' + esc(h.severity) + '">' + esc(h.severity) + '</span><h3>' + esc(h.title) + '</h3><div class="detail">' + esc(h.detail) + '</div></div>';
+                    });
+                    hh += '</div>';
+                    hEl.innerHTML = hh;
+                }
+
+                // NEO table
+                var nEl = document.getElementById('neoContent');
+                if (d.neos && d.neos.length) {
+                    var nt = '<div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Object</th><th>Date</th><th>Miss (LD)</th><th>Miss (AU)</th><th>Diameter (m)</th><th>Speed (km/h)</th></tr></thead><tbody>';
+                    d.neos.slice(0, 15).forEach(function(n) {
+                        var dot = n.is_hazardous ? 'dot-red' : 'dot-green';
+                        var cls = n.is_hazardous ? 'hazardous' : 'safe';
+                        nt += '<tr><td><span class="severity-dot ' + dot + '"></span><span class="' + cls + '">' + esc(n.name) + '</span></td>';
+                        nt += '<td>' + esc(n.close_approach_date) + '</td><td>' + esc(n.miss_lunar) + '</td><td>' + esc(n.miss_au) + '</td>';
+                        nt += '<td>' + esc(n.diameter_min) + '–' + esc(n.diameter_max) + '</td><td>' + esc(n.velocity_kph) + '</td></tr>';
+                    });
+                    nt += '</tbody></table></div>';
+                    nEl.innerHTML = nt;
+                } else {
+                    nEl.innerHTML = '<div class="empty-state">NEO data temporarily unavailable. Cached data will appear on next refresh.</div>';
+                }
+
+                // Kp Gauge
+                var kEl = document.getElementById('kpGauge');
+                if (d.kp_info && d.kp_info.kp !== undefined) {
+                    kEl.innerHTML = '<div class="kp-gauge"><div class="kp-value ' + kpColor(d.kp_info.kp) + '">' + Math.round(d.kp_info.kp) + '</div><div class="kp-label">Current Kp Index — ' + esc(d.kp_info.gScale) + '</div></div>';
+                }
+
+                // Kp Forecast
+                var fEl = document.getElementById('kpForecast');
+                if (d.kp_forecast && d.kp_forecast.length) {
+                    var ff = '<h3 style="color:#4ecdc4;font-size:0.95em;margin-bottom:8px;">Kp Forecast</h3><div class="forecast-bar">';
+                    d.kp_forecast.forEach(function(f) {
+                        var t = f.time && f.time.length > 5 ? f.time.slice(-5) : (f.time || '');
+                        ff += '<div class="forecast-chip" style="border-color:' + chipColor(f.kp) + ';">' + esc(t) + ': <strong>' + Math.round(f.kp) + '</strong></div>';
+                    });
+                    ff += '</div>';
+                    fEl.innerHTML = ff;
+                }
+
+                // Solar Flares
+                var flEl = document.getElementById('flaresContent');
+                if (d.flares && d.flares.length) {
+                    var ft = '<table class="data-table"><thead><tr><th>Class</th><th>Peak Time</th><th>Location</th></tr></thead><tbody>';
+                    d.flares.slice(0, 6).forEach(function(f) {
+                        ft += '<tr><td><span class="severity-dot dot-' + flareSev(f.classType) + '"></span>' + esc(f.classType) + '</td>';
+                        ft += '<td>' + esc(f.peakTime) + '</td><td>' + esc(f.sourceLocation) + '</td></tr>';
+                    });
+                    ft += '</tbody></table>';
+                    flEl.innerHTML = ft;
+                } else {
+                    flEl.innerHTML = '<div class="empty-state">No solar flares reported in the last 7 days.</div>';
+                }
+
+                // CMEs
+                var cEl = document.getElementById('cmesContent');
+                if (d.cmes && d.cmes.length) {
+                    var ct = '<table class="data-table"><thead><tr><th>Time</th><th>Speed (km/s)</th><th>Half-Angle</th></tr></thead><tbody>';
+                    d.cmes.slice(0, 5).forEach(function(c) {
+                        ct += '<tr><td>' + esc(c.startTime) + '</td><td>' + esc(c.speed) + '</td><td>' + esc(c.halfAngle) + '°</td></tr>';
+                    });
+                    ct += '</tbody></table>';
+                    cEl.innerHTML = ct;
+                } else {
+                    cEl.innerHTML = '<div class="empty-state">No CMEs reported in the last 7 days.</div>';
+                }
+
+                // Geomagnetic Storms
+                var sEl = document.getElementById('stormsContent');
+                if (d.storms && d.storms.length) {
+                    var st = '<h3 style="color:#ffd700;font-size:1em;margin:20px 0 10px;">Recent Geomagnetic Storms</h3>';
+                    st += '<table class="data-table"><thead><tr><th>Start</th><th>Peak Kp</th><th>Scale</th></tr></thead><tbody>';
+                    d.storms.slice(0, 5).forEach(function(s) {
+                        st += '<tr><td>' + esc(s.startTime) + '</td><td><span class="severity-dot dot-' + sevColor(s.kpMax) + '"></span>' + esc(s.kpMax) + '</td><td>' + esc(s.gScale) + '</td></tr>';
+                    });
+                    st += '</tbody></table>';
+                    sEl.innerHTML = st;
+                }
+
+                // Show content, hide spinner
+                document.getElementById('loadingOverlay').style.display = 'none';
+                document.getElementById('dataContent').style.display = 'block';
+            })
+            .catch(function() {
+                clearInterval(msgTimer);
+                document.getElementById('loadingText').textContent = 'Data temporarily unavailable. Please refresh.';
+                document.querySelector('.spinner').style.display = 'none';
+            });
+    })();
+    </script>
 </body>
 </html>
