@@ -29,7 +29,7 @@ See [docs/aws-deployment.md](aws-deployment.md) for the full step-by-step runboo
 - [ ] Create IAM user with least-privilege EC2/VPC policy
 - [ ] Generate SSH key pair (`voyager1-deploy`), store `.pem` securely outside repo
 - [ ] Create security group (`voyager1-sg`): ports 22 (operator IP only), 80, 443
-- [ ] Launch `t2.micro` EC2 instance (Amazon Linux 2)
+- [ ] Launch `t3.small` EC2 instance (Amazon Linux 2023)
 - [ ] Allocate and associate an Elastic IP
 
 ### 2. Server Provisioning
@@ -69,7 +69,7 @@ See [docs/aws-deployment.md](aws-deployment.md) for the full step-by-step runboo
 
 | Resource             | Cost                          |
 |----------------------|-------------------------------|
-| EC2 t2.micro         | Free tier (1 year), ~$8/mo after |
+| EC2 t3.small         | ~$15/mo                          |
 | Elastic IP           | Free while attached to running instance |
 | Let's Encrypt SSL    | Free                          |
 | GoDaddy domain       | Existing (no additional cost) |

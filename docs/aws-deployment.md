@@ -78,7 +78,7 @@ aws ec2 describe-images \
 # Launch the instance
 aws ec2 run-instances \
   --image-id <AMI_ID> \
-  --instance-type t2.micro \
+  --instance-type t3.small \
   --key-name voyager1-deploy \
   --security-group-ids <SECURITY_GROUP_ID> \
   --count 1 \
