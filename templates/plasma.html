@@ -498,7 +498,7 @@
 
                     // Status bar
                     document.getElementById('data-source').textContent = 'Source: NASA SPDF · ' + data.duration_hours + ' hrs | ' + data.freq_channels + ' channels';
-                    document.getElementById('update-time').textContent = 'Last refreshed: ' + new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) + ' ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',hour12:false}) + ' UTC';
+                    document.getElementById('update-time').textContent = 'Last refreshed: ' + new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) + ' ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
 
                     // Stats grid
                     var s = data.statistics;

@@ -505,7 +505,7 @@
             • Near-Earth Objects: NASA Center for Near Earth Object Studies (CNEOS), Jet Propulsion Laboratory<br>
             • Solar &amp; CME Events: NASA DONKI, Goddard Space Flight Center<br>
             • Geomagnetic Indices: NOAA Space Weather Prediction Center (SWPC)<br><br>
-            All data retrieved via public APIs. Timestamps reflect UTC.<br>
+            All data retrieved via public APIs. Timestamps reflect your local time.<br>
             <span id="creditsRefreshed"></span>
         </div>
 
@@ -600,8 +600,9 @@
                 clearInterval(msgTimer);
 
                 // Refreshed timestamps
-                document.getElementById('statusRefreshed').textContent = 'Last refreshed: ' + d.refreshed;
-                document.getElementById('creditsRefreshed').textContent = 'Last refreshed: ' + d.refreshed;
+                var localTime = new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) + ' ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
+                document.getElementById('statusRefreshed').textContent = 'Last refreshed: ' + localTime;
+                document.getElementById('creditsRefreshed').textContent = 'Last refreshed: ' + localTime;
 
                 // Highlights
                 var hEl = document.getElementById('highlightsSection');

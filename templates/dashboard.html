@@ -573,7 +573,7 @@
         function updateTimestamp() {
             const now = new Date();
             document.getElementById('update-time').textContent = 
-                `Last refreshed: ${now.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'})} ${now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',hour12:false})} UTC`;
+                `Last refreshed: ${now.toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'})} ${now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'})}`;
         }
 
         function loadPositionData() {
