@@ -1116,7 +1116,7 @@ def api_space_intelligence():
     kp_info = _fetch_kp_index()
     kp_forecast = _fetch_kp_forecast()
     highlights = _build_highlights(neos, flares, kp_info, storms)
-    refreshed = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    refreshed = datetime.datetime.now(datetime.timezone.utc).strftime('%B %d, %Y %H:%M UTC')
 
     return jsonify(
         neos=neos,
