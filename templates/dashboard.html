@@ -172,6 +172,76 @@
             transform: scale(1.05);
         }
 
+        /* Perspective block */
+        .perspective {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.85;
+        }
+        .perspective h2 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .perspective p {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-bottom: 12px;
+        }
+        .perspective p:last-child { margin-bottom: 0; }
+
+        /* Chart annotation */
+        .chart-annotation {
+            background: rgba(255,215,0,0.06);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 16px;
+            border-left: 3px solid rgba(255,215,0,0.4);
+            font-size: 0.95em;
+            line-height: 1.75;
+            opacity: 0.88;
+            text-align: left;
+        }
+        .chart-annotation strong { color: #ffd700; }
+
+        /* Journey navigation */
+        .journey-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .journey-nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-size: 1.05em;
+            transition: color 0.25s;
+        }
+        .journey-nav a:hover { color: #ffd700; }
+        .journey-label {
+            font-size: 0.85em;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .journey-teaser {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .journey-prev, .journey-next { max-width: 45%; }
+        .journey-next { text-align: right; }
+
         .loading {
             display: none;
             text-align: center;
@@ -317,12 +387,28 @@
             </div>
         </div>
 
+        <div class="perspective">
+            <h2>My Perspective</h2>
+            <p>
+                The magnetometer is Voyager's compass — and it's the instrument that closed the case. When Voyager crossed into interstellar space, the plasma wave instrument heard the change and the density measurements confirmed it. But it was the magnetometer that mapped the <em>direction</em> of the magnetic field and proved that Voyager was embedded in a fundamentally different magnetic environment: no longer the Sun's field, dragged outward by the solar wind, but the galactic magnetic field of the Milky Way itself.
+            </p>
+            <p>
+                What I find remarkable is the scale of what we're measuring. The interstellar magnetic field around Voyager is roughly 0.4–0.5 nanotesla. A refrigerator magnet is about 5 millitesla — that's ten million times stronger. Voyager is detecting a whisper of magnetism from across the galaxy, using an instrument built nearly five decades ago. Every data point on the chart below is a small miracle of engineering sensitivity.
+            </p>
+            <p>
+                This is the final chapter of the Voyager instrument story: trajectory tells you where, plasma waves tell you what it sounds like, density tells you what it's made of, and the magnetometer tells you which way the cosmic wind blows. Together, they paint a complete portrait of what it means to leave the solar system.
+            </p>
+        </div>
+
         <div class="dashboard">
             <!-- Position Panel -->
             <div class="panel">
                 <h2>Current Position</h2>
                 <div class="loading" id="position-loading">Loading position data...</div>
                 <div class="plot-container" id="position-plot"></div>
+                <div class="chart-annotation">
+                    <strong>Reading the 3D plot:</strong> This shows Voyager's current position in three-dimensional space relative to the Sun. The spacecraft is heading "up and out" — north of the ecliptic plane and away from the solar system. At 160+ AU, Voyager is farther from the Sun than any human-made object, and the gap grows by about 3.6 AU every year.
+                </div>
                 <div class="info-grid" id="position-info"></div>
                 <div class="error" id="position-error" style="display: none;"></div>
             </div>
@@ -343,6 +429,9 @@
                 </div>
                 <div class="loading" id="magnetometer-loading">Loading magnetometer data...</div>
                 <div class="plot-container" id="magnetometer-plot"></div>
+                <div class="chart-annotation">
+                    <strong>What the wiggles mean:</strong> Each fluctuation in the magnetic field time series is a story — solar shocks catching up to Voyager months after erupting from the Sun, turbulence at the boundary between stellar winds, or the quiet hum of the galactic magnetic field. The mean field strength (~0.4–0.5 nT) is the interstellar baseline; anything above it is an event worth investigating.
+                </div>
                 <div class="info-grid" id="magnetometer-info"></div>
                 <div class="error" id="magnetometer-error" style="display: none;"></div>
             </div>
@@ -372,6 +461,19 @@
                     <div class="info-label">Mission Status</div>
                     <div class="info-value">Active & Transmitting</div>
                 </div>
+            </div>
+        </div>
+
+        <div class="journey-nav">
+            <div class="journey-prev">
+                <div class="journey-label">← Previous</div>
+                <a href="/density">Electron Density</a>
+                <div class="journey-teaser">What the interstellar medium is made of</div>
+            </div>
+            <div class="journey-next">
+                <div class="journey-label">Beyond Voyager →</div>
+                <a href="/atlas">3I/ATLAS</a>
+                <div class="journey-teaser">A visitor from another star system</div>
             </div>
         </div>
 

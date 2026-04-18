@@ -69,6 +69,76 @@
             box-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
 
+        /* Perspective block */
+        .perspective {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin-bottom: 28px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.85;
+        }
+        .perspective h2 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .perspective p {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-bottom: 12px;
+        }
+        .perspective p:last-child { margin-bottom: 0; }
+
+        /* Chart annotation */
+        .chart-annotation {
+            background: rgba(255,215,0,0.06);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 16px;
+            border-left: 3px solid rgba(255,215,0,0.4);
+            font-size: 0.95em;
+            line-height: 1.75;
+            opacity: 0.88;
+            text-align: left;
+        }
+        .chart-annotation strong { color: #ffd700; }
+
+        /* Journey navigation */
+        .journey-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .journey-nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-size: 1.05em;
+            transition: color 0.25s;
+        }
+        .journey-nav a:hover { color: #ffd700; }
+        .journey-label {
+            font-size: 0.85em;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .journey-teaser {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .journey-prev, .journey-next { max-width: 45%; }
+        .journey-next { text-align: right; }
+
         /* Info panels */
         .info-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
         .panel {
@@ -227,12 +297,25 @@
             <button onclick="loadPlasma()">Run Analysis</button>
         </div>
 
+        <div class="perspective">
+            <h2>My Perspective</h2>
+            <p>
+                If the trajectory page shows you <em>where</em> Voyager is, this page lets you <em>hear</em> where it is. When Voyager crossed the heliopause in 2012, the plasma wave instrument detected a sharp rise in oscillation frequency — and from that frequency, scientists could calculate the density of the medium around the spacecraft. It was the acoustic proof that Voyager had left the Sun's bubble and entered the ocean between the stars.
+            </p>
+            <p>
+                What fascinates me most is the instrument itself — a 10-meter dipole antenna, designed in the mid-1970s, still picking up electric field fluctuations 160+ AU from home. That's like using a 1970s AM radio to tune into a station no one knew existed. The PWS wasn't built to detect interstellar plasma. It was built for planetary magnetospheres. And yet here it is, doing science its designers never imagined. That's what great engineering does — it outlives its original purpose.
+            </p>
+        </div>
+
         <!-- Spectrogram -->
         <div class="plot-section">
             <h2>Dynamic Spectrogram</h2>
             <div class="loading" id="spectrogram-loading">Generating spectrogram...</div>
             <div id="spectrogram-plot"></div>
             <div class="error" id="plot-error"></div>
+            <div class="chart-annotation">
+                <strong>What you're seeing:</strong> This is a spectrogram — think of it as a heat map of sound frequencies over time. The bright horizontal band in the 2–4 kHz range is the plasma frequency line. In the heliosheath, this line sat around 300 Hz. After crossing the heliopause, it jumped to 2–3 kHz. That single shift told us: Voyager is swimming in denser water now.
+            </div>
         </div>
 
         <!-- Frequency spectrum -->
@@ -240,6 +323,9 @@
             <h2>Frequency Spectrum (Mid-point Snapshot)</h2>
             <div class="loading" id="spectrum-loading" style="display:none;">Rendering...</div>
             <div id="spectrum-plot"></div>
+            <div class="chart-annotation">
+                <strong>Reading the peak:</strong> The dominant spike in this snapshot is the plasma frequency — the natural resonance of electrons in the surrounding medium. Its position on the x-axis directly encodes the electron density around Voyager. Move the peak to the right and the medium is denser; move it left and Voyager is in thinner gas. This single number is how we measure the "texture" of interstellar space.
+            </div>
         </div>
 
         <!-- Time series -->
@@ -247,6 +333,9 @@
             <h2>Wave Intensity &amp; Electric Field Time Series</h2>
             <div class="loading" id="timeseries-loading" style="display:none;">Rendering...</div>
             <div id="timeseries-plot"></div>
+            <div class="chart-annotation">
+                <strong>The story in the wiggles:</strong> The time series shows wave intensity and electric field strength evolving over hours. Spikes often correspond to plasma oscillation events — shock waves from the Sun catching up to Voyager, or turbulence in the interstellar medium itself. The baseline level tells you the ambient conditions; the spikes tell you something just happened out there.
+            </div>
         </div>
 
         <!-- Info panels -->
@@ -287,6 +376,19 @@
                     The Plasma Wave Subsystem measures electric field fluctuations from <code>10 Hz</code> to <code>56.2 kHz</code> using a 10-m dipole antenna.
                     It detects Langmuir waves, whistler-mode emissions, and electron plasma oscillations critical for probing the interstellar medium.
                 </div>
+            </div>
+        </div>
+
+        <div class="journey-nav">
+            <div class="journey-prev">
+                <div class="journey-label">← Previous</div>
+                <a href="/trajectory">Trajectory</a>
+                <div class="journey-teaser">How far we've thrown a bottle into the ocean</div>
+            </div>
+            <div class="journey-next">
+                <div class="journey-label">Continue the Journey →</div>
+                <a href="/density">Electron Density</a>
+                <div class="journey-teaser">How we know the water is different now</div>
             </div>
         </div>
 

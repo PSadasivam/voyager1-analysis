@@ -171,6 +171,43 @@
         }
         .quote-block .author { display: block; margin-top: 12px; font-style: normal; color: #ffd700; font-size: 0.9em; }
 
+        /* Perspective block */
+        .perspective {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin-bottom: 35px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.85;
+        }
+        .perspective h2 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .perspective p {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-bottom: 12px;
+        }
+        .perspective p:last-child { margin-bottom: 0; }
+
+        /* Chart annotation */
+        .chart-annotation {
+            background: rgba(255,215,0,0.06);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 16px;
+            border-left: 3px solid rgba(255,215,0,0.4);
+            font-size: 0.95em;
+            line-height: 1.75;
+            opacity: 0.88;
+            text-align: left;
+        }
+        .chart-annotation strong { color: #ffd700; }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -264,6 +301,20 @@
             <div class="hero-sub">Interstellar origin confirmed &nbsp;·&nbsp; Perihelion 1.356 AU &nbsp;·&nbsp; Inclination 175.1°</div>
         </div>
 
+        <!-- Perspective -->
+        <div class="perspective">
+            <h2>My Perspective</h2>
+            <p>
+                Let me put that eccentricity number in context. Every comet we've ever seen from another star system — all three of them in human history — arrived with an eccentricity barely above 1. 'Oumuamua came through at 1.20, just barely unbound. Borisov at 3.36, clearly a visitor. Then Atlas arrived at 6.139. It wasn't sneaking through our solar system. It was <em>blazing</em> through at an angle that says: I came from very, very far away, and I'm not staying.
+            </p>
+            <p>
+                What drew me to this research is the rarity. In the entire history of astronomy, we have identified exactly three objects from outside our solar system. Three data points. And yet each one has rewritten something we thought we understood. 'Oumuamua challenged our assumptions about shape and composition. Borisov proved interstellar comets could look like our own. Atlas — with JWST detecting water, CO₂, and CO in its coma — gave us the first chemical fingerprint of ices forged around another star. We are, quite literally, reading the chemistry of another solar system's birth.
+            </p>
+            <p>
+                With Voyager, we sent a message out. With Atlas, the universe sent one back.
+            </p>
+        </div>
+
         <!-- Abstract -->
         <div class="abstract">
             <h2>Abstract</h2>
@@ -347,6 +398,9 @@
                     the object's extreme hyperbolic velocity as it crosses from Sagittarius through Virgo.
                     Data: MPC ephemerides, 30 epochs.
                 </div>
+                <div class="chart-annotation">
+                    <strong>Why it's nearly a straight line:</strong> Most solar system comets trace curved arcs across the sky as they swing around the Sun. Atlas barely curves. Its path is so close to a straight line because it's moving so fast relative to us that the Sun's gravity hardly bends it — like a bullet passing through a room. That visual straightness <em>is</em> the eccentricity of 6.139, made visible.
+                </div>
             </div>
             <div class="viz-panel">
                 <h3>Brightness Light Curve (V-band)</h3>
@@ -355,6 +409,9 @@
                     Predicted V-band magnitude evolution of 3I/ATLAS from July 2025 through January 2026.
                     The ~4-magnitude brightening around perihelion (October 2025) indicates significant
                     cometary outgassing activity as solar heating increases.
+                </div>
+                <div class="chart-annotation">
+                    <strong>What the brightening tells us:</strong> A 4-magnitude increase means Atlas became roughly 40 times brighter as it approached the Sun. That's not just reflecting more light — it's <em>outgassing</em>. Volatile ices formed in another star system, preserved for billions of years in interstellar cold, are now sublimating in our Sun's warmth. We're watching another star's building materials evaporate in real time. That's what makes Atlas fundamentally different from 'Oumuamua, which showed no outgassing at all.
                 </div>
             </div>
         </div>
@@ -432,7 +489,9 @@
         <!-- Interstellar Objects Comparison -->
         <div class="quote-block">
             "3I/ATLAS is the Rosetta Stone of interstellar comets — for the first time, we can directly
-            read the chemical fingerprint of ices formed around another star."
+            read the chemical fingerprint of ices formed around another star. Three interstellar visitors
+            in eight years. A decade ago we had zero. We are living through the opening chapter of
+            interstellar chemistry."
             <span class="author">— Significance of JWST volatile detections</span>
         </div>
 

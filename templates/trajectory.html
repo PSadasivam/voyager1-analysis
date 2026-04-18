@@ -73,6 +73,76 @@
         }
 
         /* Main layout */
+        /* Perspective block */
+        .perspective {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.85;
+        }
+        .perspective h2 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .perspective p {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-bottom: 12px;
+        }
+        .perspective p:last-child { margin-bottom: 0; }
+
+        /* Chart annotation */
+        .chart-annotation {
+            background: rgba(255,215,0,0.06);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 16px;
+            border-left: 3px solid rgba(255,215,0,0.4);
+            font-size: 0.95em;
+            line-height: 1.75;
+            opacity: 0.88;
+            text-align: left;
+        }
+        .chart-annotation strong { color: #ffd700; }
+
+        /* Journey navigation */
+        .journey-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .journey-nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-size: 1.05em;
+            transition: color 0.25s;
+        }
+        .journey-nav a:hover { color: #ffd700; }
+        .journey-label {
+            font-size: 0.85em;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .journey-teaser {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .journey-prev, .journey-next { max-width: 45%; }
+        .journey-next { text-align: right; }
+
         .main-plot {
             background: rgba(255,255,255,0.08);
             border-radius: 15px;
@@ -283,10 +353,23 @@
             </div>
         </div>
 
+        <div class="perspective">
+            <h2>My Perspective</h2>
+            <p>
+                Of everything on this site, the trajectory plot is the one that humbles me the most. We launched a 722-kilogram spacecraft in 1977 — before most of us had a personal computer — and it is still out there, still transmitting, still teaching us. When I trace the line from Earth through Jupiter, Saturn, and out past the heliopause, what strikes me isn't the distance. It's the <em>intention</em>. Someone decided to throw a bottle into an ocean we couldn't see the other side of, and trusted that the math would hold.
+            </p>
+            <p>
+                That's the part that resonates with my work in technology leadership. The best systems aren't the ones that solve today's problem — they're the ones engineered to keep working long after the people who built them have moved on. Voyager's trajectory is a 48-year proof that long-horizon thinking works.
+            </p>
+        </div>
+
         <div class="main-plot">
             <div class="loading" id="plot-loading">Calculating trajectory from 1977 to present...</div>
             <div id="trajectory-plot"></div>
             <div class="error" id="plot-error"></div>
+            <div class="chart-annotation">
+                <strong>What to look for:</strong> The gravity assists at Jupiter (1979) and Saturn (1980) are where Voyager's story pivots. Each flyby bent the trajectory and accelerated the spacecraft — Jupiter alone added roughly 35,700 mph. Without those two slingshots, Voyager would still be inside the solar system today. After Saturn, the path curves upward out of the ecliptic plane and straightens into interstellar space — a one-way road with no more planetary encounters, ever.
+            </div>
         </div>
 
         <div class="info-panels">
@@ -299,6 +382,19 @@
             <div class="panel">
                 <h2>Mission Timeline</h2>
                 <div class="timeline" id="timeline"></div>
+            </div>
+        </div>
+
+        <div class="journey-nav">
+            <div class="journey-prev">
+                <div class="journey-label">← Previous</div>
+                <a href="/facts">Voyager Facts</a>
+                <div class="journey-teaser">The numbers that make Voyager extraordinary</div>
+            </div>
+            <div class="journey-next">
+                <div class="journey-label">Continue the Journey →</div>
+                <a href="/plasma">Plasma Waves</a>
+                <div class="journey-teaser">Listen to the sound of interstellar space</div>
             </div>
         </div>
 

@@ -69,6 +69,76 @@
             box-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
 
+        /* Perspective block */
+        .perspective {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin-bottom: 28px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.85;
+        }
+        .perspective h2 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .perspective p {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-bottom: 12px;
+        }
+        .perspective p:last-child { margin-bottom: 0; }
+
+        /* Chart annotation */
+        .chart-annotation {
+            background: rgba(255,215,0,0.06);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 16px;
+            border-left: 3px solid rgba(255,215,0,0.4);
+            font-size: 0.95em;
+            line-height: 1.75;
+            opacity: 0.88;
+            text-align: left;
+        }
+        .chart-annotation strong { color: #ffd700; }
+
+        /* Journey navigation */
+        .journey-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .journey-nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-size: 1.05em;
+            transition: color 0.25s;
+        }
+        .journey-nav a:hover { color: #ffd700; }
+        .journey-label {
+            font-size: 0.85em;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .journey-teaser {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .journey-prev, .journey-next { max-width: 45%; }
+        .journey-next { text-align: right; }
+
         /* Info panels */
         .info-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
         .panel {
@@ -220,12 +290,25 @@
             <button onclick="loadDensity()">Run Analysis</button>
         </div>
 
+        <div class="perspective">
+            <h2>My Perspective</h2>
+            <p>
+                This is the page where the plasma wave data transforms from sound into substance. The density extraction takes the plasma frequency we saw on the previous page and converts it into something physical: <em>how many electrons are in each cubic centimeter of space around Voyager</em>. It's an astonishingly elegant measurement. You listen for a frequency, and from that single number, you calculate the density of the medium — a medium so thin that a cubic centimeter of it contains fewer than one electron.
+            </p>
+            <p>
+                What caught my attention during this analysis was the density jump around 2013, when Voyager crossed the heliopause. The electron density went from roughly 0.06 cm⁻³ to about 0.13 cm⁻³. For context, that's like walking from a room with 6 people into a room with 13. Not dramatic in absolute terms — but after 36 years of steadily declining density, <em>any</em> increase was extraordinary. It was the environment telling Voyager: you're not in the Sun's territory anymore.
+            </p>
+        </div>
+
         <!-- Process plot -->
         <div class="plot-section">
             <h2>Density Extraction Process</h2>
             <div class="loading" id="process-loading">Running plasma frequency ridge detection...</div>
             <div id="process-plot"></div>
             <div class="error" id="process-error"></div>
+            <div class="chart-annotation">
+                <strong>The three-panel pipeline:</strong> This visualization shows how we go from raw data to a measurement. The top panel is the spectrogram — the same kind of frequency-vs-time heat map from the Plasma Waves page. The middle panel extracts the "ridge" — the dominant plasma frequency at each time step, traced using peak prominence analysis. The bottom panel converts that frequency into electron density using the plasma frequency formula. Three steps: listen, trace, calculate.
+            </div>
         </div>
 
         <!-- NASA-style plot -->
@@ -233,6 +316,9 @@
             <h2>NASA-Style Density Plot</h2>
             <div class="loading" id="nasa-loading" style="display:none;">Rendering...</div>
             <div id="nasa-plot"></div>
+            <div class="chart-annotation">
+                <strong>Reading this chart:</strong> This NASA-style presentation puts density on a logarithmic scale, which is how space physicists typically view it. The horizontal reference lines mark different environments — the heliosheath, the local interstellar medium (LISM), and the solar wind at Earth's orbit. Where Voyager's current density falls relative to these bands tells you exactly which "neighborhood" the spacecraft is traveling through right now.
+            </div>
         </div>
 
         <!-- Info panels -->
@@ -241,6 +327,10 @@
                 <h2>Extraction Statistics</h2>
                 <div class="info-grid" id="stats-info">
                     <div class="info-item"><div class="info-label">Loading...</div><div class="info-value">—</div></div>
+                </div>
+                <div class="method-block" style="margin-top:18px;">
+                    <strong>Perspective &amp; Findings</strong><br>
+                    The density values above are derived from real plasma wave data — not measured directly, but <em>inferred</em> from sound. Voyager's direct plasma detector (PLS) failed in 1980 after the Saturn flyby, so this indirect method is the only way we can "feel" the medium around the spacecraft. The values you see (~0.01 cm⁻³) place Voyager squarely in the transition zone between the heliosheath and the Local Interstellar Medium — the thin, warm cloud of partially ionized gas our solar system is moving through. The gradual density fluctuations we observe tell us that even "empty" interstellar space has structure — regions of slightly thicker and thinner gas, shaped by ancient supernova shockwaves and stellar winds from nearby stars. Voyager is, in effect, mapping the weather between the stars.
                 </div>
             </div>
 
@@ -259,8 +349,25 @@
                 <div class="method-block" style="margin-top:18px;">
                     <strong>Method:</strong><br>
                     <code>n<sub>e</sub> = (ε₀ m<sub>e</sub> / e²) × (2π f<sub>pe</sub>)²</code><br>
-                    Ridge detected via peak prominence analysis in the 500–8 000 Hz band, then smoothed with Savitzky-Golay filtering.
+                    Ridge detected via peak prominence analysis in the 500–8,000 Hz band, then smoothed with Savitzky–Golay filtering.<br><br>
+                    <strong>Why this method:</strong><br>
+                    This is the plasma frequency equation, rearranged to solve for electron density (n<sub>e</sub>). Because Voyager's direct plasma instrument is dead, we listen instead — the Plasma Wave Subsystem (PWS) picks up natural oscillations in the surrounding plasma, and the loudest, most persistent frequency is the <em>plasma frequency</em> (f<sub>pe</sub>) — the rate at which displaced electrons naturally vibrate back toward equilibrium. More electrons means a higher frequency; fewer electrons means a lower one. One number gives you the other.<br><br>
+                    <strong>How we extract it:</strong><br>
+                    We trace the brightest frequency ridge in the spectrogram using peak prominence analysis in the 500–8,000 Hz band, then smooth it with a Savitzky–Golay filter to remove noise spikes. The smoothed ridge gives us f<sub>pe</sub> over time, and the formula above converts each value into an electron density measurement.
                 </div>
+            </div>
+        </div>
+
+        <div class="journey-nav">
+            <div class="journey-prev">
+                <div class="journey-label">← Previous</div>
+                <a href="/plasma">Plasma Waves</a>
+                <div class="journey-teaser">The sound of interstellar space</div>
+            </div>
+            <div class="journey-next">
+                <div class="journey-label">Continue the Journey →</div>
+                <a href="/dashboard">Magnetometer</a>
+                <div class="journey-teaser">The compass confirming we've crossed the shore</div>
             </div>
         </div>
 
