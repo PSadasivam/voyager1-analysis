@@ -449,6 +449,7 @@
 
         <!-- ===== WHAT TO WATCH ===== -->
         <div id="highlightsSection"></div>
+        <div id="highlightsPerspective"></div>
 
         <!-- ===== TWO-COLUMN: NEO + WEATHER ===== -->
         <div class="two-col">
@@ -594,6 +595,7 @@
 
                 // Highlights
                 var hEl = document.getElementById('highlightsSection');
+                var hpEl = document.getElementById('highlightsPerspective');
                 if (d.highlights && d.highlights.length) {
                     var hh = '<h2 style="color:#ffd700;margin-bottom:16px;font-size:1.3em;">What to Watch Right Now</h2><div class="highlights">';
                     d.highlights.forEach(function(h) {
@@ -601,12 +603,35 @@
                     });
                     hh += '</div>';
                     hEl.innerHTML = hh;
+
+                    // Build interpretive perspective for the alerts
+                    var hasRed = d.highlights.some(function(h) { return h.severity === 'red'; });
+                    var hasOrange = d.highlights.some(function(h) { return h.severity === 'orange'; });
+                    var pp = '<div class="perspective" style="margin-top:18px;margin-bottom:24px;">';
+                    pp += '<h2 style="font-size:1.05em;">Interpreting These Alerts</h2>';
+                    if (hasRed) {
+                        pp += '<p><span class="severity-dot dot-red"></span><strong>Red</strong> indicates a potentially hazardous event — either a close-approach asteroid classified as hazardous by NASA, a major X-class solar flare, or a severe geomagnetic storm (Kp 7+). These warrant attention but are being actively tracked.</p>';
+                    }
+                    if (hasOrange) {
+                        pp += '<p><span class="severity-dot dot-orange"></span><strong>Orange</strong> signals an event worth monitoring — an asteroid passing within 0.05 AU, an M-class solar flare, or elevated geomagnetic activity (Kp 5-6). Not immediately dangerous, but a sign the space environment is active.</p>';
+                    }
+                    if (!hasRed && !hasOrange) {
+                        pp += '<p><span class="severity-dot dot-green"></span>Current alerts are at <strong>normal</strong> levels. The space environment is relatively quiet, with no events requiring special attention.</p>';
+                    }
+                    pp += '</div>';
+                    hpEl.innerHTML = pp;
                 }
 
                 // NEO table
                 var nEl = document.getElementById('neoContent');
                 if (d.neos && d.neos.length) {
-                    var nt = '<div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Object</th><th>Date</th><th>Miss (LD)</th><th>Miss (AU)</th><th>Diameter (m)</th><th>Speed (km/h)</th></tr></thead><tbody>';
+                    var hazCount = d.neos.filter(function(n) { return n.is_hazardous; }).length;
+                    var safeCount = d.neos.length - hazCount;
+                    var nt = '<div style="margin-bottom:12px;font-size:0.85em;opacity:0.8;">';
+                    nt += '<span class="severity-dot dot-red"></span><strong style="color:#ff6b6b;">Red</strong> = Potentially Hazardous Asteroid (PHA) — meets NASA size and orbit criteria &nbsp;&nbsp;';
+                    nt += '<span class="severity-dot dot-green"></span><strong style="color:#4caf50;">Green</strong> = Standard near-Earth object — no hazard classification';
+                    nt += '</div>';
+                    nt += '<div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Object</th><th>Date</th><th>Miss (LD)</th><th>Miss (AU)</th><th>Diameter (m)</th><th>Speed (km/h)</th></tr></thead><tbody>';
                     d.neos.slice(0, 15).forEach(function(n) {
                         var dot = n.is_hazardous ? 'dot-red' : 'dot-green';
                         var cls = n.is_hazardous ? 'hazardous' : 'safe';
@@ -615,6 +640,15 @@
                         nt += '<td>' + esc(n.diameter_min) + '–' + esc(n.diameter_max) + '</td><td>' + esc(n.velocity_kph) + '</td></tr>';
                     });
                     nt += '</tbody></table></div>';
+                    nt += '<div style="margin-top:14px;padding:14px 18px;background:rgba(255,255,255,0.04);border-radius:10px;font-size:0.9em;line-height:1.7;opacity:0.85;">';
+                    nt += '<strong style="color:#4ecdc4;">Reading this table:</strong> ';
+                    if (hazCount > 0) {
+                        nt += hazCount + ' of ' + d.neos.length + ' tracked objects this week ' + (hazCount === 1 ? 'is' : 'are') + ' classified as Potentially Hazardous — meaning ' + (hazCount === 1 ? 'it meets' : 'they meet') + ' NASA\'s size (\u226514' + '0m) and orbit (\u22640.05 AU MOID) thresholds. ';
+                        nt += 'This is a classification, not an imminent threat. All objects listed here are tracked with high precision and none are on a collision course.';
+                    } else {
+                        nt += 'All ' + safeCount + ' objects this week are standard near-Earth objects with no hazard classification. A quiet week in the neighborhood.';
+                    }
+                    nt += '</div>';
                     nEl.innerHTML = nt;
                 } else {
                     nEl.innerHTML = '<div class="empty-state">NEO data temporarily unavailable. Cached data will appear on next refresh.</div>';
