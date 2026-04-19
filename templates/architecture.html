@@ -32,8 +32,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fafafa;
-            color: #1a1a1a;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: rgba(255,255,255,0.88);
             min-height: 100vh;
         }
 
@@ -83,11 +83,17 @@
         .paper {
             max-width: 960px;
             margin: 0 auto;
-            background: #fff;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
             padding: 60px 64px;
+            border-radius: 16px;
+            margin-top: 24px;
+            margin-bottom: 24px;
         }
-        @media (max-width: 900px) { .paper { padding: 36px 24px; } }
+        @media (max-width: 900px) { .paper { padding: 36px 24px; border-radius: 0; } }
 
         /* Title block */
         .paper-title {
@@ -95,14 +101,14 @@
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 8px;
-            color: #111;
+            color: #fff;
             text-align: center;
         }
         .paper-subtitle {
             font-size: 1.15rem;
             font-weight: 300;
             font-style: italic;
-            color: #555;
+            color: rgba(255,255,255,0.55);
             text-align: center;
             margin-bottom: 24px;
         }
@@ -110,47 +116,47 @@
             text-align: center;
             margin-bottom: 32px;
             font-size: 0.95rem;
-            color: #444;
+            color: rgba(255,255,255,0.65);
             line-height: 1.7;
         }
-        .author-block a { color: #2563eb; text-decoration: none; }
-        .author-block a:hover { text-decoration: underline; }
+        .author-block a { color: #4ecdc4; text-decoration: none; }
+        .author-block a:hover { text-decoration: underline; color: #ffd700; }
 
         /* TOC */
         .toc {
-            background: #f7f7f7;
-            border-left: 4px solid #2563eb;
+            background: rgba(255,255,255,0.04);
+            border-left: 4px solid #4ecdc4;
             padding: 24px 28px;
             margin-bottom: 36px;
             border-radius: 0 8px 8px 0;
         }
-        .toc h2 { font-size: 1.1rem; margin-bottom: 12px; color: #111; }
+        .toc h2 { font-size: 1.1rem; margin-bottom: 12px; color: #fff; }
         .toc ol { padding-left: 20px; }
         .toc li { margin-bottom: 6px; }
-        .toc a { color: #2563eb; text-decoration: none; font-size: 0.95rem; }
-        .toc a:hover { text-decoration: underline; }
+        .toc a { color: #4ecdc4; text-decoration: none; font-size: 0.95rem; }
+        .toc a:hover { text-decoration: underline; color: #ffd700; }
 
         /* Section headings */
         h2 {
             font-size: 1.45rem;
             font-weight: 700;
-            color: #111;
+            color: #fff;
             margin-top: 48px;
             margin-bottom: 16px;
             padding-bottom: 8px;
-            border-bottom: 2px solid #e5e7eb;
+            border-bottom: 2px solid rgba(255,255,255,0.12);
         }
         h3 {
             font-size: 1.15rem;
             font-weight: 600;
-            color: #222;
+            color: rgba(255,255,255,0.92);
             margin-top: 28px;
             margin-bottom: 12px;
         }
 
         /* Body text */
-        p { line-height: 1.8; margin-bottom: 14px; color: #333; font-size: 0.97rem; }
-        strong { color: #111; }
+        p { line-height: 1.8; margin-bottom: 14px; color: rgba(255,255,255,0.82); font-size: 0.97rem; }
+        strong { color: #fff; }
 
         /* Tables */
         table {
@@ -160,24 +166,25 @@
             font-size: 0.9rem;
         }
         th {
-            background: #f1f5f9;
+            background: rgba(255,255,255,0.06);
             font-weight: 600;
             text-align: left;
             padding: 10px 14px;
-            border: 1px solid #e2e8f0;
-            color: #1e293b;
+            border: 1px solid rgba(255,255,255,0.10);
+            color: #fff;
         }
         td {
             padding: 10px 14px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.08);
             vertical-align: top;
             line-height: 1.6;
+            color: rgba(255,255,255,0.82);
         }
-        tr:nth-child(even) td { background: #f8fafc; }
+        tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
 
         /* Code / diagram blocks */
         pre {
-            background: #0f172a;
+            background: rgba(15, 23, 42, 0.7);
             color: #e2e8f0;
             padding: 20px 24px;
             border-radius: 8px;
@@ -187,49 +194,51 @@
             line-height: 1.6;
             margin: 16px 0 24px;
             white-space: pre;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.06);
         }
         code {
             font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
             font-size: 0.88em;
-            background: #f1f5f9;
+            background: rgba(255,255,255,0.08);
             padding: 2px 6px;
             border-radius: 4px;
-            color: #0f172a;
+            color: #4ecdc4;
         }
         pre code { background: none; padding: 0; color: inherit; }
 
         /* Lists */
         ul, ol { padding-left: 24px; margin-bottom: 14px; }
-        li { line-height: 1.8; margin-bottom: 6px; color: #333; font-size: 0.97rem; }
+        li { line-height: 1.8; margin-bottom: 6px; color: rgba(255,255,255,0.82); font-size: 0.97rem; }
 
         /* Blockquotes */
         blockquote {
-            border-left: 4px solid #2563eb;
+            border-left: 4px solid #4ecdc4;
             padding: 16px 20px;
             margin: 16px 0 24px;
-            background: #eff6ff;
+            background: rgba(78, 205, 196, 0.08);
             border-radius: 0 8px 8px 0;
         }
-        blockquote p { color: #1e40af; font-weight: 500; margin-bottom: 0; }
+        blockquote p { color: #4ecdc4; font-weight: 500; margin-bottom: 0; }
 
         /* Checklist */
         .checklist { list-style: none; padding-left: 0; }
         .checklist li { padding-left: 28px; position: relative; }
-        .checklist li::before { content: '✓'; position: absolute; left: 4px; color: #16a34a; font-weight: 700; }
-        .checklist li.pending::before { content: '○'; color: #9ca3af; }
+        .checklist li::before { content: '✓'; position: absolute; left: 4px; color: #4ecdc4; font-weight: 700; }
+        .checklist li.pending::before { content: '○'; color: rgba(255,255,255,0.3); }
 
         /* Scroll to top */
         .scroll-top {
             position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px;
-            background: #2563eb; color: #fff; border: none; border-radius: 50%;
-            font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            background: rgba(78, 205, 196, 0.8); color: #fff; border: none; border-radius: 50%;
+            font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
             display: none; z-index: 50; transition: opacity 0.3s;
         }
-        .scroll-top:hover { background: #1d4ed8; }
+        .scroll-top:hover { background: #4ecdc4; }
 
         /* Footer */
         .site-footer {
-            background: #2c3e50;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
             color: #ecf0f1;
             text-align: center;
             padding: 40px 20px;
