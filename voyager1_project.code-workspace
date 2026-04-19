@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../universe-inside-blackhole"
+		},
+		{
+			"path": "../deep_space_db"
 		}
 	],
 	"settings": {}
