@@ -12,6 +12,10 @@
     <meta property="og:description" content="Deep space research, Voyager 1 analysis, interstellar comet studies, black hole cosmology, and enterprise platform leadership.">
     <meta property="og:url" content="https://prabhusadasivam.com/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Prabhu's Deep Space Labs">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Prabhu Sadasivam | VP Technology | Prabhu's Deep Space Labs">
+    <meta name="twitter:description" content="Deep space research, Voyager 1 analysis, interstellar comet studies, black hole cosmology, and enterprise platform leadership.">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -98,7 +102,7 @@
             justify-content: center;
             position: relative;
             background: linear-gradient(135deg, #0a0e27 0%, #0d1b2a 40%, #1b2838 100%);
-            overflow: hidden;
+            overflow: visible;
         }
 
         .hero-content {
@@ -158,113 +162,135 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            min-width: 280px;
-            text-align: center;
-            background: linear-gradient(45deg, #f39c12, #e67e22);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(243,156,18,0.4);
-        }
-
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 40px;
             padding-left: 12%;
         }
 
-        .cta-button-secondary {
-            display: inline-block;
-            padding: 15px 40px;
-            min-width: 280px;
-            text-align: center;
-            background: linear-gradient(45deg, #4ecdc4, #2c9f97);
-            color: white;
+        .cta-group {
+            position: relative;
+            display: inline-flex;
+            align-items: stretch;
+        }
+
+        .cta-trigger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 36px;
+            min-width: 220px;
+            color: #fff;
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border-radius: 12px 0 0 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-right: none;
+            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.10) inset;
+            transform: perspective(600px) rotateX(2deg);
+            transition: all 0.25s ease;
+            cursor: pointer;
         }
 
-        .cta-button-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(78,205,196,0.4);
-        }
-
-        .cta-button-tertiary {
-            display: inline-block;
-            padding: 15px 40px;
+        /* Solo trigger (no caret sibling, e.g. Space Intelligence) */
+        a.cta-trigger:only-child,
+        .cta-buttons > a.cta-trigger {
+            border-radius: 12px;
+            border-right: 1px solid rgba(255,255,255,0.15);
             min-width: 280px;
-            text-align: center;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
+        }
+
+        .cta-trigger:hover {
+            transform: perspective(600px) rotateX(0deg) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(78,205,196,0.35), 0 1px 0 rgba(255,255,255,0.12) inset;
+            border-color: rgba(78,205,196,0.45);
+        }
+
+        .cta-caret {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            color: #fff;
+            font-size: 0.65em;
+            cursor: pointer;
+            border-radius: 0 12px 12px 0;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-left: 1px solid rgba(255,255,255,0.08);
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.10) inset;
+            transform: perspective(600px) rotateX(2deg);
+            transition: all 0.25s ease;
+        }
+
+        .cta-caret:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .cta-group:hover .cta-trigger,
+        .cta-group:hover .cta-caret {
+            transform: perspective(600px) rotateX(0deg) translateY(-3px);
+        }
+
+        /* Voyager 1 accent */
+        .cta-trigger--voyager, .cta-trigger--voyager + .cta-caret { border-color: rgba(243,156,18,0.35); }
+        .cta-group:hover .cta-trigger--voyager, .cta-group:hover .cta-trigger--voyager + .cta-caret { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(243,156,18,0.35), 0 1px 0 rgba(255,255,255,0.12) inset; border-color: rgba(243,156,18,0.5); }
+
+        /* Space Intelligence accent */
+        .cta-trigger--intel { border-color: rgba(0,180,216,0.35); }
+        .cta-trigger--intel:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(0,180,216,0.35), 0 1px 0 rgba(255,255,255,0.12) inset; border-color: rgba(0,180,216,0.5); }
+
+        /* Deep Research accent */
+        .cta-trigger--research, .cta-trigger--research + .cta-caret { border-color: rgba(102,126,234,0.35); }
+        .cta-group:hover .cta-trigger--research, .cta-group:hover .cta-trigger--research + .cta-caret { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(102,126,234,0.35), 0 1px 0 rgba(255,255,255,0.12) inset; border-color: rgba(102,126,234,0.5); }
+
+        .cta-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15,20,45,0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 220px;
+            z-index: 100;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+        }
+
+        .cta-group:hover .cta-dropdown { display: block; }
+
+        .cta-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            right: 0;
+            height: 12px;
+        }
+
+        .cta-dropdown a {
+            display: block;
+            color: #ccc;
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            padding: 11px 28px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
 
-        .cta-button-tertiary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102,126,234,0.4);
-        }
-
-        .cta-button-intelligence {
-            display: inline-block;
-            padding: 15px 40px;
-            min-width: 280px;
-            text-align: center;
-            background: linear-gradient(45deg, #0077b6, #00b4d8);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .cta-button-intelligence:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,180,216,0.4);
-        }
-
-        .cta-button-mars {
-            display: inline-block;
-            padding: 15px 40px;
-            min-width: 280px;
-            text-align: center;
-            background: linear-gradient(45deg, #922b21, #c0392b, #e74c3c, #f39c12);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .cta-button-mars:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(192,57,43,0.4);
+        .cta-dropdown a:hover {
+            color: #fff;
+            background: rgba(78,205,196,0.12);
         }
 
         .scroll-top-rocket {
@@ -646,8 +672,14 @@
             .profile-photo { width: 120px; height: 120px; }
             .hero-section { min-height: 100vh; }
             .hero-content { padding: 60px 20px; }
-            .cta-button, .cta-button-intelligence, .cta-button-secondary, .cta-button-tertiary, .cta-button-mars { padding: 12px 30px; font-size: 1rem; min-width: 280px; width: 280px; }
-            .cta-buttons { gap: 12px; padding-left: 0; flex-direction: column; align-items: center; }
+            .cta-trigger { padding: 12px 28px; font-size: 1rem; min-width: 240px; }
+            .cta-buttons { gap: 16px; padding-left: 0; flex-direction: column; align-items: center; }
+            .cta-dropdown { position: static; transform: none; min-width: auto; width: 100%; border-radius: 8px; margin-top: 6px; background: rgba(15,20,45,0.95); border: none; box-shadow: none; }
+            .cta-group:hover .cta-dropdown { display: none; }
+            .cta-group.open .cta-dropdown { display: block; }
+            .cta-group:hover .cta-caret { transform: none; }
+            .cta-group.open .cta-caret { transform: rotate(180deg); }
+            .cta-dropdown a { text-align: center; padding: 10px 20px; }
 
             .pdsl-section, .leadership-section { padding: 50px 0; }
             .pdsl-title, .leadership-title { font-size: 1.8rem; }
@@ -671,7 +703,7 @@
             .blog-subtitle { font-size: 1.1rem; }
             .profile-photo { width: 100px; height: 100px; }
             .hero-content { padding: 0 12px; }
-            .cta-button, .cta-button-intelligence, .cta-button-secondary, .cta-button-tertiary, .cta-button-mars { padding: 10px 24px; font-size: 0.95rem; min-width: 280px; width: 280px; }
+            .cta-trigger { padding: 10px 24px; font-size: 0.95rem; min-width: 240px; }
             .section-title { font-size: 1.6rem; margin-bottom: 30px; }
             .project-card { padding: 18px; }
             .project-icon { font-size: 2.2rem; }
@@ -718,11 +750,25 @@
                 </div>
             </div>
             <div class="cta-buttons">
-                <a href="/dashboard" class="cta-button">Explore Voyager 1 Analysis</a>
-                <a href="/space-intelligence" class="cta-button-intelligence">Space Intelligence</a>
-                <a href="/atlas" class="cta-button-secondary">Explore 3I/ATLAS Research</a>
-                <a href="/blackhole" class="cta-button-tertiary">Black Hole Cosmology Paper</a>
-                <a href="/mars" class="cta-button-mars">Mission to Mars (1993)</a>
+                <div class="cta-group" onclick="this.classList.toggle('open')">
+                    <a href="/facts" class="cta-trigger cta-trigger--voyager" onclick="event.stopPropagation()">Voyager 1</a><span class="cta-caret" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">&#9660;</span>
+                    <div class="cta-dropdown">
+                        <a href="/facts">Facts</a>
+                        <a href="/trajectory">Trajectory</a>
+                        <a href="/plasma">Plasma Waves</a>
+                        <a href="/density">Density</a>
+                        <a href="/dashboard">Magnetometer</a>
+                    </div>
+                </div>
+                <a href="/space-intelligence" class="cta-trigger cta-trigger--intel">Space Intelligence</a>
+                <div class="cta-group" onclick="this.classList.toggle('open')">
+                    <a href="/atlas" class="cta-trigger cta-trigger--research" onclick="event.stopPropagation()">Deep Research</a><span class="cta-caret" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">&#9660;</span>
+                    <div class="cta-dropdown">
+                        <a href="/atlas">3I/ATLAS</a>
+                        <a href="/blackhole">Black Hole</a>
+                        <a href="/mars">Mars (1993)</a>
+                    </div>
+                </div>
             </div>
 
             </div>

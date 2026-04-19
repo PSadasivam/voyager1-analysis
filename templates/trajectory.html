@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Voyager 1 Trajectory Visualization</title>
+    <meta name="description" content="Interactive 3D visualization of Voyager 1's outbound trajectory from Earth to interstellar space, based on NASA JPL Horizons ephemeris data.">
+    <meta name="author" content="Prabhu Sadasivam">
+    <link rel="canonical" href="https://prabhusadasivam.com/trajectory">
+    <meta property="og:title" content="Voyager 1 Trajectory Visualization | Prabhu's Deep Space Labs">
+    <meta property="og:description" content="Interactive 3D visualization of Voyager 1's outbound trajectory from Earth to interstellar space using NASA JPL Horizons data.">
+    <meta property="og:url" content="https://prabhusadasivam.com/trajectory">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Prabhu's Deep Space Labs">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Voyager 1 Trajectory Visualization | Prabhu's Deep Space Labs">
+    <meta name="twitter:description" content="Interactive 3D visualization of Voyager 1's outbound trajectory from Earth to interstellar space.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Voyager 1 Trajectory Visualization",
+        "description": "Interactive 3D visualization of Voyager 1's outbound trajectory from Earth to interstellar space, based on NASA JPL Horizons ephemeris data.",
+        "url": "https://prabhusadasivam.com/trajectory",
+        "author": { "@type": "Person", "name": "Prabhu Sadasivam", "url": "https://prabhusadasivam.com/" },
+        "isPartOf": { "@type": "WebSite", "name": "Prabhu's Deep Space Labs", "url": "https://prabhusadasivam.com/" }
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -24,6 +46,8 @@
             background: rgba(255,255,255,0.08);
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            overflow: visible;
+            position: relative; z-index: 10;
         }
 
         .header h1 {
@@ -370,17 +394,17 @@
         .main-nav { display:flex; justify-content:center; align-items:center; margin-bottom:24px; position:relative; flex-wrap:wrap; }
         .nav-toggle { display:none; background:none; border:1px solid rgba(255,255,255,0.25); color:#ccc; font-size:1.5em; padding:6px 14px; border-radius:10px; cursor:pointer; transition:all 0.25s; }
         .nav-toggle:hover { color:#fff; border-color:#4ecdc4; }
-        .nav-links { display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; }
-        .nav-links > a { color:#aaa; text-decoration:none; padding:6px 18px; border-radius:20px; border:1px solid rgba(255,255,255,0.15); font-size:0.95em; transition:all 0.25s; }
-        .nav-links > a:hover { color:#fff; border-color:#4ecdc4; }
-        .nav-links > a.active { color:#ffd700; border-color:#ffd700; background:rgba(255,215,0,0.1); }
-        .nav-group { position:relative; }
-        .nav-group-label { color:#aaa; background:none; border:1px solid rgba(255,255,255,0.15); padding:6px 18px; border-radius:20px; font-size:0.95em; cursor:pointer; transition:all 0.25s; font-family:inherit; display:flex; align-items:center; gap:4px; white-space:nowrap; }
-        .nav-group-label:hover { color:#fff; border-color:#4ecdc4; }
-        .nav-group-label.active { color:#ffd700; border-color:#ffd700; background:rgba(255,215,0,0.1); }
-        .caret { font-size:0.7em; transition:transform 0.3s; }
-        .nav-group:hover .caret { transform:rotate(180deg); }
-        .nav-dropdown { display:none; position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); background:rgba(22,33,62,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:8px 0; min-width:190px; z-index:1000; box-shadow:0 8px 32px rgba(0,0,0,0.6); }
+        .nav-links { display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap; }
+        .nav-links > a { display:inline-flex; align-items:center; justify-content:center; padding:15px 36px; color:#fff; text-decoration:none; font-size:1.15rem; font-weight:600; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%); box-shadow:0 6px 20px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.10) inset; transform:perspective(600px) rotateX(2deg); transition:all 0.25s ease; }
+        .nav-links > a:hover { transform:perspective(600px) rotateX(0deg) translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(78,205,196,0.35), 0 1px 0 rgba(255,255,255,0.12) inset; border-color:rgba(78,205,196,0.45); }
+        .nav-links > a.active { color:#ffd700; border-color:rgba(255,215,0,0.5); background:linear-gradient(180deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.04) 100%); box-shadow:0 6px 20px rgba(0,0,0,0.45), 0 0 14px rgba(255,215,0,0.25), 0 1px 0 rgba(255,255,255,0.10) inset; }
+        .nav-group { position:relative; display:inline-flex; align-items:stretch; }
+        .nav-group-label { display:inline-flex; align-items:center; justify-content:center; padding:15px 36px; color:#fff; font-family:inherit; font-size:1.15rem; font-weight:600; border-radius:12px 0 0 12px; border:1px solid rgba(255,255,255,0.15); border-right:none; background:linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%); box-shadow:0 6px 20px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.10) inset; transform:perspective(600px) rotateX(2deg); transition:all 0.25s ease; cursor:pointer; text-decoration:none; white-space:nowrap; }
+        .nav-group-label.active { color:#ffd700; border-color:rgba(255,215,0,0.5); background:linear-gradient(180deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.04) 100%); box-shadow:0 6px 20px rgba(0,0,0,0.45), 0 0 14px rgba(255,215,0,0.25), 0 1px 0 rgba(255,255,255,0.10) inset; }
+        .nav-caret { display:inline-flex; align-items:center; justify-content:center; width:44px; color:#fff; font-size:0.65em; cursor:pointer; border-radius:0 12px 12px 0; border:1px solid rgba(255,255,255,0.15); border-left:1px solid rgba(255,255,255,0.08); background:linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); box-shadow:0 6px 20px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.10) inset; transform:perspective(600px) rotateX(2deg); transition:all 0.25s ease; }
+        .nav-group:hover .nav-group-label, .nav-group:hover .nav-caret { transform:perspective(600px) rotateX(0deg) translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(78,205,196,0.35), 0 1px 0 rgba(255,255,255,0.12) inset; border-color:rgba(78,205,196,0.45); }
+        .nav-group-label.active + .nav-caret { color:#ffd700; border-color:rgba(255,215,0,0.5); background:linear-gradient(180deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.04) 100%); box-shadow:0 6px 20px rgba(0,0,0,0.45), 0 0 14px rgba(255,215,0,0.25), 0 1px 0 rgba(255,255,255,0.10) inset; }
+        .nav-dropdown { display:none; position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); background:rgba(15,20,45,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:8px 0; min-width:200px; z-index:1000; box-shadow:0 12px 40px rgba(0,0,0,0.6); }
         .nav-group:hover .nav-dropdown { display:block; }
         .nav-dropdown::before { content:''; position:absolute; top:-12px; left:0; right:0; height:12px; }
         .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; }
@@ -388,16 +412,16 @@
         .nav-dropdown a.active { color:#ffd700; background:rgba(255,215,0,0.08); }
         @media (max-width:768px) {
             .nav-toggle { display:block; margin:0 auto 8px; }
-            .nav-links { display:none; flex-direction:column; width:100%; gap:4px; }
+            .nav-links { display:none; flex-direction:column; width:100%; gap:8px; align-items:center; }
             .main-nav.open .nav-links { display:flex; }
             .nav-links > a { text-align:center; }
-            .nav-group { width:100%; }
-            .nav-group-label { width:100%; justify-content:center; }
+            .nav-group { width:auto; }
+            .nav-group-label { justify-content:center; }
             .nav-dropdown { position:static; transform:none; background:rgba(255,255,255,0.04); border:none; box-shadow:none; border-radius:8px; margin-top:4px; min-width:auto; }
             .nav-group:hover .nav-dropdown { display:none; }
             .nav-group.open .nav-dropdown { display:block; }
-            .nav-group:hover .caret { transform:none; }
-            .nav-group.open .caret { transform:rotate(180deg); }
+            .nav-group:hover .nav-caret { transform:none; }
+            .nav-group.open .nav-caret { transform:rotate(180deg); }
             .nav-dropdown a { text-align:center; padding:8px 20px; }
         }
     </style>
@@ -410,7 +434,7 @@
                 <div class="nav-links">
                     <a href="/">Home</a>
                     <div class="nav-group" onclick="this.classList.toggle('open')">
-                        <button class="nav-group-label active">Voyager 1 <span class="caret">&#9660;</span></button>
+                        <a href="/facts" class="nav-group-label active" onclick="event.stopPropagation()">Voyager 1</a><span class="nav-caret" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">&#9660;</span>
                         <div class="nav-dropdown">
                             <a href="/facts">Facts</a>
                             <a href="/trajectory" class="active">Trajectory</a>
@@ -421,7 +445,7 @@
                     </div>
                     <a href="/space-intelligence">Space Intelligence</a>
                     <div class="nav-group" onclick="this.classList.toggle('open')">
-                        <button class="nav-group-label">Deep Research <span class="caret">&#9660;</span></button>
+                        <a href="/atlas" class="nav-group-label" onclick="event.stopPropagation()">Deep Research</a><span class="nav-caret" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">&#9660;</span>
                         <div class="nav-dropdown">
                             <a href="/atlas">3I/ATLAS</a>
                             <a href="/blackhole">Black Hole</a>

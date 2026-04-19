@@ -476,25 +476,29 @@ def ai_index():
 @app.route('/sitemap.xml')
 def sitemap():
     """XML sitemap for search engine crawlers."""
+    today = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
     pages = [
-        {'loc': 'https://prabhusadasivam.com/', 'priority': '1.0'},
-        {'loc': 'https://prabhusadasivam.com/facts', 'priority': '0.8'},
-        {'loc': 'https://prabhusadasivam.com/trajectory', 'priority': '0.8'},
-        {'loc': 'https://prabhusadasivam.com/plasma', 'priority': '0.8'},
-        {'loc': 'https://prabhusadasivam.com/density', 'priority': '0.8'},
-        {'loc': 'https://prabhusadasivam.com/dashboard', 'priority': '0.8'},
-        {'loc': 'https://prabhusadasivam.com/space-intelligence', 'priority': '0.9', 'changefreq': 'hourly'},
-        {'loc': 'https://prabhusadasivam.com/atlas', 'priority': '0.8'},
-        {'loc': 'https://prabhusadasivam.com/blackhole', 'priority': '0.9'},
-        {'loc': 'https://prabhusadasivam.com/mars', 'priority': '0.7'},
-        {'loc': 'https://prabhusadasivam.com/ai-index', 'priority': '0.6'},
+        {'loc': 'https://prabhusadasivam.com/', 'priority': '1.0', 'changefreq': 'weekly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/facts', 'priority': '0.8', 'changefreq': 'monthly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/trajectory', 'priority': '0.8', 'changefreq': 'monthly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/plasma', 'priority': '0.8', 'changefreq': 'monthly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/density', 'priority': '0.8', 'changefreq': 'monthly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/dashboard', 'priority': '0.8', 'changefreq': 'monthly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/space-intelligence', 'priority': '0.9', 'changefreq': 'hourly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/atlas', 'priority': '0.8', 'changefreq': 'weekly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/blackhole', 'priority': '0.9', 'changefreq': 'monthly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/mars', 'priority': '0.7', 'changefreq': 'yearly', 'lastmod': today},
+        {'loc': 'https://prabhusadasivam.com/ai-index', 'priority': '0.6', 'changefreq': 'weekly', 'lastmod': today},
     ]
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for page in pages:
-        freq = page.get('changefreq', '')
-        freq_tag = f'<changefreq>{freq}</changefreq>' if freq else ''
-        xml += f'  <url><loc>{page["loc"]}</loc><priority>{page["priority"]}</priority>{freq_tag}</url>\n'
+        xml += '  <url>\n'
+        xml += f'    <loc>{page["loc"]}</loc>\n'
+        xml += f'    <lastmod>{page["lastmod"]}</lastmod>\n'
+        xml += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
+        xml += f'    <priority>{page["priority"]}</priority>\n'
+        xml += '  </url>\n'
     xml += '</urlset>'
     return Response(xml, mimetype='application/xml')
 
@@ -503,6 +507,8 @@ def robots():
     """Robots.txt for search engine crawlers."""
     txt = """User-agent: *
 Allow: /
+Disallow: /api/
+
 Sitemap: https://prabhusadasivam.com/sitemap.xml
 """
     return Response(txt, mimetype='text/plain')
