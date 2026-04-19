@@ -299,7 +299,6 @@
                 <li><a href="#security">Security Architecture</a></li>
                 <li><a href="#scalability">Scalability &amp; Growth Strategy</a></li>
                 <li><a href="#operations">Operational Excellence</a></li>
-                <li><a href="#cost">Cost Architecture</a></li>
                 <li><a href="#risks">Risks, Constraints &amp; Trade-Offs</a></li>
                 <li><a href="#roadmap">Roadmap &amp; Evolution Path</a></li>
                 <li><a href="#appendix">Appendix — Reference</a></li>
@@ -907,45 +906,10 @@ Layer 6: Cloud
             <tr><td>Data freshness</td><td><code>ingested_at</code> column queryable</td><td>No automated staleness alerts</td></tr>
         </table>
 
-        <!-- 15. Cost -->
-        <h2 id="cost">15. Cost Architecture</h2>
+        <!-- 15. Risks -->
+        <h2 id="risks">15. Risks, Constraints &amp; Trade-Offs</h2>
 
-        <h3>15.1 Monthly Operating Cost</h3>
-        <table>
-            <tr><th>Component</th><th>Service</th><th>Cost</th></tr>
-            <tr><td>Compute</td><td>EC2 t3.small (on-demand)</td><td>~$15.00</td></tr>
-            <tr><td>Storage</td><td>EBS (8 GB gp3)</td><td>~$0.64</td></tr>
-            <tr><td>Static IP</td><td>Elastic IP (attached)</td><td>$0.00</td></tr>
-            <tr><td>Backup</td><td>S3 (&lt; 1 MB current)</td><td>&lt; $0.01</td></tr>
-            <tr><td>DNS</td><td>GoDaddy domain</td><td>~$1.50 (amortized)</td></tr>
-            <tr><td>TLS</td><td>Let's Encrypt</td><td>$0.00</td></tr>
-            <tr><td>Database</td><td>SQLite (local file)</td><td>$0.00</td></tr>
-            <tr><td><strong>Total</strong></td><td></td><td><strong>~$17/month</strong></td></tr>
-        </table>
-
-        <h3>15.2 Cost Optimization Opportunities</h3>
-        <table>
-            <tr><th>Optimization</th><th>Savings</th><th>Trade-Off</th></tr>
-            <tr><td>Reserved Instance (1-year)</td><td>~40% on EC2 (~$9/mo)</td><td>Upfront commitment</td></tr>
-            <tr><td>Spot Instance</td><td>~70% on EC2 (~$5/mo)</td><td>Possible interruption</td></tr>
-            <tr><td>S3 Intelligent-Tiering</td><td>Negligible at current scale</td><td>Complexity</td></tr>
-            <tr><td>Graviton (t4g) instance</td><td>~20%</td><td>ARM compatibility testing needed</td></tr>
-        </table>
-
-        <h3>15.3 Cost Scaling Model</h3>
-        <p>The architecture has a <strong>flat cost curve</strong> until scaling triggers are hit:</p>
-        <table>
-            <tr><th>Users</th><th>Infrastructure Change</th><th>Incremental Cost</th></tr>
-            <tr><td>1–50</td><td>None</td><td>$0</td></tr>
-            <tr><td>50–200</td><td>Larger instance (t3.medium)</td><td>+$15/mo</td></tr>
-            <tr><td>200–1000</td><td>ALB + 2 instances + CloudFront</td><td>+$50/mo</td></tr>
-            <tr><td>1000+</td><td>Multi-AZ + RDS + ElastiCache</td><td>+$200/mo</td></tr>
-        </table>
-
-        <!-- 16. Risks -->
-        <h2 id="risks">16. Risks, Constraints &amp; Trade-Offs</h2>
-
-        <h3>16.1 Architectural Trade-Offs</h3>
+        <h3>15.1 Architectural Trade-Offs</h3>
         <table>
             <tr><th>Decision</th><th>What We Gain</th><th>What We Accept</th></tr>
             <tr><td>Server-side rendering</td><td>SEO, simplicity, no JS build chain</td><td>No client-side interactivity on plots</td></tr>
@@ -957,7 +921,7 @@ Layer 6: Cloud
             <tr><td>2 Gunicorn workers</td><td>Fits t3.small memory</td><td>Limited concurrent request handling</td></tr>
         </table>
 
-        <h3>16.2 Technical Debt Register</h3>
+        <h3>15.2 Technical Debt Register</h3>
         <table>
             <tr><th>Item</th><th>Severity</th><th>Effort</th><th>Impact if Unaddressed</th></tr>
             <tr><td>No CI/CD pipeline</td><td>Medium</td><td>Medium</td><td>Manual deploys remain error-prone</td></tr>
@@ -968,7 +932,7 @@ Layer 6: Cloud
             <tr><td>No database encryption at rest</td><td>Low</td><td>Low</td><td>Acceptable — no PII or classified data</td></tr>
         </table>
 
-        <h3>16.3 Constraints</h3>
+        <h3>15.3 Constraints</h3>
         <table>
             <tr><th>Constraint</th><th>Source</th><th>Impact</th></tr>
             <tr><td>NASA API rate limits</td><td>External policy</td><td>Drives caching strategy (15-min TTL)</td></tr>
@@ -978,8 +942,8 @@ Layer 6: Cloud
             <tr><td>No PII in scope</td><td>Data classification</td><td>Simplifies security requirements significantly</td></tr>
         </table>
 
-        <!-- 17. Roadmap -->
-        <h2 id="roadmap">17. Roadmap &amp; Evolution Path</h2>
+        <!-- 16. Roadmap -->
+        <h2 id="roadmap">16. Roadmap &amp; Evolution Path</h2>
 
         <h3>Phase 1 — Foundation (Complete)</h3>
         <ul class="checklist">
@@ -1026,8 +990,8 @@ Layer 6: Cloud
             <li class="pending">Multi-AZ deployment for high availability</li>
         </ul>
 
-        <!-- 18. Appendix -->
-        <h2 id="appendix">18. Appendix — Reference</h2>
+        <!-- 17. Appendix -->
+        <h2 id="appendix">17. Appendix — Reference</h2>
 
         <h3>A. Repository Map</h3>
         <table>
