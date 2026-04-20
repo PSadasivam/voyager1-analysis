@@ -1,3 +1,4 @@
+# Scientific analysis dependencies
 astropy
 astroquery
 pandas
@@ -5,7 +6,4 @@ numpy
 matplotlib
 cdflib
 scipy
-flask
-gunicorn
-Pillow
 requests

@@ -4,6 +4,9 @@
 			"path": "."
 		},
 		{
+			"path": "../deep_space_portal"
+		},
+		{
 			"path": "../3I-Atlas-Research"
 		},
 		{
