@@ -67,7 +67,7 @@ Method: Same as NASA JPL scientists use for published density plots
 Accuracy: Typical uncertainty ~10-20% for well-defined plasma frequency
 Environment: Voyager 1 currently sees ~0.1-0.3 cm⁻³ in interstellar space
 Applications: Space weather, interstellar medium studies, heliospheric physics
-This program transforms raw spectrogram data into the clean density vs. time plots you see in NASA publications, providing the same scientific analysis tools used by the Voyager science team!
+This program transforms raw spectrogram data into the clean density vs. time plots you see in NASA publications, applying the same plasma frequency formula used by the Voyager science team (Gurnett et al., 2013, Science 341, 1489-1492).
 
 """
 
