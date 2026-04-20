@@ -313,6 +313,27 @@
             line-height: 1.6;
         }
 
+        /* Scroll to top */
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(78,205,196,0.4), 0 0 20px rgba(78,205,196,0.2), inset 0 1px 0 rgba(255,255,255,0.25); }
+            50% { box-shadow: 0 4px 20px rgba(78,205,196,0.6), 0 0 35px rgba(78,205,196,0.35), inset 0 1px 0 rgba(255,255,255,0.25); }
+        }
+        .scroll-top {
+            position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #3ab5ad 50%, #2a9d8f 100%);
+            color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(78,205,196,0.4), 0 0 20px rgba(78,205,196,0.2), inset 0 1px 0 rgba(255,255,255,0.25);
+            display: none; z-index: 50;
+            transition: transform 0.25s, box-shadow 0.25s;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .scroll-top:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(78,205,196,0.6), 0 0 40px rgba(78,205,196,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .scroll-top:active { transform: translateY(0) scale(0.97); }
+
         .site-footer {
             background: #2c3e50;
             color: white;
@@ -346,7 +367,7 @@
         .nav-dropdown { display:none; position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); background:rgba(15,20,45,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:8px 0; min-width:200px; z-index:1000; box-shadow:0 12px 40px rgba(0,0,0,0.6); }
         .nav-group:hover .nav-dropdown { display:block; }
         .nav-dropdown::before { content:''; position:absolute; top:-12px; left:0; right:0; height:12px; }
-        .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; }
+        .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; text-align:left; }
         .nav-dropdown a:hover { color:#fff; background:rgba(78,205,196,0.15); }
         .nav-dropdown a.active { color:#ffd700; background:rgba(255,215,0,0.08); }
         @media (max-width:768px) {
@@ -361,7 +382,7 @@
             .nav-group.open .nav-dropdown { display:block; }
             .nav-group:hover .nav-caret { transform:none; }
             .nav-group.open .nav-caret { transform:rotate(180deg); }
-            .nav-dropdown a { text-align:center; padding:8px 20px; }
+            .nav-dropdown a { text-align:left; padding:8px 20px; }
         }
     </style>
 </head>
@@ -481,13 +502,13 @@
         <!-- 3  2025 model -->
         <h2>3&ensp;The 2025 "Black-Hole Universe" Model</h2>
         <p>
-            In June 2025, an international team led by Enrique Gazta&ntilde;aga published a paper in <em>Physical Review D</em> proposing a "Black-Hole Universe" model. Instead of the universe beginning from a singularity, the model considers gravitational collapse of an overdense region in a parent universe, forming a massive black hole<a class="ref" href="#ref8">[8]</a>. Quantum-mechanical effects provide a pressure that halts the collapse at extremely high density and triggers a bounce. The matter rebounding from the bounce expands into a new universe remarkably similar to our own; in Gazta&ntilde;aga's words, the collapse "does not have to end in a singularity"<a class="ref" href="#ref9">[9]</a>. The bounce occurs within general relativity combined with quantum mechanics&mdash;no speculative fields are invoked<a class="ref" href="#ref10">[10]</a>&mdash;and the rebound naturally produces two phases of accelerated expansion, corresponding to cosmic inflation and dark-energy domination<a class="ref" href="#ref11">[11]</a>. A striking prediction is that the resulting universe should have a small positive spatial curvature; the model therefore suggests that future surveys might detect slight curvature<a class="ref" href="#ref12">[12]</a>. The authors also note that their model could explain the origin of supermassive black holes and provide new perspectives on dark matter and galaxy formation<a class="ref" href="#ref13">[13]</a>.
+            In June 2025, an international team led by Enrique Gazta&ntilde;aga published a paper in <em>Physical Review D</em> proposing a "Black-Hole Universe" model. Instead of the universe beginning from a singularity, the model considers gravitational collapse of an overdense region in a parent universe, forming a massive black hole<a class="ref" href="#ref8">[8]</a>. Quantum-mechanical effects provide a pressure that halts the collapse at extremely high density and triggers a bounce. The matter rebounding from the bounce expands into a new universe remarkably similar to our own; in Gazta&ntilde;aga's words, the collapse "does not have to end in a singularity"<a class="ref" href="#ref8">[8]</a>. The bounce occurs within general relativity combined with quantum mechanics&mdash;no speculative fields are invoked<a class="ref" href="#ref8">[8]</a>&mdash;and the rebound naturally produces two phases of accelerated expansion, corresponding to cosmic inflation and dark-energy domination<a class="ref" href="#ref8">[8]</a>. A striking prediction is that the resulting universe should have a small positive spatial curvature; the model therefore suggests that future surveys might detect slight curvature<a class="ref" href="#ref8">[8]</a>. The authors also note that their model could explain the origin of supermassive black holes and provide new perspectives on dark matter and galaxy formation<a class="ref" href="#ref8">[8]</a>.
         </p>
 
         <!-- 4  Observations -->
         <h2>4&ensp;Observational Hints: Galaxy-Spin Asymmetry and Rotation</h2>
         <p>
-            Proponents of black-hole cosmology sometimes point to potential observational signatures. One such hint arises from a rotation asymmetry in galaxy spin directions. Using data from the JWST Advanced Deep Extragalactic Survey (JADES), Lior Shamir analysed 263 spiral galaxies and found that 105 rotated counter-clockwise and 158 rotated clockwise<a class="ref" href="#ref14">[14]</a>. In a random and isotropic universe, roughly half the galaxies should spin each way; the observed excess of clockwise rotations led Shamir to suggest that the universe might be rotating<a class="ref" href="#ref15">[15]</a>. One explanation for the asymmetry is that the universe was born rotating&mdash;a scenario consistent with black-hole cosmology&mdash;though it also offers the mundane possibility that the effect arises from the rotation of our home galaxy or measurement biases<a class="ref" href="#ref16">[16]</a>. The sample size is small (263&nbsp;galaxies), and rotation estimates are tricky<a class="ref" href="#ref17">[17]</a>.
+            Proponents of black-hole cosmology sometimes point to potential observational signatures. One such hint arises from a rotation asymmetry in galaxy spin directions. Using data from the JWST Advanced Deep Extragalactic Survey (JADES), Lior Shamir analysed 263 spiral galaxies and found that 105 rotated counter-clockwise and 158 rotated clockwise<a class="ref" href="#ref9">[9]</a>. In a random and isotropic universe, roughly half the galaxies should spin each way; the observed excess of clockwise rotations led Shamir to suggest that the universe might be rotating<a class="ref" href="#ref9">[9]</a>. One explanation for the asymmetry is that the universe was born rotating&mdash;a scenario consistent with black-hole cosmology&mdash;though it also offers the mundane possibility that the effect arises from the rotation of our home galaxy or measurement biases<a class="ref" href="#ref10">[10]</a>. The sample size is small (263&nbsp;galaxies), and rotation estimates are tricky<a class="ref" href="#ref10">[10]</a>.
         </p>
 
         <!-- 5  Criticisms -->
@@ -495,17 +516,17 @@
 
         <h3>5.1&ensp;Lack of Compelling Evidence</h3>
         <p>
-            Mainstream cosmologists remain sceptical. <em>Scientific American</em> columnist Paul Sutter points out that the supposed galaxy-spin signal relies on a tiny fraction of the billions of galaxies observed. He emphasises that large surveys containing millions of galaxies show no evidence for a rotating universe, and any detected asymmetries have been traced to selection effects<a class="ref" href="#ref18">[18]</a>. Shamir's analysis used stringent filters (face-on spirals near the Milky Way's rotation pole), which can easily introduce bias<a class="ref" href="#ref19">[19]</a>. A conclusion based on 263&nbsp;galaxies cannot overturn cosmological models built on hundreds of millions of observations<a class="ref" href="#ref20">[20]</a>.
+            Mainstream cosmologists remain sceptical. <em>Scientific American</em> columnist Paul Sutter points out that the supposed galaxy-spin signal relies on a tiny fraction of the billions of galaxies observed. He emphasises that large surveys containing millions of galaxies show no evidence for a rotating universe, and any detected asymmetries have been traced to selection effects<a class="ref" href="#ref11">[11]</a>. Shamir's analysis used stringent filters (face-on spirals near the Milky Way's rotation pole), which can easily introduce bias<a class="ref" href="#ref11">[11]</a>. A conclusion based on 263&nbsp;galaxies cannot overturn cosmological models built on hundreds of millions of observations<a class="ref" href="#ref11">[11]</a>.
         </p>
 
         <h3>5.2&ensp;Differences Between Black Holes and the Universe</h3>
         <p>
-            While black holes and the universe share the concept of horizons, their singularities differ. In a black hole the singularity is spatial&mdash;a point deep inside the hole&mdash;whereas in cosmology the Big Bang singularity is a moment in time. Inside a black hole everything falls inward toward the singularity, whereas our universe is expanding<a class="ref" href="#ref21">[21]</a>. One can only make a black hole resemble the universe by substantially modifying general relativity, for example with torsion or white-hole solutions<a class="ref" href="#ref22">[22]</a>, which themselves may be unstable or speculative.
+            While black holes and the universe share the concept of horizons, their singularities differ. In a black hole the singularity is spatial&mdash;a point deep inside the hole&mdash;whereas in cosmology the Big Bang singularity is a moment in time. Inside a black hole everything falls inward toward the singularity, whereas our universe is expanding<a class="ref" href="#ref11">[11]</a>. One can only make a black hole resemble the universe by substantially modifying general relativity, for example with torsion or white-hole solutions<a class="ref" href="#ref11">[11]</a>, which themselves may be unstable or speculative.
         </p>
 
         <h3>5.3&ensp;Testing the Hypothesis</h3>
         <p>
-            For a black-hole universe to be viable, the Hubble radius must equal the Schwarzschild radius corresponding to the universe's mass. The Hubble and Schwarzschild radii are indeed of similar order, but this may be a coincidence<a class="ref" href="#ref23">[23]</a>. Furthermore, if the universe were inside a rotating black hole, we might expect evidence of global rotation, which has not been found in large datasets<a class="ref" href="#ref24">[24]</a>. Because the exteriors of black holes and wormholes are indistinguishable<a class="ref" href="#ref25">[25]</a>, direct observational tests are difficult; any confirmation would require detecting subtle curvature or other signatures predicted by specific models.
+            For a black-hole universe to be viable, the Hubble radius must equal the Schwarzschild radius corresponding to the universe's mass. The Hubble and Schwarzschild radii are indeed of similar order, but this may be a coincidence<a class="ref" href="#ref1">[1]</a>. Furthermore, if the universe were inside a rotating black hole, we might expect evidence of global rotation, which has not been found in large datasets<a class="ref" href="#ref12">[12]</a>. Because the exteriors of black holes and wormholes are indistinguishable<a class="ref" href="#ref13">[13]</a>, direct observational tests are difficult; any confirmation would require detecting subtle curvature or other signatures predicted by specific models.
         </p>
 
         <!-- 6  Calculations -->
@@ -538,7 +559,7 @@
         </table>
 
         <p>
-            The gravitational radius is roughly ten times larger than the universe's radius, implying that if all mass were concentrated, the observable universe would lie well inside its own Schwarzschild radius. However, this result should be interpreted cautiously because the mass distribution in the real universe is not a point mass and the FLRW metric differs from a Schwarzschild solution<a class="ref" href="#ref26">[26]</a>.
+            The gravitational radius is roughly ten times larger than the universe's radius, implying that if all mass were concentrated, the observable universe would lie well inside its own Schwarzschild radius. However, this result should be interpreted cautiously because the mass distribution in the real universe is not a point mass and the FLRW metric differs from a Schwarzschild solution<a class="ref" href="#ref14">[14]</a>.
         </p>
 
         <h3 id="bouncing">6.1&ensp;Illustrative Bouncing Scale Factor</h3>
@@ -564,7 +585,7 @@
         <p>Although existing black-hole cosmology models are speculative, they inspire new research directions:</p>
 
         <div class="direction">
-            <p><strong>Spin&ndash;torsion and degeneracy synergy.</strong> The Einstein&ndash;Cartan theory shows how spin&ndash;spin repulsion can avoid singularities<a class="ref" href="#ref3">[3]</a>, while the Black-Hole Universe model uses degeneracy pressure and quantum effects<a class="ref" href="#ref9">[9]</a>. A unified model might treat fermionic spin and quantum degeneracy within a single framework to derive a bounce with realistic matter content.</p>
+            <p><strong>Spin&ndash;torsion and degeneracy synergy.</strong> The Einstein&ndash;Cartan theory shows how spin&ndash;spin repulsion can avoid singularities<a class="ref" href="#ref3">[3]</a>, while the Black-Hole Universe model uses degeneracy pressure and quantum effects<a class="ref" href="#ref8">[8]</a>. A unified model might treat fermionic spin and quantum degeneracy within a single framework to derive a bounce with realistic matter content.</p>
         </div>
         <div class="direction">
             <p><strong>Rotating black-hole interiors.</strong> Most astrophysical black holes rotate; if our universe formed inside a spinning black hole, the interior spacetime would be anisotropic and might imprint a subtle rotation on cosmic structures. A new theoretical study could extend Kerr&ndash;de Sitter metrics to include torsion and bounce physics.</p>
@@ -573,16 +594,16 @@
             <p><strong>Particle production and dark sector.</strong> Pop&#322;awski's model suggests that particle creation during a bounce can mimic cosmic inflation and produce large amounts of matter<a class="ref" href="#ref4">[4]</a>. This mechanism could be explored as a source of dark matter.</p>
         </div>
         <div class="direction">
-            <p><strong>Curvature measurements.</strong> The Black-Hole Universe model predicts a small positive spatial curvature<a class="ref" href="#ref12">[12]</a>. Upcoming missions such as ARRAKIHS aim to detect ultra-low-surface brightness features and could constrain curvature<a class="ref" href="#ref27">[27]</a>.</p>
+            <p><strong>Curvature measurements.</strong> The Black-Hole Universe model predicts a small positive spatial curvature<a class="ref" href="#ref8">[8]</a>. Upcoming missions such as ARRAKIHS aim to detect ultra-low-surface brightness features and could constrain curvature<a class="ref" href="#ref15">[15]</a>.</p>
         </div>
         <div class="direction">
-            <p><strong>Comprehensive galaxy-rotation surveys.</strong> To test the rotation hypothesis, one must analyse millions of galaxies across multiple surveys and control for selection biases. A rotating universe would have profound consequences for black-hole cosmology, but current evidence is unconvincing<a class="ref" href="#ref28">[28]</a>.</p>
+            <p><strong>Comprehensive galaxy-rotation surveys.</strong> To test the rotation hypothesis, one must analyse millions of galaxies across multiple surveys and control for selection biases. A rotating universe would have profound consequences for black-hole cosmology, but current evidence is unconvincing<a class="ref" href="#ref11">[11]</a>.</p>
         </div>
 
         <!-- 8  Conclusions -->
         <h2>8&ensp;Conclusions</h2>
         <p>
-            The idea that our universe resides inside a black hole is a provocative synthesis of general relativity and quantum mechanics. Historical models like Pathria's closed universe and modern spin&ndash;torsion and degeneracy-pressure bounces demonstrate that mathematics allows a collapsing region to rebound. The 2025 Black-Hole Universe model elegantly replaces the Big Bang singularity with a gravitational bounce and predicts slight spatial curvature, while Pop&#322;awski's spin&ndash;torsion cosmology provides a mechanism for a bounce and cosmic inflation<a class="ref" href="#ref3">[3]</a><a class="ref" href="#ref4">[4]</a>. However, observational evidence remains weak; the galaxy-spin asymmetry relies on a small sample and can be explained by biases<a class="ref" href="#ref18">[18]</a>. More importantly, black-hole interiors differ from our expanding universe, and no data currently require a black-hole cosmology. Thus, while the hypothesis is worth exploring, it should be approached with critical scrutiny. The proposed research directions aim to refine these models and identify testable predictions that could either support or refute the notion that we live inside a black hole.
+            The idea that our universe resides inside a black hole is a provocative synthesis of general relativity and quantum mechanics. Historical models like Pathria's closed universe and modern spin&ndash;torsion and degeneracy-pressure bounces demonstrate that mathematics allows a collapsing region to rebound. The 2025 Black-Hole Universe model elegantly replaces the Big Bang singularity with a gravitational bounce and predicts slight spatial curvature, while Pop&#322;awski's spin&ndash;torsion cosmology provides a mechanism for a bounce and cosmic inflation<a class="ref" href="#ref3">[3]</a><a class="ref" href="#ref4">[4]</a>. However, observational evidence remains weak; the galaxy-spin asymmetry relies on a small sample and can be explained by biases<a class="ref" href="#ref11">[11]</a>. More importantly, black-hole interiors differ from our expanding universe, and no data currently require a black-hole cosmology. Thus, while the hypothesis is worth exploring, it should be approached with critical scrutiny. The proposed research directions aim to refine these models and identify testable predictions that could either support or refute the notion that we live inside a black hole.
         </p>
 
         <!-- References -->
@@ -596,27 +617,14 @@
                 <li id="ref5">Pop&#322;awski, N. J. "Big bounce and closed universe from spin and torsion." <em>International Journal of Modern Physics D</em> <strong>23</strong>, 1450042 (2014).</li>
                 <li id="ref6">Chandrasekhar, S. "The Maximum Mass of Ideal White Dwarfs." <em>The Astrophysical Journal</em> <strong>74</strong>, 81 (1931).</li>
                 <li id="ref7">Frolov, V. P., Markov, M. A. &amp; Mukhanov, V. F. "Black holes as possible sources of closed and semiclosed worlds." <em>Physical Review D</em> <strong>41</strong>, 383 (1990).</li>
-                <li id="ref8">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025).</li>
-                <li id="ref9">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025).</li>
-                <li id="ref10">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025).</li>
-                <li id="ref11">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025).</li>
-                <li id="ref12">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025).</li>
-                <li id="ref13">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025).</li>
-                <li id="ref14">Shamir, L. "Galaxy spin direction distribution in JWST Advanced Deep Extragalactic Survey." Preprint (2025).</li>
-                <li id="ref15">Shamir, L. "Galaxy spin direction distribution in JWST Advanced Deep Extragalactic Survey." Preprint (2025).</li>
-                <li id="ref16">Cassella, C. "The Entire Universe Could Exist Inside a Black Hole&mdash;Here's Why." <em>ScienceAlert</em> (2025).</li>
-                <li id="ref17">Cassella, C. "The Entire Universe Could Exist Inside a Black Hole&mdash;Here's Why." <em>ScienceAlert</em> (2025).</li>
-                <li id="ref18">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
-                <li id="ref19">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
-                <li id="ref20">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
-                <li id="ref21">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
-                <li id="ref22">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
-                <li id="ref23">Pathria, R. K. "The Universe as a Black Hole." <em>Nature</em> <strong>240</strong>, 298&ndash;299 (1972); see also [2].</li>
-                <li id="ref24">God&#322;owski, W. "Global and local effects of rotation." <em>International Journal of Modern Physics D</em> <strong>20</strong>, 1643&ndash;1673 (2011).</li>
-                <li id="ref25">Visser, M. <em>Lorentzian Wormholes: From Einstein to Hawking.</em> AIP Press (1995).</li>
-                <li id="ref26">Misner, C. W., Thorne, K. S. &amp; Wheeler, J. A. <em>Gravitation.</em> W. H. Freeman (1973).</li>
-                <li id="ref27">ARRAKIHS mission&mdash;ESA Cosmic Vision programme.</li>
-                <li id="ref28">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
+                <li id="ref8">Gazta&ntilde;aga, E. et al. "The Black Hole Universe model." <em>Physical Review D</em> (2025). Press release: University of Portsmouth.</li>
+                <li id="ref9">Shamir, L. "Galaxy spin direction distribution in JWST Advanced Deep Extragalactic Survey." Preprint (2025).</li>
+                <li id="ref10">Cassella, C. "The Entire Universe Could Exist Inside a Black Hole&mdash;Here's Why." <em>ScienceAlert</em> (2025).</li>
+                <li id="ref11">Sutter, P. M. "Do We Live inside a Black Hole?" <em>Scientific American</em> (2025).</li>
+                <li id="ref12">God&#322;owski, W. "Global and local effects of rotation." <em>International Journal of Modern Physics D</em> <strong>20</strong>, 1643&ndash;1673 (2011).</li>
+                <li id="ref13">Visser, M. <em>Lorentzian Wormholes: From Einstein to Hawking.</em> AIP Press (1995).</li>
+                <li id="ref14">Misner, C. W., Thorne, K. S. &amp; Wheeler, J. A. <em>Gravitation.</em> W. H. Freeman (1973).</li>
+                <li id="ref15">ARRAKIHS mission&mdash;ESA Cosmic Vision programme.</li>
             </ol>
         </div>
 
@@ -627,6 +635,9 @@
         </div>
 
     </article>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
     <!-- Site footer -->
     <footer class="site-footer">
@@ -640,5 +651,10 @@
         <p style="margin-top: 15px; font-size: 0.9em;">&copy; 2025 Prabhu Sadasivam | Deep Space Research</p>
     </footer>
 
+    <script>
+        window.addEventListener('scroll', function() {
+            document.getElementById('scrollTop').style.display = window.scrollY > 400 ? 'block' : 'none';
+        });
+    </script>
 </body>
 </html>

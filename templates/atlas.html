@@ -362,7 +362,7 @@
         .nav-dropdown { display:none; position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); background:rgba(15,20,45,0.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:8px 0; min-width:200px; z-index:1000; box-shadow:0 12px 40px rgba(0,0,0,0.6); }
         .nav-group:hover .nav-dropdown { display:block; }
         .nav-dropdown::before { content:''; position:absolute; top:-12px; left:0; right:0; height:12px; }
-        .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; }
+        .nav-dropdown a { display:block; color:#ccc; text-decoration:none; padding:10px 24px; font-size:0.92em; transition:all 0.2s; white-space:nowrap; text-align:left; }
         .nav-dropdown a:hover { color:#fff; background:rgba(78,205,196,0.15); }
         .nav-dropdown a.active { color:#ffd700; background:rgba(255,215,0,0.08); }
         @media (max-width:768px) {
@@ -377,8 +377,29 @@
             .nav-group.open .nav-dropdown { display:block; }
             .nav-group:hover .nav-caret { transform:none; }
             .nav-group.open .nav-caret { transform:rotate(180deg); }
-            .nav-dropdown a { text-align:center; padding:8px 20px; }
+            .nav-dropdown a { text-align:left; padding:8px 20px; }
         }
+
+        /* Scroll to top */
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(78,205,196,0.4), 0 0 20px rgba(78,205,196,0.2), inset 0 1px 0 rgba(255,255,255,0.25); }
+            50% { box-shadow: 0 4px 20px rgba(78,205,196,0.6), 0 0 35px rgba(78,205,196,0.35), inset 0 1px 0 rgba(255,255,255,0.25); }
+        }
+        .scroll-top {
+            position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #3ab5ad 50%, #2a9d8f 100%);
+            color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(78,205,196,0.4), 0 0 20px rgba(78,205,196,0.2), inset 0 1px 0 rgba(255,255,255,0.25);
+            display: none; z-index: 50;
+            transition: transform 0.25s, box-shadow 0.25s;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .scroll-top:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(78,205,196,0.6), 0 0 40px rgba(78,205,196,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .scroll-top:active { transform: translateY(0) scale(0.97); }
     </style>
 </head>
 <body>
@@ -637,6 +658,9 @@
             </ul>
         </div>
 
+        <!-- Scroll to top -->
+        <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
         <footer class="footer">
             <div class="container">
                 <div class="footer-links">
@@ -651,5 +675,11 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            document.getElementById('scrollTop').style.display = window.scrollY > 400 ? 'block' : 'none';
+        });
+    </script>
 </body>
 </html>

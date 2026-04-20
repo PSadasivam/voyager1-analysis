@@ -228,13 +228,25 @@
         .checklist li.pending::before { content: '○'; color: rgba(255,255,255,0.3); }
 
         /* Scroll to top */
-        .scroll-top {
-            position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px;
-            background: rgba(78, 205, 196, 0.8); color: #fff; border: none; border-radius: 50%;
-            font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
-            display: none; z-index: 50; transition: opacity 0.3s;
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(78,205,196,0.4), 0 0 20px rgba(78,205,196,0.2), inset 0 1px 0 rgba(255,255,255,0.25); }
+            50% { box-shadow: 0 4px 20px rgba(78,205,196,0.6), 0 0 35px rgba(78,205,196,0.35), inset 0 1px 0 rgba(255,255,255,0.25); }
         }
-        .scroll-top:hover { background: #4ecdc4; }
+        .scroll-top {
+            position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #3ab5ad 50%, #2a9d8f 100%);
+            color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(78,205,196,0.4), 0 0 20px rgba(78,205,196,0.2), inset 0 1px 0 rgba(255,255,255,0.25);
+            display: none; z-index: 50;
+            transition: transform 0.25s, box-shadow 0.25s;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .scroll-top:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(78,205,196,0.6), 0 0 40px rgba(78,205,196,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .scroll-top:active { transform: translateY(0) scale(0.97); }
 
         /* Footer */
         .site-footer {
