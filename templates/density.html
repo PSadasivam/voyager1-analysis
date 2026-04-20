@@ -430,7 +430,8 @@
 
         <!-- NASA-style plot -->
         <div class="plot-section">
-            <h2>NASA-Style Density Plot</h2>
+            <h2>NASA-Style Electron Density Plot</h2>
+            <p style="font-style: italic; color: rgba(255,255,255,0.6); margin-top: -8px;">Derived from NASA PWS data</p>
             <div class="loading" id="nasa-loading" style="display:none;">Rendering...</div>
             <div id="nasa-plot"></div>
             <div class="chart-annotation">
@@ -499,6 +500,7 @@
                     <a href="/architecture">Platform Architecture</a>
                 </div>
                 <p>&copy; 2025 Prabhu Sadasivam | Deep Space Research | Data courtesy of NASA JPL & SPDF</p>
+                <p style="font-size: 0.7em; opacity: 0.55; margin-top: 8px;">Independent research by Prabhu Sadasivam. Not affiliated with or endorsed by NASA. All NASA data used under public domain.</p>
             </div>
         </footer>
     </div>
@@ -534,7 +536,7 @@
                     document.getElementById('process-plot').innerHTML =
                         '<img src="data:image/png;base64,' + data.process_plot + '" alt="Density Extraction Process">';
                     document.getElementById('nasa-plot').innerHTML =
-                        '<img src="data:image/png;base64,' + data.nasa_plot + '" alt="NASA-Style Density Plot">';
+                        '<img src="data:image/png;base64,' + data.nasa_plot + '" alt="NASA-Style Electron Density Plot">';
 
                     // Status bar
                     document.getElementById('data-source').textContent = 'Source: NASA SPDF · ' + data.duration_hours + ' hrs';
