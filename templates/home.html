@@ -164,10 +164,10 @@
         .cta-buttons {
             display: flex;
             gap: 24px;
-            justify-content: center;
+            justify-content: flex-start;
             flex-wrap: wrap;
+            margin-top: 50px;
             margin-bottom: 40px;
-            padding-left: 12%;
         }
 
         .cta-group {
@@ -746,13 +746,11 @@
                 <div class="hero-text">
                     <h1 class="blog-title">PRABHU'S DEEP SPACE LABS</h1>
                     <p class="blog-subtitle">Exploring the cosmos through real data and first principles, where physics meets technology leadership</p>
-                    <p style="text-align: center; color: rgba(255,255,255,0.65); font-size: 1.1rem; letter-spacing: 2px; font-weight: 300; margin-top: -10px;">Disciplined analysis &middot; Lifelong curiosity &middot; Long-horizon thinking</p>
-                </div>
-            </div>
-            <div class="cta-buttons">
-                <div class="cta-group" onclick="this.classList.toggle('open')">
-                    <a href="/facts" class="cta-trigger cta-trigger--voyager" onclick="event.stopPropagation()">Voyager 1</a><span class="cta-caret" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">&#9660;</span>
-                    <div class="cta-dropdown">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; letter-spacing: 2px; font-weight: 600; margin-top: -10px;">Disciplined analysis &ensp;&#x2726;&ensp; Lifelong curiosity &ensp;&#x2726;&ensp; Long-horizon thinking</p>
+                    <div class="cta-buttons">
+                        <div class="cta-group" onclick="this.classList.toggle('open')">
+                            <a href="/facts" class="cta-trigger cta-trigger--voyager" onclick="event.stopPropagation()">Voyager 1</a><span class="cta-caret" onclick="event.stopPropagation(); this.parentElement.classList.toggle('open')">&#9660;</span>
+                            <div class="cta-dropdown">
                         <a href="/facts">Facts</a>
                         <a href="/trajectory">Trajectory</a>
                         <a href="/plasma">Plasma Waves</a>
@@ -769,8 +767,7 @@
                         <a href="/mars">Mars (1993)</a>
                     </div>
                 </div>
-            </div>
-
+                </div>
             </div>
         </div>
     </section>
