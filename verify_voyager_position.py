@@ -8,6 +8,12 @@ Verify the accuracy of Voyager 1 current position in our trajectory script.
 import datetime
 import numpy as np
 
+from voyager1_position_model import (
+    DIRECTION_DEC_DEGREES,
+    DIRECTION_RA_HOURS,
+    voyager1_distance_au,
+)
+
 try:
     from astroquery.jplhorizons import Horizons
     from astropy.coordinates import SkyCoord
@@ -22,13 +28,13 @@ def check_current_position():
     print(f"=== Voyager 1 Position Verification ===")
     print(f"Date: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print()
-    
-    # Synthetic model from our script
-    synthetic_distance = 160.0 + max(0, (now.year - 2025)) * 3.2
-    
-    # Approximate direction (RA ~17h, Dec ~12°)
-    ra_hours = 17.0
-    dec_degrees = 12.0
+
+    # Synthetic model — single source of truth (see voyager1_position_model.py).
+    synthetic_distance = voyager1_distance_au(now.date())
+
+    # Approximate direction (J2000, toward Ophiuchus)
+    ra_hours = DIRECTION_RA_HOURS
+    dec_degrees = DIRECTION_DEC_DEGREES
     ra_rad = np.radians(ra_hours * 15.0)
     dec_rad = np.radians(dec_degrees)
     
