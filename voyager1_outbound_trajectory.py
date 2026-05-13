@@ -34,6 +34,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+# Shared position model — single source of truth for Voyager 1's synthetic
+# heliocentric position (ADR-002 in deep_space_portal/docs/facts-dynamic-ticket.md).
+from voyager1_position_model import (
+    HELIOPAUSE_DATE as _HP_DATE,
+    HELIOPAUSE_AU as _HP_AU,
+    RATE_AU_PER_YR as _RATE_AU_PER_YR,
+    DIRECTION_RA_HOURS as _DIR_RA_HOURS,
+    DIRECTION_DEC_DEGREES as _DIR_DEC_DEG,
+    voyager1_distance_au as _voyager1_distance_au,
+)
+
+# Heliopause datetime (UTC midnight on the shared anchor date) — needed because
+# this module works in tz-aware datetimes while the shared model uses dates.
+_HELIOPAUSE_DT = datetime.datetime(_HP_DATE.year, _HP_DATE.month, _HP_DATE.day,
+                                   tzinfo=datetime.timezone.utc)
+
 try:
     from astroquery.jplhorizons import Horizons
     _ASTROQUERY_AVAILABLE = True
@@ -151,16 +167,15 @@ def fetch_trajectory_synthetic(start_date: datetime.datetime, end_date: datetime
         datetime.datetime(1980, 11, 12, tzinfo=datetime.timezone.utc): 9.5,   # Saturn
         datetime.datetime(1990, 2, 14, tzinfo=datetime.timezone.utc): 40.0,   # Pale Blue Dot
         datetime.datetime(2004, 12, 16, tzinfo=datetime.timezone.utc): 94.0,  # Termination Shock
-        datetime.datetime(2012, 8, 25, tzinfo=datetime.timezone.utc): 121.0,  # Heliopause
-        # Updated calculation for current position (more accurate)
-        # Voyager 1 moves ~3.6 AU/year since heliopause crossing
-        end_date: 121.0 + ((end_date - datetime.datetime(2012, 8, 25, tzinfo=datetime.timezone.utc)).days / 365.25) * 3.6
+        _HELIOPAUSE_DT: _HP_AU,                                                # Heliopause (shared anchor)
+        # Endpoint extrapolated via the shared position model so /trajectory,
+        # /facts, and verify_voyager_position.py always agree (ADR-002).
+        end_date: _voyager1_distance_au(end_date.date()),
     }
-    
-    # Updated Voyager 1 direction based on more recent data
-    # Current heading: RA ≈ 17h 13m, Dec ≈ +12° 5' (J2000)
-    ra_hours = 17.22  # More precise RA
-    dec_degrees = 12.08  # More precise Dec
+
+    # Voyager 1 direction (J2000) — pulled from the shared position model.
+    ra_hours = _DIR_RA_HOURS
+    dec_degrees = _DIR_DEC_DEG
     ra_rad = math.radians(ra_hours * 15.0)
     dec_rad = math.radians(dec_degrees)
     
@@ -397,11 +412,10 @@ def plot_trajectory_3d(trajectory: np.ndarray, dates: List[datetime.datetime],
     print(f"Total trajectory points: {len(trajectory)}")
     
     # Calculate years since heliopause for verification
-    heliopause_date = datetime.datetime(2012, 8, 25, tzinfo=datetime.timezone.utc)
-    years_since_hp = (dates[-1] - heliopause_date).days / 365.25
-    expected_distance = 121.0 + years_since_hp * 3.6
+    years_since_hp = (dates[-1] - _HELIOPAUSE_DT).days / 365.25
+    expected_distance = _voyager1_distance_au(dates[-1].date())
     print(f"Years since heliopause crossing: {years_since_hp:.1f}")
-    print(f"Expected distance (121 + {years_since_hp:.1f} × 3.6): {expected_distance:.1f} AU")
+    print(f"Expected distance ({_HP_AU:g} + {years_since_hp:.1f} × {_RATE_AU_PER_YR:g}): {expected_distance:.1f} AU")
     print(f"Model accuracy: {abs(total_distance - expected_distance):.1f} AU difference")
     
     # Convert to galactic coordinates if astropy available
